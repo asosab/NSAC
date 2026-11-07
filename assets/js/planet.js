@@ -194,7 +194,11 @@
     return 0;
   }
 
-  var world = new THREE.Group();
+  var world = new THREE.Group();      // el planeta: gira sobre SU eje
+  var tilt = new THREE.Group();       // el eje inclinado, fijo
+  tilt.add(world);
+  tilt.rotation.z = Math.PI + Math.PI / 4;   // invertido + ~45° de eje
+  tilt.rotation.x = -0.5;
 
   (function buildPlanet() {
     var cells = [], i, j, lon, lat;
@@ -227,7 +231,7 @@
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     world.add(mesh);
   })();
-  scene.add(world);
+  scene.add(tilt);
 
   /* ---------- nave de bloques: tecnología que aún no existe ----------
      toda la nave es UNA malla con colores por vértice: 1 draw call */
@@ -344,7 +348,7 @@
 
   /* coreografía del giro: al ver el planeta al revés el este corre hacia la
      izquierda; el yaw converge al aterrizaje (Bolivia arriba a la derecha) */
-  var PHI_LAND = 1.7, SPIN = -0.05;
+  var PHI_LAND = 0.55, SPIN = -0.05;
   function wrapAngle(x) {
     x = (x + Math.PI) % (Math.PI * 2);
     if (x < 0) x += Math.PI * 2;
@@ -398,18 +402,15 @@
     var sp = curScroll;
 
     /* el planeta invertido (el sur arriba), a la izquierda y saliéndose del
-       cuadro; el polo sur se escapa por la esquina superior izquierda */
-    world.position.x = -1.15 + sp * 0.25;
-    world.position.y = -0.35 + sp * 0.45 + (reduceMotion ? 0 : Math.sin(t * 0.4) * 0.02);
-    world.rotation.z = Math.PI + 0.45;
-    world.rotation.x = -0.3;
-    /* el giro converge al yaw del aterrizaje conforme avanza la nave */
+       cuadro; el eje queda fijo a ~45° y el mundo gira SOBRE él */
+    tilt.position.x = -1.15 + sp * 0.25;
+    tilt.position.y = -0.35 + sp * 0.45 + (reduceMotion ? 0 : Math.sin(t * 0.4) * 0.02);
     var prog = demo === "approach" ? easeOut(Math.min(demoT, 1))
              : estado === "pre" && demo === null ? easeOut(Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1))
              : 1;
     var spinYaw = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * SPIN);
     world.rotation.y = spinYaw + prog * wrapAngle(PHI_LAND - spinYaw);
-    world.updateMatrixWorld();
+    tilt.updateMatrixWorld();
 
     /* los extremos de las trayectorias siguen a Bolivia cada frame */
     approach.points[3].copy(landSpot(_end));
@@ -482,7 +483,7 @@
       0.4 + sp * 0.45,
       Math.cos(az) * dist
     );
-    camera.lookAt(0.1 + sp * 0.1, world.position.y * 0.5, 0);
+    camera.lookAt(0.1 + sp * 0.1, tilt.position.y * 0.5, 0);
 
     renderer.render(scene, camera);
 
