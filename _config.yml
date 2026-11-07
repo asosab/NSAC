@@ -7,6 +7,8 @@ timezone: America/La_Paz
 markdown: kramdown
 permalink: /diario/:title/
 exclude:
+  - AGENTS.md
+  - README.md
   - docs
   - .devin
   - .taste-skill
