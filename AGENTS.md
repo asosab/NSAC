@@ -11,7 +11,7 @@ project page del repo `NSAC`: **https://asosab.github.io/NSAC/**
   tal cual y se puede inspeccionar abriéndolo directo en el navegador.
 - El resto del sitio (diario, posts) sí usa Liquid: `_layouts/`, `_includes/`.
 - Escena 3D: Three.js r147 por CDN (`jsdelivr`) + `assets/js/planet.js`
-  (planeta de plastilina, cohete, estrellas). Sin build tools.
+  (planeta de bloques estilo voxel/Minecraft, cohete, estrellas). Sin build tools.
 
 ## El cohete y la cuenta regresiva
 
