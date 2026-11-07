@@ -333,9 +333,10 @@
     return world.localToWorld(out.copy(SPOT));
   }
 
-  /* coreografía del giro: al ver el planeta al revés el este corre hacia la
-     izquierda; el yaw converge al aterrizaje con Bolivia arriba al centro */
-  var SPIN = -0.05, phiLand = 4.96;
+  /* coreografía del giro: el planeta da una vuelta por día (7 vueltas en
+     los 7 días de la cuenta) y el yaw queda anclado al instante del
+     aterrizaje: en T0 vale phiLand, con Bolivia arriba al centro */
+  var phiLand = 4.96;
   function wrapAngle(x) {
     x = (x + Math.PI) % (Math.PI * 2);
     if (x < 0) x += Math.PI * 2;
@@ -424,11 +425,13 @@
        cuadro; el eje queda fijo a ~45° y el mundo gira SOBRE él */
     tilt.position.x = -1.15 + sp * 0.25;
     tilt.position.y = -0.35 + sp * 0.45 + (reduceMotion ? 0 : Math.sin(t * 0.4) * 0.02);
-    var prog = demo === "approach" ? easeOut(Math.min(demoT, 1))
-             : estado === "pre" && demo === null ? Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1)
-             : 1;
-    var spinYaw = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * SPIN);
-    world.rotation.y = spinYaw + prog * wrapAngle(phiLand - spinYaw);
+    /* yaw = phiLand - 2π·(días hasta T0): una vuelta por día, y en el
+       instante del aterrizaje Bolivia queda exactamente en phiLand;
+       la demo converge a esa pose mientras dura */
+    var timeYaw = reduceMotion ? phiLand
+                  : phiLand - Math.PI * 2 * (T0 - now) / 864e5;
+    var prog = demo === "approach" ? easeOut(Math.min(demoT, 1)) : demo === null ? 0 : 1;
+    world.rotation.y = timeYaw + sp * 0.8 + prog * wrapAngle(phiLand - timeYaw - sp * 0.8);
     tilt.updateMatrixWorld();
 
     /* los extremos de las trayectorias siguen a Bolivia cada frame; el
