@@ -21,7 +21,7 @@ En `assets/js/planet.js`:
   en proporción al tiempo restante; aterriza cuando la cuenta llega a cero.
 - `T0` → `T1` (15 nov, 23:59:59 local): muestra «¡Estamos desarrollando
   software!» y nueva cuenta al cierre; la nave despega gradualmente y desaparece.
-- Después de `T1`: la nave no vuelve; queda la banderita de plastilina.
+- Después de `T1`: la nave no vuelve; el planeta sigue girando solo.
 - El planeta es fondo fijo; el scroll orbita la cámara para mostrar más.
 - `prefers-reduced-motion`: escena estática, cuenta regresiva sigue viva.
 

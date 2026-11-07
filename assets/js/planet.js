@@ -263,11 +263,6 @@
   }
 
   var voxelMat = new THREE.MeshLambertMaterial({ vertexColors: true });
-  function bx(w, h, d, color, x, y, z) {
-    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshLambertMaterial({ color: color }));
-    m.position.set(x, y, z);
-    return m;
-  }
 
   var hull = [
     [0.09, 0.09, 0.09, WHITE, 0, 0, 0],
@@ -300,15 +295,6 @@
   ship.scale.setScalar(1.35);
   scene.add(ship);
 
-  /* banderita que queda para siempre */
-  var flag = new THREE.Group();
-  var pole = bx(0.006, 0.14, 0.006, WHITE, 0, 0.07, 0);
-  flag.add(pole);
-  var cloth = bx(0.055, 0.032, 0.006, CORAL, 0.03, 0.12, 0);
-  flag.add(cloth);
-  flag.visible = false;
-  world.add(flag);
-
   /* el punto de aterrizaje: Sudamérica, cerca de casa */
   function latLon(lon, lat, r) {
     var phi = (90 - lat) * Math.PI / 180, theta = (lon + 180) * Math.PI / 180;
@@ -320,8 +306,6 @@
   }
   var SPOT = latLon(-63.18, -17.78, 1.005);
   var SPOT2 = SPOT.clone().multiplyScalar(2);
-  flag.position.copy(SPOT);
-  flag.lookAt(SPOT2);
 
   /* la entrada es por la derecha de la pantalla, sobre el espacio oscuro;
      el final de la curva es la posición REAL de Bolivia cada frame y el
@@ -460,7 +444,6 @@
       ship.position.y += Math.sin(t * 1.7) * 0.02;
       flame.visible = ta < 0.98;
       flame.scale.setScalar(0.8 + Math.sin(t * 14) * 0.25);
-      flag.visible = false;
       if (ta >= 1) demo = "landed";
     } else if (demo === "landed") {
       ship.position.copy(landSpot(_p));
@@ -468,18 +451,15 @@
       ship.lookAt(world.localToWorld(_a.copy(SPOT2)));
       ship.rotateX(Math.PI / 2);
       flame.visible = false;
-      flag.visible = true;
     } else if (demo === "depart") {
       demoT += dt * 0.25;
       var td = easeIn(Math.min(demoT, 1));
       aim(ship, depart, td, dt);
       flame.visible = true;
       flame.scale.setScalar(1 + Math.sin(t * 16) * 0.3);
-      flag.visible = true;
       if (td >= 1) { demo = "gone"; ship.visible = false; }
     } else if (demo === "gone") {
       ship.visible = false;
-      flag.visible = true;
     } else if (estado === "pre") {
       var p = Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1);
       var eased = easeOut(p);
@@ -488,10 +468,8 @@
       ship.position.y += Math.sin(t * 1.7) * 0.02;
       flame.visible = eased < 0.98;
       flame.scale.setScalar(0.8 + Math.sin(t * 14) * 0.25);
-      flag.visible = false;
     } else if (estado === "live") {
       var q = (now - T0) / (T1 - T0);
-      flag.visible = true;
       if (q < 0.72) {
         /* aterrizada, con una respiración mínima */
         ship.position.copy(landSpot(_p));
@@ -508,7 +486,6 @@
       }
     } else {
       ship.visible = false;
-      flag.visible = true;
     }
 
     /* cámara a la derecha del planeta: queda un tercio de espacio oscuro */
