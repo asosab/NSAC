@@ -148,7 +148,7 @@
 
   /* ---------- planeta de bloques, estilo voxel ---------- */
 
-  var R_PLANET = 1, LON_N = 72, LAT_N = 36, BLOCK = 0.088;
+  var R_PLANET = 1, LON_N = 48, LAT_N = 24, BLOCK = 0.142;
   /* espec por tipo: color, desfase radial, escala */
   var KIND = [
     { c: 0x3d6db5, r: -0.035, s: 0.92 },  // 0 océano, un paso hundido
@@ -254,6 +254,7 @@
   flame.add(bx(0.05, 0.05, 0.05, ORANGE, 0, -0.115, 0));
   flame.add(bx(0.028, 0.045, 0.028, YELLOW, 0, -0.16, 0));
   ship.add(flame);
+  ship.scale.setScalar(1.35);
   scene.add(ship);
 
   /* banderita que queda para siempre */
@@ -306,12 +307,19 @@
     var f = tt * PATH_N, i = Math.min(Math.floor(f), PATH_N - 1), r = f - i;
     return out.copy(pts[i]).lerp(pts[i + 1], r);
   }
+  /* la trayectoria vive en el espacio del planeta: se transforma cada frame,
+     así la nave aterriza sobre Bolivia aunque el mundo siga girando */
   function aim(ship, pts, tt) {
     samplePath(pts, Math.min(tt, 1), _p);
     samplePath(pts, Math.min(tt + 0.02, 1), _a);
+    world.localToWorld(_p);
+    world.localToWorld(_a);
     ship.position.copy(_p);
     ship.lookAt(_a);
     ship.rotateX(Math.PI / 2);
+  }
+  function landSpot(out) {
+    return world.localToWorld(out.copy(SPOT));
   }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
   function easeIn(t) { return t * t * t; }
@@ -337,16 +345,25 @@
   resize();
 
   var clock = new THREE.Clock();
+  var curScroll = 0;
 
   function frame() {
     var dt = Math.min(clock.getDelta(), 0.1);
     var t = clock.elapsedTime;
     var now = new Date();
 
-    /* el planeta se asoma y crece con el scroll */
-    world.position.y = -1.55 + Math.min(scrollP * 1.15, 1) * 0.75;
-    world.rotation.y = 2.2 + scrollP * 1.4 + (reduceMotion ? 0 : t * 0.02);
-    world.rotation.x = 0.12;
+    /* scroll con inercia: todo responde suave, nada brusco */
+    curScroll += (scrollP - curScroll) * Math.min(dt * 4, 1);
+    var sp = curScroll;
+
+    /* el planeta invertido (el sur arriba), a la izquierda y saliéndose del
+       cuadro; el polo sur se escapa por la esquina superior izquierda */
+    world.position.x = -1.15 + sp * 0.25;
+    world.position.y = -0.35 + sp * 0.45 + (reduceMotion ? 0 : Math.sin(t * 0.4) * 0.02);
+    world.rotation.z = Math.PI + 0.45;
+    world.rotation.y = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * 0.02);
+    world.rotation.x = -0.3;
+    world.updateMatrixWorld();
 
     if (demo === "approach") {
       demoT += dt * 0.25;
@@ -359,9 +376,9 @@
       flag.visible = false;
       if (ta >= 1) demo = "landed";
     } else if (demo === "landed") {
-      ship.position.copy(SPOT);
+      ship.position.copy(landSpot(_p));
       ship.position.y += Math.sin(t * 1.2) * 0.004;
-      ship.lookAt(SPOT2);
+      ship.lookAt(world.localToWorld(_a.copy(SPOT2)));
       ship.rotateX(Math.PI / 2);
       flame.visible = false;
       flag.visible = true;
@@ -390,9 +407,9 @@
       flag.visible = true;
       if (q < 0.72) {
         /* aterrizada, con una respiración mínima */
-        ship.position.copy(SPOT);
+        ship.position.copy(landSpot(_p));
         ship.position.y += Math.sin(t * 1.2) * 0.004;
-        ship.lookAt(SPOT2);
+        ship.lookAt(world.localToWorld(_a.copy(SPOT2)));
         ship.rotateX(Math.PI / 2);
         flame.visible = false;
       } else {
@@ -407,14 +424,15 @@
       flag.visible = true;
     }
 
-    var az = 0.55 - scrollP * 0.9;
-    var dist = 3.35 - Math.min(scrollP, 0.5) * 0.5;
+    /* cámara a la derecha del planeta: queda un tercio de espacio oscuro */
+    var az = 0.3 - sp * 0.45;
+    var dist = 4.1 - Math.min(sp, 0.5) * 0.4;
     camera.position.set(
-      Math.sin(az) * dist,
-      0.45 + scrollP * 0.5,
+      0.55 + Math.sin(az) * 0.8,
+      0.4 + sp * 0.45,
       Math.cos(az) * dist
     );
-    camera.lookAt(world.position);
+    camera.lookAt(0.1 + sp * 0.1, world.position.y * 0.5, 0);
 
     renderer.render(scene, camera);
     if (!reduceMotion) requestAnimationFrame(frame);

@@ -98,7 +98,11 @@ main, .top, .footer { position: relative; z-index: 1; }
   background: rgba(28, 28, 28, 0.18);
 }
 
-.hero__top { max-width: 34ch; }
+.hero__top {
+  max-width: 34ch;
+  margin-left: auto;
+  text-align: right;
+}
 
 .hero__claim {
   font-size: var(--step-lead);
