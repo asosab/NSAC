@@ -1,0 +1,15 @@
+_site
+.jekyll-metadata
+.jekyll-cache
+*bash
+.taste-skill/
+.playwright-mcp/
+
+# Obsidian: config compartida sí, estado local no
+.obsidian/workspace*.json
+.obsidian/workspaces.json
+.obsidian/graph.json
+.obsidian/bookmarks.json
+.obsidian/plugins/
+.obsidian/snippets/
+.obsidian/themes/

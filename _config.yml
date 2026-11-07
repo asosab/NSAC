@@ -1,0 +1,13 @@
+title: "NSAC — NASA Space Apps Challenge 2026"
+description: "Mi participación en el NASA Space Apps Challenge 2026, desde Santa Cruz de la Sierra."
+baseurl: "/NSAC"
+url: "https://asosab.github.io"
+lang: es
+timezone: America/La_Paz
+markdown: kramdown
+permalink: /diario/:title/
+exclude:
+  - docs
+  - .devin
+  - .taste-skill
+  - assets/credits.json

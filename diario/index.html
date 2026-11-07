@@ -1,0 +1,18 @@
+---
+layout: default
+title: Diario del hackathon
+description: "Los avances de mi participación en el NASA Space Apps Challenge 2026, contados día a día."
+---
+
+<h1>Diario del hackathon</h1>
+<p class="page__sub">Lo que va pasando, contado desde Santa Cruz de la Sierra. Los videos salen en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
+
+<ul class="diary-list">
+  {% for post in site.posts %}
+  <li>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <span class="d-date">{{ post.date | date: "%d de %B de %Y" }}</span>
+    {% if post.description %}<span class="d-exc">{{ post.description }}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>

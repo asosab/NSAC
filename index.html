@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSAC — NASA Space Apps Challenge 2026 | Alejandro Sosa</title>
+<meta name="description" content="Participo en el NASA Space Apps Challenge 2026 desde Santa Cruz de la Sierra: cuenta regresiva en vivo, los 14 retos oficiales explicados y el diario del hackathon del 14 y 15 de noviembre.">
+<meta name="author" content="Alejandro Sosa Briceño">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://asosab.github.io/NSAC/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NSAC — NASA Space Apps 2026">
+<meta property="og:title" content="NSAC — NASA Space Apps Challenge 2026">
+<meta property="og:description" content="Cuenta regresiva en vivo hacia el hackathon más grande del mundo: los 14 retos oficiales y el diario del evento, del 14 al 15 de noviembre.">
+<meta property="og:url" content="https://asosab.github.io/NSAC/">
+<meta property="og:image" content="https://asosab.github.io/NSAC/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Planeta Tierra estilo plastilina con un cohete aterrizando, sobre una cuenta regresiva gigante.">
+<meta property="og:locale" content="es_ES">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@asosab">
+<meta name="twitter:creator" content="@asosab">
+<meta name="twitter:title" content="NSAC — NASA Space Apps Challenge 2026">
+<meta name="twitter:description" content="Cuenta regresiva en vivo, los 14 retos oficiales y el diario del hackathon del 14 y 15 de noviembre.">
+<meta name="twitter:image" content="https://asosab.github.io/NSAC/assets/img/og-cover.jpg">
+<meta name="twitter:image:alt" content="Planeta Tierra estilo plastilina con un cohete aterrizando, sobre una cuenta regresiva gigante.">
+
+<!-- Geo -->
+<meta name="geo.region" content="BO-S">
+<meta name="geo.placename" content="Santa Cruz de la Sierra">
+<meta name="geo.position" content="-17.7833152;-63.1821236">
+<meta name="ICBM" content="-17.7833152, -63.1821236">
+
+<meta name="theme-color" content="#1c1c1c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2234%22 fill=%22%234a7cae%22/><ellipse cx=%2250%22 cy=%2250%22 rx=%2246%22 ry=%2214%22 fill=%22none%22 stroke=%22%238fa68e%22 stroke-width=%229%22/></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Event",
+      "name": "NASA Space Apps Challenge 2026",
+      "description": "El hackathon más grande del mundo: equipos de hasta seis personas resuelven retos con datos abiertos de la NASA durante un fin de semana.",
+      "startDate": "2026-11-14T09:00:00-04:00",
+      "endDate": "2026-11-15T23:59:59-04:00",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+      "url": "https://www.spaceappschallenge.org/2026/",
+      "image": "https://asosab.github.io/NSAC/assets/img/og-cover.jpg",
+      "organizer": {
+        "@type": "Organization",
+        "name": "NASA",
+        "url": "https://www.nasa.gov"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Santa Cruz de la Sierra",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santa Cruz de la Sierra",
+          "addressCountry": "BO"
+        }
+      },
+      "performer": {
+        "@type": "Person",
+        "name": "Alejandro Sosa Briceño",
+        "url": "https://asosab.github.io"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Alejandro Sosa Briceño",
+      "url": "https://asosab.github.io",
+      "email": "mailto:asosab@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santa Cruz de la Sierra",
+        "addressCountry": "BO"
+      },
+      "sameAs": [
+        "https://github.com/asosab",
+        "https://www.youtube.com/@asosab",
+        "https://www.linkedin.com/in/alejandrososa",
+        "https://x.com/asosab",
+        "https://www.instagram.com/alejandrososab"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "NSAC — NASA Space Apps Challenge 2026",
+      "url": "https://asosab.github.io/NSAC/",
+      "inLanguage": "es",
+      "author": {
+        "@type": "Person",
+        "name": "Alejandro Sosa Briceño",
+        "url": "https://asosab.github.io"
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+<canvas id="planeta" aria-hidden="true"></canvas>
+
+<header class="top">
+  <a class="wordmark" href="./">NSAC</a>
+  <nav class="nav">
+    <a href="#retos">Retos</a>
+    <a href="#quien-soy">Quién soy</a>
+    <a href="diario/">Diario</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero__top">
+    <p class="hero__claim" id="claim">Participo en el NASA Space Apps Challenge 2026.</p>
+    <a class="btn" href="#retos">Ver los retos</a>
+  </div>
+
+  <!-- taste-skill-ignore: la cuenta regresiva es contenido real, no numeración decorativa -->
+  <div class="hero__cd" role="timer" aria-label="Cuenta regresiva">
+    <p class="hero__live" id="live-msg" hidden>¡Estamos desarrollando software!</p>
+    <h1 class="cd" id="cd" aria-label="Días, horas, minutos y segundos restantes">
+      <div class="cd__u"><span class="cd__n" id="cd-d">00</span><span class="cd__l">días</span></div>
+      <span class="cd__sep">:</span>
+      <div class="cd__u"><span class="cd__n" id="cd-h">00</span><span class="cd__l">horas</span></div>
+      <span class="cd__sep">:</span>
+      <div class="cd__u"><span class="cd__n" id="cd-m">00</span><span class="cd__l">minutos</span></div>
+      <span class="cd__sep">:</span>
+      <div class="cd__u"><span class="cd__n" id="cd-s">00</span><span class="cd__l">segundos</span></div>
+    </h1>
+  </div>
+</section>
+
+<section class="intro" id="hackathon">
+  <div class="intro__col">
+    <h2 class="h2">El hackathon</h2>
+    <p class="intro__first">El NASA Space Apps Challenge es el hackathon más grande del mundo. Miles de equipos en casi todos los países dedican un fin de semana a resolver problemas reales con datos abiertos de la NASA.</p>
+    <p>Este año corre el sábado 14 y el domingo 15 de noviembre. La ventana para entregar proyectos abre a las 9:00 del sábado y cierra a las 23:59 del domingo, siempre en hora local.</p>
+    <p>Los equipos pueden tener hasta seis personas. Todavía no tengo reto elegido: quiero armar equipo primero y decidirlo juntos.</p>
+    <p>Mientras llega el día, esta página hace la cuenta. Cuando arranque, el proceso se contará <a href="diario/">en el diario</a>.</p>
+  </div>
+</section>
+
+<section class="retos" id="retos">
+  <div class="retos__cat">
+    <h2 class="cat">La Tierra de cerca <span class="cat__n">5</span></h2>
+    <div class="retos__grid">
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/tendencias.jpg" alt="Ilustración de la Tierra en cuatro cuadrantes con capas de datos: clima, precipitación, superficie y atmósfera." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/" target="_blank" rel="noopener">Earth System Trend Detective</a><span class="reto__nivel">Avanzado</span></p>
+          <p class="reto__desc">Elegir variables de las misiones de ciencia terrestre, ver cómo cambian con el tiempo y detectar qué cambia, dónde y si el cambio es significativo.</p>
+          <p class="reto__temas">Ciencia de la Tierra · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/sars.jpg" alt="Ilustración del satélite NISAR sobre el monte Rainier vista con radar de apertura sintética." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/dancing-with-the-sars/" target="_blank" rel="noopener">Dancing with the SARs</a><span class="reto__nivel">Avanzado · Intermedio</span></p>
+          <p class="reto__desc">Una aplicación interactiva que usa el radar NISAR para seguir y visualizar cambios en la superficie: humedales, incendios, glaciares.</p>
+          <p class="reto__temas">Ciencia de la Tierra</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/granjas.jpg" alt="La agricultora Denise Moyle en sus campos de alfalfa en Nevada." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/adapting-farms-with-nasa-data/" target="_blank" rel="noopener">Field Shift</a><span class="reto__nivel">Avanzado · Intermedio</span></p>
+          <p class="reto__desc">Herramienta de apoyo a la decisión que cruza observaciones de la NASA con el suelo y las prioridades del agricultor para explorar rotaciones.</p>
+          <p class="reto__temas">Arte y multimedia · Ciencia de la Tierra · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/incendios.jpg" alt="Mapa de puntos calientes detectados por los sensores MODIS y VIIRS." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/modis-and-viirs-hot-spots/" target="_blank" rel="noopener">MODIS + VIIRS Hot Spots</a><span class="reto__nivel">Avanzado · Intermedio</span></p>
+          <p class="reto__desc">Armonizar más de veinte años de focos de calor registrados por dos satélites en un solo calendario de quema para la alerta temprana.</p>
+          <p class="reto__temas">Ciencia de la Tierra · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/jukebox.jpg" alt="Una persona dentro de Space for Earth, la experiencia inmersiva del Earth Information Center." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/the-earth-information-jukebox/" target="_blank" rel="noopener">The Earth Information Jukebox</a><span class="reto__nivel">Intermedio · Principiante</span></p>
+          <p class="reto__desc">Traducir las visualizaciones del Earth Information Center a sonido generado en tiempo real: sonificar el planeta.</p>
+          <p class="reto__temas">Arte y multimedia · Ciencia de la Tierra · Software</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="retos__cat">
+    <h2 class="cat">La Luna, Marte y más allá <span class="cat__n">9</span></h2>
+    <div class="retos__grid">
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/abandonados.jpg" alt="Tres diseños de rover marciano sobre terreno rocoso de pruebas." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/nasas-discarded-equipment-storytelling/" target="_blank" rel="noopener">Abandoned but not Forgotten</a><span class="reto__nivel">Intermedio · Principiante</span></p>
+          <p class="reto__desc">Contar la historia del hardware que la NASA dejó en la Luna, en Marte y en el espacio profundo, para lectores en edad escolar.</p>
+          <p class="reto__temas">Astrofísica · Planetas y lunas · Exploración</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/astronauta-junior.jpg" alt="La astronauta Christina Koch mirando la Tierra desde la ventana de la estación." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/junior-astronaut-mission-trainer/" target="_blank" rel="noopener">Junior Astronaut Mission Trainer</a><span class="reto__nivel">Intermedio · Principiante</span></p>
+          <p class="reto__desc">Un juego donde estudiantes administran una base lunar o marciana equilibrando soporte vital, blindaje, energía y comida.</p>
+          <p class="reto__temas">Juegos · Planetas y lunas · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/salud.jpg" alt="Una astronauta haciendo ejercicio mientras un monitor muestra sus datos de salud." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/health-monitoring-software/" target="_blank" rel="noopener">Health Monitoring for Astronauts</a><span class="reto__nivel">Intermedio</span></p>
+          <p class="reto__desc">Software que reúne indicadores de salud para que un astronauta en misión larga pueda evaluarse y actuar a tiempo.</p>
+          <p class="reto__temas">Exploración humana · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/llamas.jpg" alt="Una llama ardiendo durante una prueba de combustión en microgravedad." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/" target="_blank" rel="noopener">Flame in Freefall</a><span class="reto__nivel">Avanzado · Intermedio</span></p>
+          <p class="reto__desc">Un panel con inteligencia artificial que resume e interpreta décadas de datos de combustión en microgravedad para la seguridad contra incendios.</p>
+          <p class="reto__temas">Exploración espacial</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/analogos.jpg" alt="La Tierra azulada asomando detrás de la superficie craterizada de la Luna." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/permanent-moon-base-locations-and-mars/" target="_blank" rel="noopener">Moon Base Analogs</a><span class="reto__nivel">Avanzado · Intermedio · Principiante</span></p>
+          <p class="reto__desc">Encontrar lugares de la Tierra análogos a sitios de futuras bases lunares o marcianas, usando datos abiertos de varias agencias.</p>
+          <p class="reto__temas">Ciencia de la Tierra · Planetas y lunas · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/marte.jpg" alt="El rover Perseverance tomándose una selfie en la superficie de Marte." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/interplanetary-survival-guide-martian-map/" target="_blank" rel="noopener">Martian Map</a><span class="reto__nivel">Intermedio</span></p>
+          <p class="reto__desc">Un mapa en capas de una ruta marciana que integra datos de varias misiones para planificar una caminata segura.</p>
+          <p class="reto__temas">Exploración humana · Marte · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/aterrizaje.jpg" alt="Ilustración de módulos de aterrizaje del programa CLPS en la Luna." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/lunar-landing-site-navigator/" target="_blank" rel="noopener">Lunar Landing Site Navigator</a><span class="reto__nivel">Avanzado · Intermedio</span></p>
+          <p class="reto__desc">Comparar sitios de alunizaje en el polo sur visualizando las posiciones del Sol y la Tierra: energía y ventanas de comunicación.</p>
+          <p class="reto__temas">Exploración humana · Luna · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/planetax.jpg" alt="Ilustración de la sonda SPHEREx sobre la Tierra con un fondo cósmico." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/planet-x-and-spherex/" target="_blank" rel="noopener">Planet X and SPHEREx</a><span class="reto__nivel">Avanzado</span></p>
+          <p class="reto__desc">Una herramienta web pública para recorrer las imágenes del cielo de SPHEREx y ver cómo cambian entre un barrido y otro.</p>
+          <p class="reto__temas">Astrofísica · Planetas y lunas · Software</p>
+        </div>
+      </article>
+
+      <article class="reto">
+        <img class="reto__img" src="assets/img/retos/mision.jpg" alt="Un astronauta en caminata espacial sujetando un panel circular de la nave." width="128" height="128" loading="lazy">
+        <div class="reto__body">
+          <p class="reto__line"><a class="reto__name" href="https://www.spaceappschallenge.org/2026/challenges/space-mission-design-game/" target="_blank" rel="noopener">Space Mission Design Game</a><span class="reto__nivel">Intermedio · Principiante</span></p>
+          <p class="reto__desc">Un juego para diseñar, administrar y simular una misión completa: decisiones de ingeniería con recursos limitados.</p>
+          <p class="reto__temas">Juegos</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="media-band">
+  <h2 class="h2 media-band__h">El planeta, de verdad</h2>
+  <video class="media-band__vid" autoplay muted loop playsinline preload="metadata" poster="assets/middle-east-to-the-south-pacific-ocean-poster.jpg" width="720" height="480" aria-hidden="true">
+    <source src="assets/middle-east-to-the-south-pacific-ocean.webm" type="video/webm">
+  </video>
+  <p class="media-band__cap">La Tierra vista desde la Estación Espacial Internacional, filmada por la tripulación de la Expedición 29.</p>
+  <div class="media-band__row">
+    <figure>
+      <img src="assets/img/city-lights-of-south-america-s-atlantic.jpg" alt="Las luces de la costa atlántica de Sudamérica vistas de noche desde el espacio." width="1024" height="576" loading="lazy">
+      <figcaption class="media-band__cap">Sudamérica de noche. Ahí abajo está Santa Cruz de la Sierra.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/a-blue-and-white-part-of-earth.jpg" alt="La Tierra azul y blanca vista a través de las ventanas de la cúpula de la Estación Espacial Internacional." width="1023" height="743" loading="lazy">
+      <figcaption class="media-band__cap">La vista desde la cúpula de la ISS. Oficina con buenas vistas.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/cosmic-kiss-meets-nebra-sky-disc.jpg" alt="Una mano de astronauta con un anillo luminoso sostiene en el aire una réplica del Disco celeste de Nebra, con la Tierra al fondo." width="1024" height="683" loading="lazy">
+      <figcaption class="media-band__cap">El Disco celeste de Nebra flotando frente a la Tierra, foto del astronauta Matthias Maurer.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="planet-gap" aria-hidden="true"></div>
+
+<section class="about" id="quien-soy">
+  <h2 class="h2">Quién soy</h2>
+  <div class="about__row">
+    <div class="about__facts">
+      <p><span class="fact__k">Nombre</span><span class="fact__v">Alejandro Sosa</span></p>
+      <p><span class="fact__k">Base</span><span class="fact__v">Santa Cruz de la Sierra, Bolivia</span></p>
+      <p><span class="fact__k">Oficio</span><span class="fact__v">Software y producto</span></p>
+    </div>
+    <p class="about__p">Llevo años construyendo cosas con código: un bot que monitorea inmuebles, landings para podcasts, un call center ciudadano que atendió más de 50.000 casos en dos años. Ahora quiero ver qué sale de dos días seguidos con datos de la NASA.</p>
+  </div>
+  <div class="about__row about__row--lists">
+    <p class="fact__k">Proyectos y redes</p>
+    <div class="about__lists">
+      <ul class="record">
+        <li><span>Statetty</span><span class="record__y">2024</span></li>
+        <li><span>Somos 10⁷</span><span class="record__y">2026</span></li>
+        <li><span>Línea Abierta Vecinal</span><span class="record__y">2019</span></li>
+        <li><span>Buddy</span><span class="record__y">2026</span></li>
+        <li><span>Arturito</span><span class="record__y">2025</span></li>
+      </ul>
+      <ul class="record">
+        <li><a href="https://asosab.github.io">asosab.github.io</a></li>
+        <li><a href="https://github.com/asosab" target="_blank" rel="noopener">github.com/asosab</a></li>
+        <li><a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a></li>
+        <li><a href="https://www.linkedin.com/in/alejandrososa" target="_blank" rel="noopener">linkedin.com/in/alejandrososa</a></li>
+        <li><a href="mailto:asosab@gmail.com">asosab@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="cta__h">Nos vemos el 14.</h2>
+  <div class="cta__row">
+    <p class="cta__p">Los avances quedan en el diario; los videos, en mi canal.</p>
+    <a class="btn btn--accent" href="diario/">Leer el diario</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__cols">
+    <div class="fcol">
+      <p class="fcol__h">El sitio</p>
+      <a href="#retos">Los retos</a>
+      <a href="#quien-soy">Quién soy</a>
+      <a href="diario/">Diario</a>
+    </div>
+    <div class="fcol">
+      <p class="fcol__h">El evento</p>
+      <a href="https://www.spaceappschallenge.org/2026/" target="_blank" rel="noopener">Space Apps 2026</a>
+      <a href="https://www.spaceappschallenge.org/2026/challenges/" target="_blank" rel="noopener">Retos oficiales</a>
+      <a href="https://www.spaceappschallenge.org/2026/locations/" target="_blank" rel="noopener">Eventos locales</a>
+    </div>
+    <div class="fcol">
+      <p class="fcol__h">Yo</p>
+      <a href="mailto:asosab@gmail.com">asosab@gmail.com</a>
+      <a href="https://github.com/asosab" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="fcol">
+      <p class="fcol__h">Créditos</p>
+      <p class="fcol__t">Imágenes de los retos: spaceappschallenge.org</p>
+      <p class="fcol__t"><a href="https://commons.wikimedia.org/wiki/File:Middle_East_to_the_South_Pacific_Ocean.ogv" target="_blank" rel="noopener">Video ISS</a>: tripulación Expedición 29, dominio público</p>
+      <p class="fcol__t"><a href="https://www.flickr.com/photos/24662369@N07/8250445190" target="_blank" rel="noopener">Sudamérica de noche</a>: NASA Goddard, CC BY 2.0</p>
+      <p class="fcol__t"><a href="https://www.flickr.com/photos/153584064@N07/45640728004" target="_blank" rel="noopener">Cúpula ISS</a>: NASA vía rawpixel, CC BY 2.0</p>
+      <p class="fcol__t"><a href="https://www.flickr.com/photos/188488206@N03/51960919162" target="_blank" rel="noopener">Disco de Nebra</a>: Matthias Maurer/ESA, CC BY 2.0</p>
+      <p class="fcol__t">Planeta: WebGL, textura dibujada en código</p>
+    </div>
+  </div>
+  <svg class="footer__word" viewBox="0 0 1000 120" aria-hidden="true">
+    <text x="500" y="98" text-anchor="middle">SPACE APPS</text>
+  </svg>
+  <p class="footer__legal">© 2026 Alejandro Sosa — Jekyll en GitHub Pages.</p>
+</footer>
+
+<script src="assets/js/three.min.js"></script>
+<script src="assets/js/planet.js"></script>
+</body>
+</html>

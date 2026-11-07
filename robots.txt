@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asosab.github.io/NSAC/sitemap.xml

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if page.title %}{{ page.title }} — {% endif %}NSAC</title>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Diario de mi participación en el NASA Space Apps Challenge 2026.{% endif %}">
+<meta name="author" content="Alejandro Sosa Briceño">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}NSAC">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/img/og-cover.jpg' | absolute_url }}">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@asosab">
+<meta name="theme-color" content="#1c1c1c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2234%22 fill=%22%234a7cae%22/><ellipse cx=%2250%22 cy=%2250%22 rx=%2246%22 ry=%2214%22 fill=%22none%22 stroke=%22%238fa68e%22 stroke-width=%229%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+<header class="top">
+  <a class="wordmark" href="{{ '/' | relative_url }}">NSAC</a>
+  <nav class="nav">
+    <a href="{{ '/' | relative_url }}#retos">Retos</a>
+    <a href="{{ '/' | relative_url }}#quien-soy">Quién soy</a>
+    <a href="{{ '/diario/' | relative_url }}">Diario</a>
+  </nav>
+</header>
+<main class="page">
+  <div class="page__col">
+    {{ content }}
+  </div>
+</main>
+</body>
+</html>
