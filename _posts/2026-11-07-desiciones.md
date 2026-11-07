@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Desiciones"
-description: ""
+description: "Faltan seis días y ya hay que decidirse por un reto, y conocer al equipo"
 ---
 
 La Space App Challenge aterriza el sábado 14 a las 9:00 y hay que tomar desiciones antes de que me tomen a mi
