@@ -21,13 +21,13 @@
     if (keys.length >= 3) { keys = []; demo = k === "a" ? "approach" : "depart"; demoT = 0; }
   });
 
-  /* ---------- giro libre: triple click sobre el planeta ----------
+  /* ---------- giro libre: triple click en cualquier parte ----------
      una vuelta cada 6 s para inspeccionar cualquier zona; al repetir el
      gesto frena y asienta en el yaw correcto según la hora del día */
 
   var spin = 0, spinning = false, spinBase = 0, spinT0 = 0, spinStop = null;
   window.addEventListener("click", function (e) {
-    if (e.detail < 3 || e.target !== document.getElementById("planeta")) return;
+    if (e.detail < 3) return;
     if (spinning) {
       spinning = false;
       spinStop = { a: spin, b: Math.round(spin / (Math.PI * 2)) * Math.PI * 2, t: 0 };
