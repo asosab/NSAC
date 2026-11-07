@@ -198,7 +198,7 @@
   var tilt = new THREE.Group();       // el eje inclinado, fijo
   tilt.add(world);
   tilt.rotation.z = Math.PI + Math.PI / 4;   // invertido + ~45° de eje
-  tilt.rotation.x = -0.5;
+  tilt.rotation.x = 0.18;   // eje perpendicular a la vista: polos nivelados
 
   (function buildPlanet() {
     var cells = [], i, j, lon, lat;
