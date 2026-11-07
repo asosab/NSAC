@@ -584,7 +584,8 @@ main, .top, .footer { position: relative; z-index: 1; }
 
   .hero { padding-top: 80px; }
 
-  .cd { flex-wrap: wrap; gap: 18px 24px; justify-content: flex-start; }
+  .hero__cd { text-align: right; }
+  .cd { flex-wrap: wrap; gap: 18px 24px; justify-content: flex-end; }
   .cd__sep { display: none; }
   .cd__u { flex-basis: 44%; }
   .cd__n { font-size: clamp(3rem, 18vw, 7rem); }

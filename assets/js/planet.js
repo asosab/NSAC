@@ -324,11 +324,12 @@
   flag.lookAt(SPOT2);
 
   /* la entrada es por la derecha de la pantalla, sobre el espacio oscuro;
-     el final de la curva es la posición REAL de Bolivia cada frame */
+     el final de la curva es la posición REAL de Bolivia cada frame y el
+     penúltimo punto se alinea a la normal del terreno para posarse de frente */
   var approach = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(6.6, 3.4, 7.8),
-    new THREE.Vector3(3.4, 1.9, 4.4),
-    new THREE.Vector3(1.3, 0.95, 2.3),
+    new THREE.Vector3(2.2, 0.3, 2.2),
+    new THREE.Vector3(1.9, 0.75, 1.25),
+    new THREE.Vector3(),
     new THREE.Vector3()
   ]);
   /* el despegue continúa hacia la derecha y arriba hasta salir de cuadro */
@@ -347,12 +348,43 @@
   }
 
   /* coreografía del giro: al ver el planeta al revés el este corre hacia la
-     izquierda; el yaw converge al aterrizaje (Bolivia arriba a la derecha) */
-  var PHI_LAND = 0.55, SPIN = -0.05;
+     izquierda; el yaw converge al aterrizaje con Bolivia arriba al centro */
+  var SPIN = -0.05, phiLand = 4.96;
   function wrapAngle(x) {
     x = (x + Math.PI) % (Math.PI * 2);
     if (x < 0) x += Math.PI * 2;
     return x - Math.PI;
+  }
+
+  /* calibra el yaw de aterrizaje contra la cámara del héroe (scroll 0):
+     barre el anillo que describe Bolivia al girar y elige el punto más alto
+     que quede dentro del cuadro y de cara a la cámara; en pantallas angostas
+     el planeta se sale a la izquierda y el filo visible manda */
+  function calibrateLand() {
+    var cam = camera.clone();
+    cam.aspect = camera.aspect;
+    cam.position.set(0.55 + Math.sin(0.3) * 0.8, 0.4, Math.cos(0.3) * 4.1);
+    cam.lookAt(0.1, -0.175, 0);
+    cam.updateMatrixWorld();
+    cam.updateProjectionMatrix();
+    var center = new THREE.Vector3(-1.15, -0.35, 0);
+    var view = new THREE.Vector3(0.1, -0.175, 0).sub(cam.position).normalize();
+    var up = new THREE.Vector3(0, 1, 0).addScaledVector(view, -view.y).normalize();
+    var toCam = view.negate();
+    var m = new THREE.Matrix4().makeRotationFromEuler(tilt.rotation);
+    var axisY = new THREE.Vector3(0, 1, 0);
+    var v = new THREE.Vector3(), pr = new THREE.Vector3(), dir = new THREE.Vector3();
+    var best = -1e9;
+    for (var deg = 0; deg < 360; deg += 0.5) {
+      var phi = deg * Math.PI / 180;
+      v.copy(SPOT).applyAxisAngle(axisY, phi).applyMatrix4(m);
+      dir.copy(v).normalize();
+      pr.copy(v).add(center).project(cam);
+      var score = dir.dot(up)
+        - Math.max(0, Math.abs(pr.x) - 1.0) * 1.5
+        - Math.max(0, 0.05 - dir.dot(toCam)) * 2;
+      if (score > best) { best = score; phiLand = phi; }
+    }
   }
 
   /* orientación con slerp: la nave gira suave, no pega saltos */
@@ -384,6 +416,7 @@
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    calibrateLand();
   }
   window.addEventListener("resize", resize);
   resize();
@@ -409,11 +442,14 @@
              : estado === "pre" && demo === null ? easeOut(Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1))
              : 1;
     var spinYaw = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * SPIN);
-    world.rotation.y = spinYaw + prog * wrapAngle(PHI_LAND - spinYaw);
+    world.rotation.y = spinYaw + prog * wrapAngle(phiLand - spinYaw);
     tilt.updateMatrixWorld();
 
-    /* los extremos de las trayectorias siguen a Bolivia cada frame */
+    /* los extremos de las trayectorias siguen a Bolivia cada frame; el
+       tramo final de la aproximación baja por la normal del terreno */
     approach.points[3].copy(landSpot(_end));
+    _p.copy(_end).sub(tilt.position).normalize();
+    approach.points[2].copy(_end).addScaledVector(_p, 0.5).add(_a.set(0.25, 0.02, 0.12));
     depart.points[0].copy(_end);
 
     if (demo === "approach") {
