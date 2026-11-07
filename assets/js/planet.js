@@ -142,113 +142,126 @@
       pos[i * 3 + 2] = r * Math.cos(p);
     }
     g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    var stars = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xd8dcd6, size: 0.045, sizeAttenuation: true }));
+    var stars = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xd8dcd6, size: 0.07, sizeAttenuation: true }));
     scene.add(stars);
   })();
 
-  /* ---------- textura de la Tierra, dibujada como plastilina ---------- */
+  /* ---------- planeta de bloques, estilo voxel ---------- */
 
-  function blob(ctx, pts, W, H, fill) {
-    ctx.fillStyle = fill;
-    ctx.beginPath();
-    pts.forEach(function (pt, i) {
-      var x = (pt[0] + 180) / 360 * W, y = (90 - pt[1]) / 180 * H;
-      i === 0 ? ctx.moveTo(x, y) : ctx.quadraticCurveTo(
-        (pts[i - 1][0] + 180) / 360 * W + (x - (pts[i - 1][0] + 180) / 360 * W) / 2 + (i % 2 ? 8 : -8),
-        (90 - pts[i - 1][1]) / 180 * H + (i % 2 ? 6 : -6), x, y);
-    });
-    ctx.closePath(); ctx.fill();
+  var R_PLANET = 1, LON_N = 72, LAT_N = 36, BLOCK = 0.088;
+  /* espec por tipo: color, desfase radial, escala */
+  var KIND = [
+    { c: 0x3d6db5, r: -0.035, s: 0.92 },  // 0 océano, un paso hundido
+    { c: 0x5da24a, r: 0,      s: 1.0  },  // 1 tierra
+    { c: 0x3f7d38, r: 0,      s: 1.0  },  // 2 bosque
+    { c: 0xc9a86a, r: 0,      s: 1.0  },  // 3 seco
+    { c: 0xe8e3da, r: 0,      s: 1.0  },  // 4 hielo
+    { c: 0xf4f4f0, r: 0.08,   s: 0.55 }   // 5 nube flotante
+  ];
+
+  /* continentes como polígonos lon/lat; el último que toca la celda gana */
+  var SHAPES = [
+    { k: 1, p: [[-80,10],[-70,12],[-60,8],[-50,0],[-40,-5],[-35,-8],[-40,-20],[-50,-30],[-58,-38],[-65,-45],[-70,-52],[-73,-45],[-70,-35],[-70,-20],[-75,-15],[-80,-5],[-85,0],[-85,5]] },
+    { k: 2, p: [[-75,5],[-60,5],[-55,0],[-60,-8],[-70,-10],[-77,-5],[-80,0]] },
+    { k: 1, p: [[-160,65],[-140,70],[-120,72],[-100,70],[-85,68],[-75,62],[-60,55],[-55,48],[-65,45],[-75,40],[-80,30],[-90,20],[-97,16],[-95,10],[-85,8],[-80,8],[-85,15],[-95,18],[-105,20],[-110,25],[-115,30],[-120,35],[-125,40],[-125,48],[-130,55],[-150,60]] },
+    { k: 3, p: [[-105,30],[-95,25],[-90,20],[-100,18],[-110,22],[-112,28]] },
+    { k: 3, p: [[-15,15],[-5,12],[5,10],[10,5],[15,5],[20,0],[25,-5],[30,-10],[35,-15],[35,-25],[30,-35],[25,-35],[20,-35],[15,-30],[12,-20],[10,-10],[5,5],[0,8],[-5,10],[-10,15],[-15,20],[-17,22]] },
+    { k: 3, p: [[-12,20],[5,18],[15,15],[25,12],[30,18],[20,25],[5,28],[-8,26]] },
+    { k: 1, p: [[-10,36],[-5,43],[0,46],[5,50],[10,55],[15,58],[25,60],[40,62],[60,65],[80,68],[100,70],[120,72],[140,70],[160,65],[170,62],[175,60],[165,55],[150,50],[140,45],[130,40],[120,35],[115,25],[108,18],[100,8],[95,15],[90,22],[85,20],[80,10],[75,15],[70,22],[60,25],[55,28],[50,30],[45,35],[40,38],[35,40],[30,42],[20,40],[10,38],[0,36]] },
+    { k: 2, p: [[75,20],[85,22],[90,15],[82,8],[76,12],[73,18]] },
+    { k: 2, p: [[100,15],[108,12],[110,5],[105,2],[100,6],[98,12]] },
+    { k: 3, p: [[113,-22],[120,-20],[130,-15],[138,-12],[142,-10],[145,-18],[150,-22],[153,-28],[150,-35],[145,-38],[138,-35],[130,-32],[120,-34],[115,-35],[113,-30]] }
+  ];
+
+  function inPoly(p, lon, lat) {
+    var inside = false;
+    for (var i = 0, j = p.length - 1; i < p.length; j = i++) {
+      var xi = p[i][0], yi = p[i][1], xj = p[j][0], yj = p[j][1];
+      if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) inside = !inside;
+    }
+    return inside;
   }
 
-  function earthTexture() {
-    var W = 2048, H = 1024, c = document.createElement("canvas");
-    c.width = W; c.height = H;
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = "#4a7cae"; ctx.fillRect(0, 0, W, H);          // océano arcilla
-
-    var LAND = "#7ba05b", LAND2 = "#5d8a4a", DRY = "#c9a86a", ICE = "#e8e3da";
-
-    blob(ctx, [[-80,10],[-70,12],[-60,8],[-50,0],[-40,-5],[-35,-8],[-40,-20],[-50,-30],[-58,-38],[-65,-45],[-70,-52],[-73,-45],[-70,-35],[-70,-20],[-75,-15],[-80,-5],[-85,0],[-85,5]], W, H, LAND);
-    blob(ctx, [[-75,5],[-60,5],[-55,0],[-60,-8],[-70,-10],[-77,-5],[-80,0]], W, H, LAND2);            // Amazonia
-    blob(ctx, [[-160,65],[-140,70],[-120,72],[-100,70],[-85,68],[-75,62],[-60,55],[-55,48],[-65,45],[-75,40],[-80,30],[-90,20],[-97,16],[-95,10],[-85,8],[-80,8],[-85,15],[-95,18],[-105,20],[-110,25],[-115,30],[-120,35],[-125,40],[-125,48],[-130,55],[-150,60]], W, H, LAND);
-    blob(ctx, [[-105,30],[-95,25],[-90,20],[-100,18],[-110,22],[-112,28]], W, H, DRY);               // Norteamérica seca
-    blob(ctx, [[-15,15],[-5,12],[5,10],[10,5],[15,5],[20,0],[25,-5],[30,-10],[35,-15],[35,-25],[30,-35],[25,-35],[20,-35],[15,-30],[12,-20],[10,-10],[5,5],[0,8],[-5,10],[-10,15],[-15,20],[-17,22]], W, H, DRY);
-    blob(ctx, [[-12,20],[5,18],[15,15],[25,12],[30,18],[20,25],[5,28],[-8,26]], W, H, "#b8945a");    // Sahara
-    blob(ctx, [[-10,36],[-5,43],[0,46],[5,50],[10,55],[15,58],[25,60],[40,62],[60,65],[80,68],[100,70],[120,72],[140,70],[160,65],[170,62],[175,60],[165,55],[150,50],[140,45],[130,40],[120,35],[115,25],[108,18],[100,8],[95,15],[90,22],[85,20],[80,10],[75,15],[70,22],[60,25],[55,28],[50,30],[45,35],[40,38],[35,40],[30,42],[20,40],[10,38],[0,36]], W, H, LAND);
-    blob(ctx, [[75,20],[85,22],[90,15],[82,8],[76,12],[73,18]], W, H, LAND2);                        // India
-    blob(ctx, [[100,15],[108,12],[110,5],[105,2],[100,6],[98,12]], W, H, LAND2);                     // SE Asia
-    blob(ctx, [[113,-22],[120,-20],[130,-15],[138,-12],[142,-10],[145,-18],[150,-22],[153,-28],[150,-35],[145,-38],[138,-35],[130,-32],[120,-34],[115,-35],[113,-30]], W, H, DRY);
-    ctx.fillStyle = ICE;
-    ctx.beginPath(); ctx.ellipse(W / 2, 14, W * 0.52, 26, 0, 0, Math.PI * 2); ctx.fill();            // Ártico
-    ctx.beginPath(); ctx.ellipse(W / 2, H - 8, W * 0.52, 40, 0, 0, Math.PI * 2); ctx.fill();         // Antártida
-    ctx.fillStyle = "rgba(255,255,255,0.5)";
-    [[-60,20],[-20,-5],[30,-12],[-100,35],[80,30],[-40,-30],[120,-20]].forEach(function (cl) {        // nubes de algodón
-      ctx.beginPath();
-      ctx.ellipse((cl[0] + 180) / 360 * W, (90 - cl[1]) / 180 * H, 90, 26, cl[0] / 40, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    var tex = new THREE.CanvasTexture(c);
-    return tex;
+  function kindAt(lon, lat) {
+    if (lat > 60 || lat < -58) return 4;
+    for (var i = SHAPES.length - 1; i >= 0; i--) {
+      if (inPoly(SHAPES[i].p, lon, lat)) return SHAPES[i].k;
+    }
+    return 0;
   }
 
-  var earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 48, 48),
-    new THREE.MeshStandardMaterial({ map: earthTexture(), roughness: 0.95, metalness: 0 })
-  );
   var world = new THREE.Group();
-  world.add(earth);
 
-  var atmo = new THREE.Mesh(
-    new THREE.SphereGeometry(1.03, 40, 40),
-    new THREE.MeshBasicMaterial({ color: 0x6d9ed0, transparent: true, opacity: 0.14, side: THREE.BackSide })
-  );
-  world.add(atmo);
+  (function buildPlanet() {
+    var cells = [], i, j, lon, lat;
+    for (i = 0; i < LON_N; i++) for (j = 0; j < LAT_N; j++) {
+      lon = -180 + (i + 0.5) * 360 / LON_N;
+      lat = -90 + (j + 0.5) * 180 / LAT_N;
+      cells.push({ lon: lon, lat: lat, k: kindAt(lon, lat) });
+    }
+    /* nubes sueltas flotando sobre el océano */
+    var seeded = 0;
+    while (seeded < 30) {
+      var cc = cells[(Math.random() * cells.length) | 0];
+      if (cc.k === 0 && Math.abs(cc.lat) < 55) { cc.k = 5; seeded++; }
+    }
+    var mesh = new THREE.InstancedMesh(
+      new THREE.BoxGeometry(BLOCK, BLOCK, BLOCK),
+      new THREE.MeshLambertMaterial(),
+      cells.length
+    );
+    var m4 = new THREE.Matrix4(), col = new THREE.Color();
+    cells.forEach(function (c, i2) {
+      var spec = KIND[c.k];
+      m4.makeScale(spec.s, spec.s, spec.s);
+      m4.setPosition(latLon(c.lon, c.lat, R_PLANET + spec.r));
+      mesh.setMatrixAt(i2, m4);
+      col.setHex(spec.c);
+      mesh.setColorAt(i2, col);
+    });
+    mesh.instanceMatrix.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
+    world.add(mesh);
+  })();
   scene.add(world);
 
-  /* ---------- nave de arcilla: tecnología que aún no existe ---------- */
+  /* ---------- nave de bloques: tecnología que aún no existe ---------- */
 
-  function clay(color) { return new THREE.MeshStandardMaterial({ color: color, roughness: 1, metalness: 0 }); }
-  var WHITE = 0xe8e3da, CORAL = 0xd4574a, SAGE = 0x8fa68e, DARK = 0x2a2a28;
+  var WHITE = 0xe8e3da, CORAL = 0xd4574a, SAGE = 0x8fa68e, DARK = 0x2a2a28, ORANGE = 0xff8a3d, YELLOW = 0xffd23d;
+  function bx(w, h, d, color, x, y, z) {
+    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshLambertMaterial({ color: color }));
+    m.position.set(x, y, z);
+    return m;
+  }
 
   var ship = new THREE.Group();
-
-  var body = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.075, 0.22, 24), clay(WHITE));
-  ship.add(body);
-  var nose = new THREE.Mesh(new THREE.ConeGeometry(0.055, 0.11, 24), clay(CORAL));
-  nose.position.y = 0.165; ship.add(nose);
-
-  // anillos gravitacionales: lo que la hace capaz de aterrizar y volver a subir
-  [0.105, 0.14].forEach(function (r, i) {
-    var ring = new THREE.Mesh(new THREE.TorusGeometry(r, 0.012, 10, 40), clay(SAGE));
-    ring.rotation.x = Math.PI / 2;
-    ring.position.y = 0.02 - i * 0.07;
-    ship.add(ring);
+  ship.add(bx(0.09, 0.09, 0.09, WHITE, 0, 0, 0));
+  ship.add(bx(0.09, 0.09, 0.09, WHITE, 0, 0.085, 0));
+  ship.add(bx(0.06, 0.06, 0.06, CORAL, 0, 0.155, 0));            // nariz
+  ship.add(bx(0.028, 0.028, 0.02, DARK, 0, 0.09, 0.048));        // escotilla
+  [[-0.058, 0], [0.058, 0], [0, -0.058], [0, 0.058]].forEach(function (o) {
+    ship.add(bx(0.018, 0.08, 0.045, CORAL, o[0], -0.055, o[1]));
+  });
+  /* anillos de bloques: la parte que todavía no existe */
+  [[0.02, 0.115], [-0.075, 0.09]].forEach(function (ring, ri) {
+    for (var b = 0; b < 8; b++) {
+      var a = b / 8 * Math.PI * 2 + (ri ? 0.4 : 0);
+      ship.add(bx(0.032, 0.032, 0.032, SAGE, Math.cos(a) * ring[1], ring[0], Math.sin(a) * ring[1]));
+    }
   });
 
-  for (var f = 0; f < 3; f++) {
-    var fin = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.1, 0.06), clay(CORAL));
-    var a = f / 3 * Math.PI * 2;
-    fin.position.set(Math.cos(a) * 0.085, -0.11, Math.sin(a) * 0.085);
-    fin.rotation.y = -a;
-    ship.add(fin);
-  }
-  var port = new THREE.Mesh(new THREE.SphereGeometry(0.02, 12, 12), clay(DARK));
-  port.position.set(0, 0.08, 0.062); ship.add(port);
-
-  var flame = new THREE.Mesh(
-    new THREE.ConeGeometry(0.045, 0.14, 16),
-    new THREE.MeshBasicMaterial({ color: 0xffa54a })
-  );
-  flame.rotation.x = Math.PI; flame.position.y = -0.19;
+  var flame = new THREE.Group();
+  flame.add(bx(0.05, 0.05, 0.05, ORANGE, 0, -0.115, 0));
+  flame.add(bx(0.028, 0.045, 0.028, YELLOW, 0, -0.16, 0));
   ship.add(flame);
   scene.add(ship);
 
   /* banderita que queda para siempre */
   var flag = new THREE.Group();
-  var pole = new THREE.Mesh(new THREE.CylinderGeometry(0.004, 0.004, 0.14, 8), clay(WHITE));
-  pole.position.y = 0.07; flag.add(pole);
-  var cloth = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.032, 0.004), clay(CORAL));
-  cloth.position.set(0.03, 0.12, 0); flag.add(cloth);
+  var pole = bx(0.006, 0.14, 0.006, WHITE, 0, 0.07, 0);
+  flag.add(pole);
+  var cloth = bx(0.055, 0.032, 0.006, CORAL, 0.03, 0.12, 0);
+  flag.add(cloth);
   flag.visible = false;
   world.add(flag);
 
