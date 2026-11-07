@@ -44,4 +44,8 @@ En `assets/js/planet.js`:
 
 - `index.html` lleva OG, Twitter Cards, canonical, geo, JSON-LD
   (Event + Person + WebSite). `sitemap.xml` y `robots.txt` propios.
-- OG image: `assets/img/og-cover.jpg` (captura del hero).
+- OG image: `assets/img/og-cover.jpg` (captura del hero). **Antes de cada
+  commit** se regenera — junto con `imagen/nsac.jpg` (tarjeta del proyecto
+  en asosab.github.io) — con una captura del hero en viewport de celular
+  (390×844): planeta a la izquierda, cuenta completa y legible a la
+  derecha. Las dimensiones reales van en `og:image:width/height`.
