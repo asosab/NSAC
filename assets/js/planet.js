@@ -54,7 +54,7 @@
       c.style.translate = (sp * (i % 2 ? -1 : 1) * 18) + "px 0";
     });
     /* el wordmark del pie crece al llegar */
-    if (wordEl) {
+    if (wordEl && sp > 0.5) {
       var r = wordEl.getBoundingClientRect();
       var k = Math.min(Math.max((window.innerHeight - r.top) / window.innerHeight, 0), 1);
       wordEl.style.transform = "scale(" + (0.94 + k * 0.06) + ")";
@@ -119,9 +119,9 @@
 
   var renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   } catch (e) { canvas.style.display = "none"; return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
@@ -192,14 +192,14 @@
   }
 
   var earth = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 64, 64),
+    new THREE.SphereGeometry(1, 48, 48),
     new THREE.MeshStandardMaterial({ map: earthTexture(), roughness: 0.95, metalness: 0 })
   );
   var world = new THREE.Group();
   world.add(earth);
 
   var atmo = new THREE.Mesh(
-    new THREE.SphereGeometry(1.03, 48, 48),
+    new THREE.SphereGeometry(1.03, 40, 40),
     new THREE.MeshBasicMaterial({ color: 0x6d9ed0, transparent: true, opacity: 0.14, side: THREE.BackSide })
   );
   world.add(atmo);
@@ -262,27 +262,42 @@
     );
   }
   var SPOT = latLon(-63.18, -17.78, 1.005);
+  var SPOT2 = SPOT.clone().multiplyScalar(2);
   flag.position.copy(SPOT);
-  flag.lookAt(SPOT.clone().multiplyScalar(2));
+  flag.lookAt(SPOT2);
 
-  var approach = new THREE.CatmullRomCurve3([
+  var approachCurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(7.5, 4.2, 8.5),
     new THREE.Vector3(3.8, 2.1, 4.8),
     new THREE.Vector3(1.9, 1.0, 2.6),
     SPOT.clone()
   ]);
-  var depart = new THREE.CatmullRomCurve3([
+  var departCurve = new THREE.CatmullRomCurve3([
     SPOT.clone(),
     SPOT.clone().multiplyScalar(1.35).add(new THREE.Vector3(0.2, 0.35, 0.3)),
     SPOT.clone().multiplyScalar(2.2).add(new THREE.Vector3(0.7, 1.1, 0.9)),
     new THREE.Vector3(6, 5.5, 9)
   ]);
 
-  function aim(ship, curve, t) {
-    var p = curve.getPoint(Math.min(t, 1));
-    var ahead = curve.getPoint(Math.min(t + 0.02, 1));
-    ship.position.copy(p);
-    ship.lookAt(ahead);
+  /* trayectorias premuestreadas: sin asignar vectores en cada frame */
+  var PATH_N = 160;
+  function bake(curve) {
+    var pts = [];
+    for (var i = 0; i <= PATH_N; i++) pts.push(curve.getPoint(i / PATH_N));
+    return pts;
+  }
+  var approach = bake(approachCurve), depart = bake(departCurve);
+
+  var _p = new THREE.Vector3(), _a = new THREE.Vector3();
+  function samplePath(pts, tt, out) {
+    var f = tt * PATH_N, i = Math.min(Math.floor(f), PATH_N - 1), r = f - i;
+    return out.copy(pts[i]).lerp(pts[i + 1], r);
+  }
+  function aim(ship, pts, tt) {
+    samplePath(pts, Math.min(tt, 1), _p);
+    samplePath(pts, Math.min(tt + 0.02, 1), _a);
+    ship.position.copy(_p);
+    ship.lookAt(_a);
     ship.rotateX(Math.PI / 2);
   }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
@@ -317,7 +332,7 @@
 
     /* el planeta se asoma y crece con el scroll */
     world.position.y = -1.55 + Math.min(scrollP * 1.15, 1) * 0.75;
-    world.rotation.y = 2.2 + scrollP * 1.4 + (reduceMotion ? 0 : t * 0.012);
+    world.rotation.y = 2.2 + scrollP * 1.4 + (reduceMotion ? 0 : t * 0.02);
     world.rotation.x = 0.12;
 
     if (demo === "approach") {
@@ -331,9 +346,9 @@
       flag.visible = false;
       if (ta >= 1) demo = "landed";
     } else if (demo === "landed") {
-      ship.position.copy(SPOT).multiplyScalar(1.0);
+      ship.position.copy(SPOT);
       ship.position.y += Math.sin(t * 1.2) * 0.004;
-      ship.lookAt(SPOT.clone().multiplyScalar(2));
+      ship.lookAt(SPOT2);
       ship.rotateX(Math.PI / 2);
       flame.visible = false;
       flag.visible = true;
@@ -362,9 +377,9 @@
       flag.visible = true;
       if (q < 0.72) {
         /* aterrizada, con una respiración mínima */
-        ship.position.copy(SPOT).multiplyScalar(1.0);
+        ship.position.copy(SPOT);
         ship.position.y += Math.sin(t * 1.2) * 0.004;
-        ship.lookAt(SPOT.clone().multiplyScalar(2));
+        ship.lookAt(SPOT2);
         ship.rotateX(Math.PI / 2);
         flame.visible = false;
       } else {
