@@ -308,10 +308,12 @@
   var SPOT2 = SPOT.clone().multiplyScalar(2);
 
   /* la entrada es por la derecha de la pantalla, sobre el espacio oscuro;
-     el final de la curva es la posición REAL de Bolivia cada frame y el
-     penúltimo punto se alinea a la normal del terreno para posarse de frente */
+     el cohete recorre la curva a velocidad constante (getPointAt), así la
+     distancia que le falta es la del tiempo que falta; el final de la curva
+     es la posición REAL de Bolivia cada frame y el penúltimo punto se
+     alinea a la normal del terreno para posarse de frente */
   var approach = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(2.2, 0.3, 2.2),
+    new THREE.Vector3(6.5, 0.2, 3.0),
     new THREE.Vector3(1.9, 0.75, 1.25),
     new THREE.Vector3(),
     new THREE.Vector3()
@@ -373,8 +375,8 @@
 
   /* orientación con slerp: la nave gira suave, no pega saltos */
   function aim(ship, curve, tt, dt) {
-    curve.getPoint(Math.min(tt, 1), _p);
-    curve.getPoint(Math.min(tt + 0.02, 1), _a);
+    curve.getPointAt(Math.min(tt, 1), _p);
+    curve.getPointAt(Math.min(tt + 0.02, 1), _a);
     ship.position.copy(_p);
     _dummy.position.copy(_p);
     _dummy.lookAt(_a);
@@ -423,7 +425,7 @@
     tilt.position.x = -1.15 + sp * 0.25;
     tilt.position.y = -0.35 + sp * 0.45 + (reduceMotion ? 0 : Math.sin(t * 0.4) * 0.02);
     var prog = demo === "approach" ? easeOut(Math.min(demoT, 1))
-             : estado === "pre" && demo === null ? easeOut(Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1))
+             : estado === "pre" && demo === null ? Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1)
              : 1;
     var spinYaw = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * SPIN);
     world.rotation.y = spinYaw + prog * wrapAngle(phiLand - spinYaw);
@@ -435,6 +437,9 @@
     _p.copy(_end).sub(tilt.position).normalize();
     approach.points[2].copy(_end).addScaledVector(_p, 0.5).add(_a.set(0.25, 0.02, 0.12));
     depart.points[0].copy(_end);
+    /* los puntos mutan: los largos de arco se recalculan para getPointAt */
+    approach.needsUpdate = true;
+    depart.needsUpdate = true;
 
     if (demo === "approach") {
       demoT += dt * 0.25;
@@ -461,12 +466,12 @@
     } else if (demo === "gone") {
       ship.visible = false;
     } else if (estado === "pre") {
+      /* avance lineal: la distancia recorrida es la del tiempo transcurrido */
       var p = Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1);
-      var eased = easeOut(p);
-      aim(ship, approach, eased, dt);
+      aim(ship, approach, p, dt);
       ship.position.x += Math.sin(t * 2.1) * 0.02;
       ship.position.y += Math.sin(t * 1.7) * 0.02;
-      flame.visible = eased < 0.98;
+      flame.visible = p < 0.98;
       flame.scale.setScalar(0.8 + Math.sin(t * 14) * 0.25);
     } else if (estado === "live") {
       var q = (now - T0) / (T1 - T0);
