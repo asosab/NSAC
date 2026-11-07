@@ -1,4 +1,4 @@
-/* NSAC — planeta de plastilina + cohete sincronizado a la cuenta regresiva.
+/* NSAC — planeta de bloques (voxel) + cohete sincronizado a la cuenta regresiva.
    Ventana oficial del hackathon (hora local):
    abre sábado 14 nov 2026 09:00 · cierra domingo 15 nov 2026 23:59:59. */
 (function () {
