@@ -9,6 +9,18 @@
   var LAUNCH = new Date(2026, 10, 1, 0, 0, 0);     // el cohete ya venía en camino
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- demo secreta: AAA aterriza, DDD despega ---------- */
+
+  var demo = null, demoT = 0, keys = [];
+  window.addEventListener("keydown", function (e) {
+    var k = e.key.toLowerCase();
+    if (k !== "a" && k !== "d") return;
+    var now = Date.now();
+    keys = keys.filter(function (k2) { return k2.k === k && now - k2.t < 800; });
+    keys.push({ k: k, t: now });
+    if (keys.length >= 3) { keys = []; demo = k === "a" ? "approach" : "depart"; demoT = 0; }
+  });
+
   /* ---------- cuenta regresiva ---------- */
 
   var elD = document.getElementById("cd-d"),
@@ -299,7 +311,8 @@
   var clock = new THREE.Clock();
 
   function frame() {
-    var t = clock.getElapsedTime();
+    var dt = Math.min(clock.getDelta(), 0.1);
+    var t = clock.elapsedTime;
     var now = new Date();
 
     /* el planeta se asoma y crece con el scroll */
@@ -307,7 +320,35 @@
     world.rotation.y = 2.2 + scrollP * 1.4 + (reduceMotion ? 0 : t * 0.012);
     world.rotation.x = 0.12;
 
-    if (estado === "pre") {
+    if (demo === "approach") {
+      demoT += dt * 0.25;
+      var ta = Math.min(demoT, 1);
+      aim(ship, approach, easeOut(ta));
+      ship.position.x += Math.sin(t * 2.1) * 0.02;
+      ship.position.y += Math.sin(t * 1.7) * 0.02;
+      flame.visible = ta < 0.98;
+      flame.scale.setScalar(0.8 + Math.sin(t * 14) * 0.25);
+      flag.visible = false;
+      if (ta >= 1) demo = "landed";
+    } else if (demo === "landed") {
+      ship.position.copy(SPOT).multiplyScalar(1.0);
+      ship.position.y += Math.sin(t * 1.2) * 0.004;
+      ship.lookAt(SPOT.clone().multiplyScalar(2));
+      ship.rotateX(Math.PI / 2);
+      flame.visible = false;
+      flag.visible = true;
+    } else if (demo === "depart") {
+      demoT += dt * 0.25;
+      var td = easeIn(Math.min(demoT, 1));
+      aim(ship, depart, td);
+      flame.visible = true;
+      flame.scale.setScalar(1 + Math.sin(t * 16) * 0.3);
+      flag.visible = true;
+      if (td >= 1) { demo = "gone"; ship.visible = false; }
+    } else if (demo === "gone") {
+      ship.visible = false;
+      flag.visible = true;
+    } else if (estado === "pre") {
       var p = Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1);
       var eased = easeOut(p);
       aim(ship, approach, eased);
