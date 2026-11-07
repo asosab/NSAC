@@ -21,6 +21,21 @@
     if (keys.length >= 3) { keys = []; demo = k === "a" ? "approach" : "depart"; demoT = 0; }
   });
 
+  /* ---------- giro libre: triple click sobre el planeta ----------
+     una vuelta cada 6 s para inspeccionar cualquier zona; al repetir el
+     gesto frena y asienta en el yaw correcto según la hora del día */
+
+  var spin = 0, spinning = false, spinBase = 0, spinT0 = 0, spinStop = null;
+  window.addEventListener("click", function (e) {
+    if (e.detail < 3 || e.target !== document.getElementById("planeta")) return;
+    if (spinning) {
+      spinning = false;
+      spinStop = { a: spin, b: Math.round(spin / (Math.PI * 2)) * Math.PI * 2, t: 0 };
+    } else if (!spinStop) {
+      spinning = true; spinBase = spin; spinT0 = Date.now();
+    }
+  });
+
   /* ---------- cuenta regresiva ---------- */
 
   var elD = document.getElementById("cd-d"),
@@ -307,6 +322,21 @@
   var SPOT = latLon(-63.18, -17.78, 1.005);
   var SPOT2 = SPOT.clone().multiplyScalar(2);
 
+  /* banderita boliviana junto al punto de aterrizaje: corrida al suroeste
+     para que el cohete no la pise al posarse; hija de world, gira con él */
+  var SPOT_FLAG = latLon(-67.5, -20, 1.05);
+  var flag = new THREE.Group();
+  flag.add(new THREE.Mesh(mergeBoxes([
+    [0.014, 0.19, 0.014, DARK,    0,     0.095, 0],   // asta
+    [0.105, 0.032, 0.012, 0xd52b1e, 0.055, 0.166, 0], // rojo
+    [0.105, 0.032, 0.012, 0xf9e300, 0.055, 0.134, 0], // amarillo
+    [0.105, 0.032, 0.012, 0x007934, 0.055, 0.102, 0]  // verde
+  ]), voxelMat));
+  flag.position.copy(SPOT_FLAG);
+  flag.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), SPOT_FLAG.clone().normalize());
+  flag.rotateY(-0.5);   // el paño mira de frente cuando Bolivia queda arriba
+  world.add(flag);
+
   /* la entrada es por la derecha de la pantalla, sobre el espacio oscuro;
      el cohete recorre la curva a velocidad constante (getPointAt), así la
      distancia que le falta es la del tiempo que falta; el final de la curva
@@ -430,8 +460,18 @@
        la demo converge a esa pose mientras dura */
     var timeYaw = reduceMotion ? phiLand
                   : phiLand - Math.PI * 2 * (T0 - now) / 864e5;
+    /* giro libre: avanza por reloj real (sirve también con reduce-motion);
+       al frenar, vuelve al múltiplo de 2π más cercano = yaw del reloj */
+    if (spinning) {
+      spin = spinBase + (Date.now() - spinT0) * Math.PI / 3000;
+    } else if (spinStop) {
+      spinStop.t += dt / 0.7;
+      var st = Math.min(spinStop.t, 1);
+      spin = spinStop.a + (spinStop.b - spinStop.a) * easeOut(st);
+      if (spinStop.t >= 1) { spin = spinStop.b; spinStop = null; }
+    }
     var prog = demo === "approach" ? easeOut(Math.min(demoT, 1)) : demo === null ? 0 : 1;
-    world.rotation.y = timeYaw + sp * 0.8 + prog * wrapAngle(phiLand - timeYaw - sp * 0.8);
+    world.rotation.y = timeYaw + sp * 0.8 + spin + prog * wrapAngle(phiLand - timeYaw - sp * 0.8 - spin);
     tilt.updateMatrixWorld();
 
     /* los extremos de las trayectorias siguen a Bolivia cada frame; el
