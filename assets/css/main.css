@@ -189,7 +189,8 @@ main, .top, .footer { position: relative; z-index: 1; }
 .intro__col {
   width: 340px;
   max-width: 78%;
-  margin-left: 12%;
+  margin-left: auto;
+  margin-right: 4%;
   background: var(--scrim);
   padding: 36px 32px 40px;
 }

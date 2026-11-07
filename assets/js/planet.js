@@ -107,10 +107,13 @@
     document.querySelectorAll(".rise").forEach(function (el) { el.classList.add("on"); });
   }
 
-  /* el video se pausa si el usuario prefiere menos movimiento */
-  if (reduceMotion) {
-    document.querySelectorAll("video[autoplay]").forEach(function (v) { v.pause(); v.removeAttribute("autoplay"); });
-  }
+  /* el video se pausa fuera de pantalla (ahorro real) y con movimiento reducido */
+  document.querySelectorAll("video[autoplay]").forEach(function (v) {
+    if (reduceMotion) { v.pause(); v.removeAttribute("autoplay"); return; }
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.isIntersecting ? v.play().catch(function () {}) : v.pause(); });
+    }, { threshold: 0.1 }).observe(v);
+  });
 
   /* ---------- escena ---------- */
 
@@ -143,6 +146,7 @@
     }
     g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     var stars = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xd8dcd6, size: 0.07, sizeAttenuation: true }));
+    stars.geometry.setDrawRange(0, 420);
     scene.add(stars);
   })();
 
@@ -225,34 +229,69 @@
   })();
   scene.add(world);
 
-  /* ---------- nave de bloques: tecnología que aún no existe ---------- */
+  /* ---------- nave de bloques: tecnología que aún no existe ----------
+     toda la nave es UNA malla con colores por vértice: 1 draw call */
 
   var WHITE = 0xe8e3da, CORAL = 0xd4574a, SAGE = 0x8fa68e, DARK = 0x2a2a28, ORANGE = 0xff8a3d, YELLOW = 0xffd23d;
+
+  function mergeBoxes(list) {
+    var pos = [], nor = [], col = [], idx = [], off = 0;
+    list.forEach(function (b) {
+      var g = new THREE.BoxGeometry(b[0], b[1], b[2]);
+      g.translate(b[4], b[5], b[6]);
+      var p = g.attributes.position, n = g.attributes.normal, ix = g.index;
+      var c = new THREE.Color(b[3]);
+      for (var i = 0; i < p.count; i++) {
+        pos.push(p.getX(i), p.getY(i), p.getZ(i));
+        nor.push(n.getX(i), n.getY(i), n.getZ(i));
+        col.push(c.r, c.g, c.b);
+      }
+      for (var k = 0; k < ix.count; k++) idx.push(ix.getX(k) + off);
+      off += p.count;
+      g.dispose();
+    });
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    geo.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+    geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+    geo.setIndex(idx);
+    return geo;
+  }
+
+  var voxelMat = new THREE.MeshLambertMaterial({ vertexColors: true });
   function bx(w, h, d, color, x, y, z) {
     var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshLambertMaterial({ color: color }));
     m.position.set(x, y, z);
     return m;
   }
 
-  var ship = new THREE.Group();
-  ship.add(bx(0.09, 0.09, 0.09, WHITE, 0, 0, 0));
-  ship.add(bx(0.09, 0.09, 0.09, WHITE, 0, 0.085, 0));
-  ship.add(bx(0.06, 0.06, 0.06, CORAL, 0, 0.155, 0));            // nariz
-  ship.add(bx(0.028, 0.028, 0.02, DARK, 0, 0.09, 0.048));        // escotilla
+  var hull = [
+    [0.09, 0.09, 0.09, WHITE, 0, 0, 0],
+    [0.09, 0.09, 0.09, WHITE, 0, 0.085, 0],
+    [0.06, 0.06, 0.06, CORAL, 0, 0.155, 0],         // nariz
+    [0.028, 0.028, 0.02, DARK, 0, 0.09, 0.048]      // escotilla
+  ];
   [[-0.058, 0], [0.058, 0], [0, -0.058], [0, 0.058]].forEach(function (o) {
-    ship.add(bx(0.018, 0.08, 0.045, CORAL, o[0], -0.055, o[1]));
+    hull.push([0.018, 0.08, 0.045, CORAL, o[0], -0.055, o[1]]);
   });
   /* anillos de bloques: la parte que todavía no existe */
   [[0.02, 0.115], [-0.075, 0.09]].forEach(function (ring, ri) {
     for (var b = 0; b < 8; b++) {
       var a = b / 8 * Math.PI * 2 + (ri ? 0.4 : 0);
-      ship.add(bx(0.032, 0.032, 0.032, SAGE, Math.cos(a) * ring[1], ring[0], Math.sin(a) * ring[1]));
+      hull.push([0.032, 0.032, 0.032, SAGE, Math.cos(a) * ring[1], ring[0], Math.sin(a) * ring[1]]);
     }
   });
 
-  var flame = new THREE.Group();
-  flame.add(bx(0.05, 0.05, 0.05, ORANGE, 0, -0.115, 0));
-  flame.add(bx(0.028, 0.045, 0.028, YELLOW, 0, -0.16, 0));
+  var ship = new THREE.Group();
+  ship.add(new THREE.Mesh(mergeBoxes(hull), voxelMat));
+
+  var flame = new THREE.Mesh(
+    mergeBoxes([
+      [0.05, 0.05, 0.05, ORANGE, 0, -0.115, 0],
+      [0.028, 0.045, 0.028, YELLOW, 0, -0.16, 0]
+    ]),
+    new THREE.MeshBasicMaterial({ vertexColors: true })
+  );
   ship.add(flame);
   ship.scale.setScalar(1.35);
   scene.add(ship);
@@ -280,46 +319,47 @@
   flag.position.copy(SPOT);
   flag.lookAt(SPOT2);
 
-  var approachCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(7.5, 4.2, 8.5),
-    new THREE.Vector3(3.8, 2.1, 4.8),
-    new THREE.Vector3(1.9, 1.0, 2.6),
-    SPOT.clone()
+  /* la entrada es por la derecha de la pantalla, sobre el espacio oscuro;
+     el final de la curva es la posición REAL de Bolivia cada frame */
+  var approach = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(6.6, 3.4, 7.8),
+    new THREE.Vector3(3.4, 1.9, 4.4),
+    new THREE.Vector3(1.3, 0.95, 2.3),
+    new THREE.Vector3()
   ]);
-  var departCurve = new THREE.CatmullRomCurve3([
-    SPOT.clone(),
-    SPOT.clone().multiplyScalar(1.35).add(new THREE.Vector3(0.2, 0.35, 0.3)),
-    SPOT.clone().multiplyScalar(2.2).add(new THREE.Vector3(0.7, 1.1, 0.9)),
-    new THREE.Vector3(6, 5.5, 9)
+  /* el despegue continúa hacia la derecha y arriba hasta salir de cuadro */
+  var depart = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(),
+    new THREE.Vector3(0.8, 1.7, 1.4),
+    new THREE.Vector3(2.4, 3.4, 3.0),
+    new THREE.Vector3(8.5, 7.0, 10)
   ]);
 
-  /* trayectorias premuestreadas: sin asignar vectores en cada frame */
-  var PATH_N = 160;
-  function bake(curve) {
-    var pts = [];
-    for (var i = 0; i <= PATH_N; i++) pts.push(curve.getPoint(i / PATH_N));
-    return pts;
-  }
-  var approach = bake(approachCurve), depart = bake(departCurve);
+  var _p = new THREE.Vector3(), _a = new THREE.Vector3(), _end = new THREE.Vector3();
+  var _dummy = new THREE.Object3D();
 
-  var _p = new THREE.Vector3(), _a = new THREE.Vector3();
-  function samplePath(pts, tt, out) {
-    var f = tt * PATH_N, i = Math.min(Math.floor(f), PATH_N - 1), r = f - i;
-    return out.copy(pts[i]).lerp(pts[i + 1], r);
-  }
-  /* la trayectoria vive en el espacio del planeta: se transforma cada frame,
-     así la nave aterriza sobre Bolivia aunque el mundo siga girando */
-  function aim(ship, pts, tt) {
-    samplePath(pts, Math.min(tt, 1), _p);
-    samplePath(pts, Math.min(tt + 0.02, 1), _a);
-    world.localToWorld(_p);
-    world.localToWorld(_a);
-    ship.position.copy(_p);
-    ship.lookAt(_a);
-    ship.rotateX(Math.PI / 2);
-  }
   function landSpot(out) {
     return world.localToWorld(out.copy(SPOT));
+  }
+
+  /* coreografía del giro: al ver el planeta al revés el este corre hacia la
+     izquierda; el yaw converge al aterrizaje (Bolivia arriba a la derecha) */
+  var PHI_LAND = 1.7, SPIN = -0.05;
+  function wrapAngle(x) {
+    x = (x + Math.PI) % (Math.PI * 2);
+    if (x < 0) x += Math.PI * 2;
+    return x - Math.PI;
+  }
+
+  /* orientación con slerp: la nave gira suave, no pega saltos */
+  function aim(ship, curve, tt, dt) {
+    curve.getPoint(Math.min(tt, 1), _p);
+    curve.getPoint(Math.min(tt + 0.02, 1), _a);
+    ship.position.copy(_p);
+    _dummy.position.copy(_p);
+    _dummy.lookAt(_a);
+    _dummy.rotateX(Math.PI / 2);
+    ship.quaternion.slerp(_dummy.quaternion, Math.min(dt * 5, 1));
   }
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
   function easeIn(t) { return t * t * t; }
@@ -346,6 +386,7 @@
 
   var clock = new THREE.Clock();
   var curScroll = 0;
+  var dpr = Math.min(window.devicePixelRatio, 1.5), perfAcc = 0, perfN = 0;
 
   function frame() {
     var dt = Math.min(clock.getDelta(), 0.1);
@@ -361,14 +402,23 @@
     world.position.x = -1.15 + sp * 0.25;
     world.position.y = -0.35 + sp * 0.45 + (reduceMotion ? 0 : Math.sin(t * 0.4) * 0.02);
     world.rotation.z = Math.PI + 0.45;
-    world.rotation.y = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * 0.02);
     world.rotation.x = -0.3;
+    /* el giro converge al yaw del aterrizaje conforme avanza la nave */
+    var prog = demo === "approach" ? easeOut(Math.min(demoT, 1))
+             : estado === "pre" && demo === null ? easeOut(Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1))
+             : 1;
+    var spinYaw = 0.45 + sp * 0.8 + (reduceMotion ? 0 : t * SPIN);
+    world.rotation.y = spinYaw + prog * wrapAngle(PHI_LAND - spinYaw);
     world.updateMatrixWorld();
+
+    /* los extremos de las trayectorias siguen a Bolivia cada frame */
+    approach.points[3].copy(landSpot(_end));
+    depart.points[0].copy(_end);
 
     if (demo === "approach") {
       demoT += dt * 0.25;
       var ta = Math.min(demoT, 1);
-      aim(ship, approach, easeOut(ta));
+      aim(ship, approach, easeOut(ta), dt);
       ship.position.x += Math.sin(t * 2.1) * 0.02;
       ship.position.y += Math.sin(t * 1.7) * 0.02;
       flame.visible = ta < 0.98;
@@ -385,7 +435,7 @@
     } else if (demo === "depart") {
       demoT += dt * 0.25;
       var td = easeIn(Math.min(demoT, 1));
-      aim(ship, depart, td);
+      aim(ship, depart, td, dt);
       flame.visible = true;
       flame.scale.setScalar(1 + Math.sin(t * 16) * 0.3);
       flag.visible = true;
@@ -396,7 +446,7 @@
     } else if (estado === "pre") {
       var p = Math.min(Math.max((now - LAUNCH) / (T0 - LAUNCH), 0), 1);
       var eased = easeOut(p);
-      aim(ship, approach, eased);
+      aim(ship, approach, eased, dt);
       ship.position.x += Math.sin(t * 2.1) * 0.02;
       ship.position.y += Math.sin(t * 1.7) * 0.02;
       flame.visible = eased < 0.98;
@@ -415,7 +465,7 @@
       } else {
         /* despegue: se va para no volver */
         var k = easeIn((q - 0.72) / 0.28);
-        aim(ship, depart, k);
+        aim(ship, depart, k, dt);
         flame.visible = true;
         flame.scale.setScalar(1 + Math.sin(t * 16) * 0.3);
       }
@@ -435,6 +485,13 @@
     camera.lookAt(0.1 + sp * 0.1, world.position.y * 0.5, 0);
 
     renderer.render(scene, camera);
+
+    /* pixelRatio adaptativo: si el frame medio pasa de ~26ms se baja un paso */
+    perfAcc += dt; perfN++;
+    if (perfN >= 90) {
+      if (perfAcc / perfN > 0.026 && dpr > 1.0) { dpr = Math.max(1.0, dpr - 0.25); renderer.setPixelRatio(dpr); }
+      perfAcc = 0; perfN = 0;
+    }
     if (!reduceMotion) requestAnimationFrame(frame);
   }
 
