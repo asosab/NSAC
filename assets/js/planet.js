@@ -460,8 +460,7 @@
     /* yaw = phiLand - 2π·(días hasta T0): una vuelta por día, y en el
        instante del aterrizaje Bolivia queda exactamente en phiLand;
        la demo converge a esa pose mientras dura */
-    var timeYaw = reduceMotion ? phiLand
-                  : phiLand - Math.PI * 2 * (T0 - now) / 864e5;
+    var timeYaw = phiLand - Math.PI * 2 * (T0 - now) / 864e5;
     /* giro libre: avanza por reloj real (sirve también con reduce-motion);
        al frenar, vuelve al múltiplo de 2π más cercano = yaw del reloj */
     if (spinning) {
