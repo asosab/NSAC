@@ -37,7 +37,9 @@ En `assets/js/planet.js`:
 
 - El monitor `D:\proyectos\whatsapp` vigila el grupo «Diario NSAC»,
   empaqueta lotes en `inbox/lote-<ts>/` (`mensajes.json` + media) y dispara
-  `devin.exe -p --prompt-file inbox/PROMPT.md --permission-mode bypass`.
+  una sesión Devin local vía driver ACP (`bin/nsac-devin.mjs` allá:
+  `devin.exe acp` + `authenticate` con la API key de `credentials.toml`,
+  sesión en `D:\proyectos\NSAC`, modo bypass, prompt = `inbox/PROMPT.md`).
 - `inbox/PROMPT.md` es el contrato de procesamiento: filtro de decencia +
   normas del evento (`docs/conducta-space-apps.md`), post del día, fotos a
   `assets/img/galeria/` + `_data/galeria.yml`, videos `#nasa` de YouTube,
