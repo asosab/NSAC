@@ -49,7 +49,10 @@ En `assets/js/planet.js`:
   en asosab.github.io) — con una captura del hero en viewport de celular
   (390×844): planeta a la izquierda, cuenta completa y legible a la
   derecha. Las dimensiones reales van en `og:image:width/height`.
-- `description`, `og:description` y `twitter:description` llevan el tiempo
-  restante en palabras («Faltan N días…» hacia el sábado 14, 9:00 hora de
-  Bolivia) y se refrescan con la OG image. Pasado `T1` cambian a pasado:
-  «el hackathon fue el 14 y 15 de noviembre de 2026…».
+- Con cada cambio de código se regenera la OG image **y** los textos
+  `description`, `og:description` y `twitter:description`, para que el
+  comentario concuerde con el momento del evento: antes de `T0`, «Faltan N
+  días / N horas…» hacia el sábado 14, 9:00 (hora de Bolivia); entre `T0`
+  y `T1`, «en curso, quedan N horas para el cierre» (domingo 15, 23:59:59);
+  después de `T1`, en pasado: «el hackathon fue el 14 y 15 de noviembre
+  de 2026…».
