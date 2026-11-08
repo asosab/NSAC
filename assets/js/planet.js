@@ -1,12 +1,14 @@
 /* NSAC — planeta de bloques (voxel) + cohete sincronizado a la cuenta regresiva.
-   Ventana oficial del hackathon (hora local):
-   abre sábado 14 nov 2026 09:00 · cierra domingo 15 nov 2026 23:59:59. */
+   Ventana oficial del hackathon en hora de Bolivia (UTC-4, sin horario de
+   verano): abre sábado 14 nov 2026 09:00 · cierra domingo 15 nov 2026 23:59:59.
+   Las fechas llevan offset explícito para que la cuenta, la rotación del
+   planeta y el aterrizaje sean el mismo instante en cualquier zona horaria. */
 (function () {
   "use strict";
 
-  var T0 = new Date(2026, 10, 14, 9, 0, 0);        // empieza
-  var T1 = new Date(2026, 10, 15, 23, 59, 59);     // cierra
-  var LAUNCH = new Date(2026, 10, 1, 0, 0, 0);     // el cohete ya venía en camino
+  var T0 = new Date("2026-11-14T09:00:00-04:00");   // empieza (La Paz)
+  var T1 = new Date("2026-11-15T23:59:59-04:00");   // cierra (La Paz)
+  var LAUNCH = new Date("2026-11-01T00:00:00-04:00"); // el cohete ya venía en camino
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- demo secreta: AAA aterriza, DDD despega ---------- */
