@@ -7,6 +7,19 @@ description: "Los avances de mi participación en el NASA Space Apps Challenge 2
 <h1>Diario del hackathon</h1>
 <p class="page__sub">Lo que va pasando, contado desde Santa Cruz de la Sierra. Los videos salen en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
 
+<div id="diario-feed">
+  {% for post in site.posts limit:3 %}
+  <article class="diario-post">
+    <h2 class="diario-post__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p class="post__date">{{ post.date | date: "%d de %B de %Y" }}</p>
+    <div class="post__body">{{ post.content }}</div>
+  </article>
+  {% endfor %}
+</div>
+<p id="diario-more" class="diario-more" hidden>cargando…</p>
+<p id="diario-end" class="diario-more" hidden>fin del diario</p>
+
+<noscript>
 <ul class="diary-list">
   {% for post in site.posts %}
   <li>
@@ -16,3 +29,11 @@ description: "Los avances de mi participación en el NASA Space Apps Challenge 2
   </li>
   {% endfor %}
 </ul>
+</noscript>
+
+{% assign resto = site.posts | slice: 3, site.posts.size %}
+<script>
+  window.DIARIO_BASE = {{ '/' | relative_url | jsonify }};
+  window.DIARIO_PENDING = {{ resto | map: 'url' | jsonify }};
+</script>
+<script src="{{ '/assets/js/diario.js' | relative_url }}" defer></script>

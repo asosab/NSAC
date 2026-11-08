@@ -589,6 +589,12 @@ main, .top, .footer { position: relative; z-index: 1; }
 .gal__item img { width: 100%; display: block; }
 .gal__cap { font-size: var(--step-small); color: var(--muted); margin-top: 6px; }
 
+.diario-post { border-top: 1px solid var(--line, #3a3a36); padding-top: 48px; margin-bottom: 72px; }
+.diario-post:first-child { border-top: none; padding-top: 0; }
+.diario-post__title a { color: inherit; text-decoration: none; }
+.diario-post__title a:hover { text-decoration: underline; }
+.diario-more { text-align: center; color: var(--muted); font-size: var(--step-small); margin: 48px 0; }
+
 /* ---- teléfono ---- */
 
 @media (max-width: 768px) {
