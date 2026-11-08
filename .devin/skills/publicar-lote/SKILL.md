@@ -40,6 +40,27 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
 8. `git add -A`, commit breve en minúsculas (estilo del repo), push a
    `master`.
 
+## Cierre verificado
+
+Antes de dar por terminado el turno:
+
+- `git log -1` muestra tu commit y `git status` queda limpio (salvo
+  `inbox/` que está ignorado).
+- Cada lote tiene `.hecho` — sin excepción, así todo se haya rechazado.
+- Si algo falló a medias, deja la causa en `inbox/lote-<ts>/devin-nota.md`
+  y el repo sin cambios parciales (`git checkout` / `git stash` si hace
+  falta). Un lote sin `.hecho` y sin nota se reintentará en la próxima
+  corrida — no dejes trabajo a medias.
+
+## Límites del turno
+
+- Ve directo al trabajo: lee `AGENTS.md`, este skill, `mensajes.json` y
+  los textos de `docs/conducta-space-apps.md`; no recorras skills ni
+  explores el repo más allá de lo necesario.
+- Un turno tiene ~30 min de vida y se mata si pasa ~12 min sin emitir
+  nada: no te pongas a mejorar código ajeno ni a dejar todo perfecto —
+  procesa, verifica, commitea, cierra.
+
 ## Reglas duras
 
 - **Nada se publica dos veces**: nombres por hash + chequeo de `src` en el
