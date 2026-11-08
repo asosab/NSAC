@@ -1,2 +1,5 @@
-fotos: []
+fotos:
+  - src: /assets/img/galeria/2026-11-08-cbb89c6e.jpg
+    alt: "El grupo «Diario NSAC» recién creado en WhatsApp, con el aviso de la escucha al pie"
+    pie: "Así nació el grupo «Diario NSAC»: lo que se mande ahí se publica aquí"
 videos: []
