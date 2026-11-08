@@ -1,0 +1,34 @@
+---
+layout: default
+title: Galería
+description: "Fotos y videos de mi participación en el NASA Space Apps Challenge 2026, del 14 al 15 de noviembre."
+---
+
+<h1>Galería</h1>
+<p class="page__sub">Lo que va quedando del hackathon. Los videos completos están en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
+
+{% if site.data.galeria.videos.size > 0 %}
+<div class="gal__vids">
+  {% for v in site.data.galeria.videos %}
+  <div class="gal__vid">
+    {% include youtube.html id=v.id title=v.titulo %}
+    <p class="gal__cap">{{ v.titulo }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if site.data.galeria.fotos.size > 0 %}
+<div class="gal__grid">
+  {% for f in site.data.galeria.fotos %}
+  <figure class="gal__item">
+    <img src="{{ f.src | relative_url }}" alt="{{ f.alt }}" loading="lazy">
+    {% if f.pie %}<figcaption class="gal__cap">{{ f.pie }}</figcaption>{% endif %}
+  </figure>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% unless site.data.galeria.fotos.size > 0 or site.data.galeria.videos.size > 0 %}
+<p>Todavía no hay material: se va publicando durante el evento.</p>
+{% endunless %}

@@ -33,6 +33,18 @@ En `assets/js/planet.js`:
 - Primera persona, castellano. Toda prosa nueva pasa por el skill
   `humanamente` (`.devin/skills/`).
 
+## Puente WhatsApp → diario y galería
+
+- El monitor `D:\proyectos\whatsapp` vigila el grupo «Diario NSAC»,
+  empaqueta lotes en `inbox/lote-<ts>/` (`mensajes.json` + media) y dispara
+  `devin.exe -p --prompt-file inbox/PROMPT.md --permission-mode bypass`.
+- `inbox/PROMPT.md` es el contrato de procesamiento: filtro de decencia +
+  normas del evento (`docs/conducta-space-apps.md`), post del día, fotos a
+  `assets/img/galeria/` + `_data/galeria.yml`, videos `#nasa` de YouTube,
+  commit + push. Los lotes crudos no se versionan.
+- Galería: página `/galeria/` (`layout: default`) alimentada por
+  `_data/galeria.yml` (`fotos:` y `videos:`).
+
 ## Diseño
 
 - Dirección `name-as-monument` (design-taste-frontend): Chivo 900, carbón

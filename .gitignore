@@ -5,6 +5,10 @@ _site
 .taste-skill/
 .playwright-mcp/
 
+# lotes crudos del puente WhatsApp (material en tránsito, no se versiona)
+inbox/lote-*/
+!inbox/PROMPT.md
+
 # Obsidian: config compartida sí, estado local no
 .obsidian/workspace*.json
 .obsidian/workspaces.json

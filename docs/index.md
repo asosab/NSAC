@@ -16,6 +16,10 @@ el vault; `docs/` no se publica (está en `exclude`).
 - [[2026-11-07]] — aterrizaje calibrado sobre Bolivia (arriba al centro) y cuenta a la derecha en móvil
 - [[2026-11-08]] — reloj del sitio anclado a UTC-4: misma cuenta, rotación y aterrizaje en cualquier zona horaria
 
+## Notas
+
+- [[conducta-space-apps]] — normas de comportamiento del evento (filtro de publicación del puente WhatsApp)
+
 ## Notas rápidas
 
 - El sitio vive en `asosab.github.io/NSAC` (project page de este repo).
