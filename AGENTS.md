@@ -54,6 +54,24 @@ En `assets/js/planet.js`:
   (`lint.mjs` + `inspect.mjs`), corre desde la raíz del repo (`.taste-skill/`
   está en `.gitignore`).
 
+## Orden de archivos
+
+La raíz solo admite archivos del sitio y su configuración: `index.html`,
+`_config.yml`, `sitemap.xml`, `robots.txt`, `AGENTS.md`, `README.md`. Cualquier
+otra cosa tiene un lugar:
+
+- Contenido del sitio: `_posts/`, `_data/`, `diario/`, `galeria/`, `assets/`.
+- Notas y conocimiento del proyecto: `docs/` (vault Obsidian, no se publica).
+- Entrada del puente WhatsApp: `inbox/` (`PROMPT.md` + `lote-*`, los lotes no se
+  versionan).
+- Scripts de un solo uso, salidas de prueba, capturas de depuración, respuestas
+  de API guardadas: `.tmp/` (gitignored). Si un script temporal madura y se
+  vuelve herramienta, se mueve a `bin/` o a `docs/` según su naturaleza; no se
+  queda en `.tmp/` ni en la raíz.
+
+Regla práctica: antes de crear un archivo en la raíz, preguntarse a cuál de
+esos dominios pertenece. Ninguno → `.tmp/`.
+
 ## SEO
 
 - `index.html` lleva OG, Twitter Cards, canonical, geo, JSON-LD

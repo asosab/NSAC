@@ -5,6 +5,9 @@ _site
 .taste-skill/
 .playwright-mcp/
 
+# scripts y salidas de un solo uso (ver «Orden de archivos» en AGENTS.md)
+.tmp/
+
 # lotes crudos del puente WhatsApp (material en tránsito, no se versiona)
 inbox/lote-*/
 !inbox/PROMPT.md
