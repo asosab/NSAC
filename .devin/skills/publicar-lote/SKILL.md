@@ -60,6 +60,9 @@ Antes de dar por terminado el turno:
 - Un turno tiene ~30 min de vida y se mata si pasa ~12 min sin emitir
   nada: no te pongas a mejorar código ajeno ni a dejar todo perfecto —
   procesa, verifica, commitea, cierra.
+- Si las tools `write`/`edit` responden «Parse error» de forma
+  persistente (se vio en sesiones ACP), escribe los archivos con `exec`
+  y un script (python o node) y sigue: no insistas ni lo depures.
 
 ## Reglas duras
 
