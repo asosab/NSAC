@@ -41,9 +41,10 @@ En `assets/js/planet.js`:
   `devin.exe acp` + `authenticate` con la API key de `credentials.toml`,
   sesión en `D:\proyectos\NSAC`, modo bypass, prompt = `inbox/PROMPT.md`).
 - `inbox/PROMPT.md` es el contrato de procesamiento: filtro de decencia +
-  normas del evento (`docs/conducta-space-apps.md`), post del día, fotos a
-  `assets/img/galeria/` + `_data/galeria.yml`, videos `#nasa` de YouTube,
-  commit + push. Los lotes crudos no se versionan.
+  normas del evento (`docs/conducta-space-apps.md`), un post por lote,
+  fotos a `assets/img/galeria/` + `_data/galeria.yml`, videos `#nasa` de
+  YouTube, commit + push, y `.publicado` con la URL del post para que el
+  monitor avise por Telegram. Los lotes crudos no se versionan.
 - Galería: página `/galeria/` (`layout: default`) alimentada por
   `_data/galeria.yml` (`fotos:` y `videos:`).
 

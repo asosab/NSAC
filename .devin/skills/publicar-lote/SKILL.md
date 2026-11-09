@@ -1,6 +1,6 @@
 ---
 name: publicar-lote
-description: Publica en el diario y la galería de NSAC los lotes que llegan por WhatsApp a inbox/. Filtra contenido indebido, redacta el post del día, alimenta _data/galeria.yml, actualiza OG y commitea. Úsalo cuando dispare el puente del grupo «Diario NSAC» o cuando el usuario pida procesar el inbox.
+description: Publica en el diario y la galería de NSAC los lotes que llegan por WhatsApp a inbox/. Filtra contenido indebido, redacta un post por lote, alimenta _data/galeria.yml, actualiza OG, commitea y deja .publicado con la URL. Úsalo cuando dispare el puente del grupo «Diario NSAC» o cuando el usuario pida procesar el inbox.
 ---
 
 # Publicar lotes del inbox
@@ -17,11 +17,13 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
    burla, desnudez, datos privados, spam ni suplantación. Lo rechazado se
    anota en `.omitidos` del lote con el motivo. Si todo se rechaza,
    marca `.hecho` y pasa al siguiente sin commit.
-3. **Diario**: reescribe los textos en primera persona y castellano con
-   la voz de los posts existentes (lee uno antes). Crea o edita
-   `_posts/YYYY-MM-DD-slug.md` (fecha en hora Bolivia, UTC-4;
-   `layout: post`, `title`, `description`). Si ya hay post del día, anexa
-   una sección `##` con la hora — nunca dupliques contenido ya escrito.
+3. **Diario**: un post por lote — todo lo que trae el lote va en el
+   mismo post. Reescribe los textos en primera persona y castellano con
+   la voz de los posts existentes (lee uno antes). Crea
+   `_posts/YYYY-MM-DD-<slug>-HHMM.md` (fecha y hora del lote en Bolivia,
+   UTC-4; slug corto del contenido; el `-HHMM` evita choques entre lotes
+   del mismo día; `layout: post`, `title`, `description`). No edites
+   posts ya existentes.
 4. **Fotos**: nómbralas por hash de contenido
    `assets/img/galeria/YYYY-MM-DD-<sha1[:8]>.<ext>` — así un reenvío o una
    corrida repetida produce el mismo nombre y nada se duplica. Antes de
@@ -39,6 +41,12 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
    el entorno lo permite.
 8. `git add -A`, commit breve en minúsculas (estilo del repo), push a
    `master`.
+9. Solo si el push salió: escribe en cada lote publicado
+   `inbox/lote-<ts>/.publicado` con la URL absoluta de su post — una por
+   línea, `https://asosab.github.io/NSAC/diario/<slug>-HHMM/` (agrega
+   `https://asosab.github.io/NSAC/galeria/` si el lote solo llevaba
+   material visual). El monitor la usa para avisar por Telegram cuando
+   Pages ya la sirve. Un lote todo rechazado no lleva `.publicado`.
 
 ## Cierre verificado
 
@@ -67,7 +75,7 @@ Antes de dar por terminado el turno:
 ## Reglas duras
 
 - **Nada se publica dos veces**: nombres por hash + chequeo de `src` en el
-  YAML + anexar sin duplicar en el post del día.
+  YAML + un lote con `.publicado` nunca genera otro post.
 - En duda sobre el filtro, omite el material.
 - No inventes hechos: el diario cuenta solo lo que llegó al grupo.
 - `inbox/` no se commitea (`.gitignore`); `.hecho`/`.omitidos` son locales.
