@@ -19,6 +19,7 @@ el vault; `docs/` no se publica (está en `exclude`).
 ## Notas
 
 - [[conducta-space-apps]] — normas de comportamiento del evento (filtro de publicación del puente WhatsApp)
+- [[reto-planet-x-spherex]] — estudio del reto Planet X and SPHEREx: datos, recursos para cruzar y análisis para variables raras
 
 ## Notas rápidas
 
