@@ -25,7 +25,7 @@
     {% assign og_image_alt = 'Planeta Tierra de bloques estilo Minecraft a la izquierda y cuenta regresiva legible a la derecha.' -%}
   {% endif -%}
 {% endif -%}
-{% if og_image contains '://' %}{% assign og_image_url = og_image %}{% else %}{% assign og_image_url = og_image | absolute_url %}{% endif -%}
+{% if og_image contains '://' %}{% assign og_image_url = og_image %}{% else %}{% assign og_image_url = site.url | append: og_image %}{% endif -%}
 <meta property="og:image" content="{{ og_image_url }}">
 <meta property="og:image:alt" content="{{ og_image_alt }}">
 <meta property="og:locale" content="es_ES">
