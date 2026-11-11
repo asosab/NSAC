@@ -8,7 +8,7 @@ A Siria, mi esposa, le conté por chat el reto que vamos a desarrollar en el hac
 
 No sé dónde tengo la cabeza, pero lo primero que leí fue «un gnomo y un enólogo».
 
-![Ilustración estilo cómic del hackathon: programo en la laptop con una copa de vino al lado, un gnomo de jardín brinda con la suya y un mesero elegante trae la botella]({{ '/assets/img/diario/2026-11-11-85cd4525.jpg' | relative_url }})
+![Ilustración estilo cómic del hackathon: programo en la laptop con una copa de vino al lado, un gnomo de jardín brinda con la suya y un mesero elegante trae la botella]({{ '/assets/img/diario/2026-11-11-7fa1dc25.jpg' | relative_url }})
 
 Me puse a imaginarlo y haríamos lindo equipo. El gnomo conoce las plantas de cerca, vive entre ellas. El enólogo sabe de suelo, de clima y de esperar a que las cosas maduren. Y yo tecleo. Para un reto de agricultura hasta tiene sentido.
 
