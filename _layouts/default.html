@@ -11,9 +11,26 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}NSAC">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta property="og:image" content="{{ '/assets/img/og-cover.jpg' | absolute_url }}">
+{% assign og_image = page.image -%}
+{% assign og_image_alt = '' -%}
+{% if og_image -%}
+  {% unless og_image contains '://' %}{% assign og_image = og_image | relative_url %}{% endunless -%}
+{% else -%}
+  {% assign img_chunks = content | split: '<img' -%}
+  {% if img_chunks.size > 1 -%}
+    {% assign og_image = img_chunks[1] | split: 'src="' | last | split: '"' | first -%}
+    {% assign og_image_alt = img_chunks[1] | split: 'alt="' | last | split: '"' | first -%}
+  {% else -%}
+    {% assign og_image = '/assets/img/og-cover.jpg' | relative_url -%}
+    {% assign og_image_alt = 'Planeta Tierra de bloques estilo Minecraft a la izquierda y cuenta regresiva legible a la derecha.' -%}
+  {% endif -%}
+{% endif -%}
+{% if og_image contains '://' %}{% assign og_image_url = og_image %}{% else %}{% assign og_image_url = og_image | absolute_url %}{% endif -%}
+<meta property="og:image" content="{{ og_image_url }}">
+<meta property="og:image:alt" content="{{ og_image_alt }}">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ og_image_url }}">
 <meta name="twitter:creator" content="@asosab">
 <meta name="theme-color" content="#1c1c1c">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2234%22 fill=%22%234a7cae%22/><ellipse cx=%2250%22 cy=%2250%22 rx=%2246%22 ry=%2214%22 fill=%22none%22 stroke=%22%238fa68e%22 stroke-width=%229%22/></svg>">

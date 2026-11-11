@@ -77,6 +77,10 @@ esos dominios pertenece. Ninguno → `.tmp/`.
 
 - `index.html` lleva OG, Twitter Cards, canonical, geo, JSON-LD
   (Event + Person + WebSite). `sitemap.xml` y `robots.txt` propios.
+- En `_layouts/default.html`, `og:image`/`twitter:image` se resuelven por
+  página: `page.image` si existe, si no la **primera `<img>` del contenido
+  renderizado** (los posts comparten su primera foto), y si no hay, el
+  `og-cover.jpg` general.
 - OG image: `assets/img/og-cover.jpg` (captura del hero). **Antes de cada
   commit** se regenera — junto con `imagen/nsac.jpg` (tarjeta del proyecto
   en asosab.github.io) — con una captura del hero en viewport de celular
