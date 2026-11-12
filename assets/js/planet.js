@@ -94,11 +94,11 @@
 
     if (estado === "live") {
       liveMsg.hidden = false;
-      claim.textContent = "El hackathon corre hasta el domingo 15 a las 23:59.";
+      claim.textContent = "Elay pUEJ corre hasta el domingo 15 a las 23:59.";
     } else if (estado === "done") {
       liveMsg.hidden = false;
       liveMsg.textContent = "Misión cumplida.";
-      claim.textContent = "El hackathon terminó. El resultado está en el diario.";
+      claim.textContent = "Elay pUEJ ya entregó. El resultado está en el diario.";
     }
   }
   tick();
