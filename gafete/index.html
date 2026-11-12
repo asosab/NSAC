@@ -1,0 +1,39 @@
+---
+layout: default
+title: Gafete
+description: "Genera una hoja carta con tu gafete de dos caras: sube una o dos imágenes y descarga el pliego listo para imprimir, recortar y doblar."
+---
+
+<h1>Gafete</h1>
+<p class="page__sub">Sube el diseño de tu credencial y baja una hoja carta lista para imprimir: las dos caras quedan unidas por el borde superior, para recortarlas juntas y doblar por la mitad.</p>
+
+<div class="tool">
+  <div class="tool__grid">
+    <label class="drop" id="dropA">
+      <input type="file" id="fileA" accept="image/*">
+      <span class="drop__t">Cara frontal</span>
+      <span class="drop__h">Toca para elegir la imagen (JPG o PNG)</span>
+    </label>
+    <label class="drop" id="dropB">
+      <input type="file" id="fileB" accept="image/*">
+      <span class="drop__t">Cara trasera</span>
+      <span class="drop__h">Opcional: sin ella se repite la frontal</span>
+    </label>
+  </div>
+
+  <div class="tool__opts">
+    <label><input type="radio" name="fit" value="cover" checked> Llenar el gafete, aunque recorte bordes</label>
+    <label><input type="radio" name="fit" value="contain"> Mostrar la imagen completa, aunque queden márgenes</label>
+  </div>
+
+  <canvas id="hoja" width="2550" height="3300" aria-label="Vista previa de la hoja carta con el gafete de dos caras"></canvas>
+
+  <div class="tool__actions">
+    <button class="btn" id="dlPng" disabled>Descargar PNG</button>
+    <button class="btn btn--ghost" id="printBtn" disabled>Imprimir o guardar PDF</button>
+  </div>
+
+  <p class="tool__note">Cada cara sale a 4 × 5 pulgadas (unos 10 × 13 cm), tamaño estándar de gafete de evento que entra en la mayoría de los portacredenciales. Imprime al 100 %, sin «ajustar a la página»: recorta el contorno con la hoja entera, dobla por la línea punteada y sujeta por el borde doblado. Las dos caras comparten el mismo punto de agarre.</p>
+</div>
+
+<script src="{{ '/assets/js/gafete.js' | relative_url }}" defer></script>

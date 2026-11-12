@@ -4,6 +4,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>{{ '/' | absolute_url }}</loc></url>
   <url><loc>{{ '/diario/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/galeria/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/gafete/' | absolute_url }}</loc></url>
   {% for post in site.posts %}
   <url><loc>{{ post.url | absolute_url }}</loc></url>
   {% endfor %}
