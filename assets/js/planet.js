@@ -94,11 +94,11 @@
 
     if (estado === "live") {
       liveMsg.hidden = false;
-      claim.textContent = "Elay pUEJ corre hasta el domingo 15 a las 23:59.";
+      claim.textContent = "elay puej corre hasta el domingo 15 a las 23:59.";
     } else if (estado === "done") {
       liveMsg.hidden = false;
       liveMsg.textContent = "Misión cumplida.";
-      claim.textContent = "Elay pUEJ ya entregó. El resultado está en el diario.";
+      claim.textContent = "elay puej ya entregó. El resultado está en el diario.";
     }
   }
   tick();
