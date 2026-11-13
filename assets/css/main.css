@@ -46,6 +46,8 @@ a:focus-visible, button:focus-visible {
 
 img { display: block; }
 
+main img { cursor: zoom-in; }
+
 /* ---- escena del planeta ---- */
 
 #planeta {

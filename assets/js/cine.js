@@ -1,8 +1,9 @@
-/* NSAC — modo cine: clic sobre cualquier imagen del diario (o de la
-   galería) abre un pase de diapositivas a pantalla completa con todo el
-   material de _data/galeria.yml, que el layout expone en
-   window.NSAC_GALERIA. Si la imagen tocada no está en la galería,
-   entra como diapositiva extra al principio. */
+/* NSAC — modo cine: clic sobre cualquier imagen de la página abre un
+   pase de diapositivas a pantalla completa. En el diario y la galería el
+   pase usa todo el material de _data/galeria.yml (que el layout expone
+   en window.NSAC_GALERIA); fuera de ahí —por ejemplo en la landing— el
+   pase recorre todas las imágenes de <main> en orden del documento, con
+   su figcaption como pie cuando la hay. */
 (function () {
   "use strict";
 
@@ -110,21 +111,46 @@
     if (timer) reproducir(); /* reinicia el intervalo desde esta diapositiva */
   }
 
+  function slidesPagina() {
+    var imgs = document.querySelectorAll("main img");
+    var vistos = {}, arr = [];
+    for (var i = 0; i < imgs.length; i++) {
+      var im = imgs[i];
+      if (vistos[im.src]) continue;
+      vistos[im.src] = 1;
+      var fig = im.closest("figure");
+      var cap = fig && fig.querySelector("figcaption");
+      arr.push({
+        src: im.src,
+        pie: cap ? cap.textContent.trim() : (im.alt || ""),
+        alt: im.alt || ""
+      });
+    }
+    return arr;
+  }
+
   function abrir(t) {
     montar();
     origen = t;
     var gal = window.NSAC_GALERIA || [];
-    slides = gal.map(function (f) {
-      return {
-        src: base() + f.src,
-        pie: f.pie || f.alt || "",
-        alt: f.alt || ""
-      };
-    });
     var nom = archivo(t.src), i;
     pos = -1;
-    for (i = 0; i < slides.length; i++) {
-      if (archivo(slides[i].src) === nom) { pos = i; break; }
+    if ((t.closest(".post__body") || t.closest(".gal__item")) && gal.length) {
+      slides = gal.map(function (f) {
+        return {
+          src: base() + f.src,
+          pie: f.pie || f.alt || "",
+          alt: f.alt || ""
+        };
+      });
+      for (i = 0; i < slides.length; i++) {
+        if (archivo(slides[i].src) === nom) { pos = i; break; }
+      }
+    } else {
+      slides = slidesPagina();
+      for (i = 0; i < slides.length; i++) {
+        if (slides[i].src === t.src) { pos = i; break; }
+      }
     }
     if (pos < 0) {
       slides.unshift({ src: t.src, pie: t.alt || "", alt: t.alt || "" });
@@ -148,7 +174,7 @@
   document.addEventListener("click", function (e) {
     var t = e.target;
     if (!t || t.tagName !== "IMG" || cine && !cine.hidden) return;
-    if (!t.closest(".post__body") && !t.closest(".gal__item")) return;
+    if (!t.closest("main")) return;
     e.preventDefault();
     abrir(t);
   });
