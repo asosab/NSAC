@@ -22,6 +22,10 @@ el vault; `docs/` no se publica (está en `exclude`).
 - [[conducta-space-apps]] — normas de comportamiento del evento (filtro de publicación del puente WhatsApp)
 - [[reto-planet-x-spherex]] — estudio del reto Planet X and SPHEREx: datos, recursos para cruzar y análisis para variables raras
 
+## Equipo
+
+- [[leonardo-fernandez]] — agrónomo (UAGRM), segundo integrante de «elay puej»; agricultura de precisión con drones y forraje
+
 ## Field Shift (reto elegido)
 
 Investigación orquestada 2026-11-11, carpeta `docs/field-shift/`:

@@ -416,6 +416,33 @@ main, .top, .footer { position: relative; z-index: 1; }
 .record__y { color: var(--muted); }
 .record a { color: var(--ink); }
 
+/* fichas del equipo */
+.mates {
+  display: flex;
+  gap: 64px;
+}
+.mate { flex: 1; max-width: 480px; }
+
+.mate__foto {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+.mate__name {
+  font-size: var(--step-lead);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.mate__rol {
+  font-size: var(--step-small);
+  color: var(--accent);
+  margin-top: 4px;
+}
+.mate__bio { margin-top: 20px; max-width: 34ch; }
+.mate .record { margin-top: 28px; width: 100%; }
+.mate .record + .record { margin-top: 16px; }
+
 /* cta invertido */
 .cta {
   background: var(--field-1);
@@ -772,6 +799,8 @@ main, .top, .footer { position: relative; z-index: 1; }
   .about__row { flex-direction: column; gap: 40px; margin-bottom: 80px; }
   .about__facts { width: 100%; flex-direction: row; flex-wrap: wrap; gap: 24px 40px; }
   .about__lists { flex-direction: column; gap: 40px; }
+  .mates { flex-direction: column; gap: 72px; }
+  .mate { max-width: none; }
   .record { width: 100%; }
 
   .cta { min-height: 80svh; }
