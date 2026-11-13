@@ -51,5 +51,6 @@ mitad (software) es mía — ver [[index]].
 
 ## Adjuntos
 
-- [[leonardo-fernandez.jpg]] — foto extraída del CV (página 1)
+- [[leonardo-fernandez.jpg]] — foto de perfil (con una ternera nelore)
+- [[leonardo-fernandez-cv.jpg]] — foto extraída del CV (página 1)
 - [[leonardo-fernandez-cv.pdf]] — CV completo, fuente de esta ficha
