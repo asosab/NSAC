@@ -55,5 +55,10 @@
     {{ content }}
   </div>
 </main>
+<script>
+  window.NSAC_BASE = {{ '/' | relative_url | jsonify }};
+  window.NSAC_GALERIA = {{ site.data.galeria.fotos | jsonify }};
+</script>
+<script src="{{ '/assets/js/cine.js' | relative_url }}" defer></script>
 </body>
 </html>
