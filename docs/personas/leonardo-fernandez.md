@@ -17,6 +17,24 @@ Agrónomo: en el reto Field Shift pone el suelo — sabe qué significa un
 
 - Correo: lefehur@gmail.com
 - LinkedIn: https://www.linkedin.com/in/leo-fernandez-agro/
+- Instagram: https://www.instagram.com/leo_fernandez.agro/
+
+## Redes (sherlock, verificado 2026-11-13)
+
+Barrido con `leo_fernandez.agro`, `leo-fernandez-agro`, `lefehur` y
+`leonardofernandez` (+ línea base `zzqqxx99leo` para descartar los 62
+detectores rotos). Confirmado = URL viva + nombre/usuario que calza:
+
+- X/Twitter: https://x.com/lefehur — «Leo_fernandezh»
+- Pinterest: https://www.pinterest.com/lefehur/ — «Leonardo»
+- Platzi: https://platzi.com/p/lefehur/ — «Leonardo Fernandez Hurtado»
+
+Candidatos sin verificar (username existe pero no se puede atar a él):
+github.com/leonardofernandez, t.me/leonardofernandez.
+
+Descartados: youtube.com/@lefehur (404), xboxgamertag lefehur (la URL
+de búsqueda responde pero el perfil da 404), y ~60 hits en sitios que
+también «encontraron» el username-basura.
 - Teléfono: +591 79843141
 - Ciudad: Santa Cruz de la Sierra
 
