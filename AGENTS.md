@@ -31,7 +31,9 @@ En `assets/js/planet.js`:
   `/diario/`. Permalink `/diario/:title/`.
 - Videos: `{% include youtube.html id="VIDEO_ID" %}` embebe de youtube.com/@asosab.
 - Primera persona, castellano. Toda prosa nueva pasa por el skill
-  `humanamente` (`.devin/skills/`).
+  `humanamente` (`.devin/skills/`) — incluidos textos para pegar fuera
+  del sitio (respuestas de foro, mensajes, etc.), que se redactan en
+  castellano con la skill y luego se traducen naturales al inglés.
 
 ## Internacionalización (EN + ES)
 
