@@ -788,6 +788,17 @@ main, .top, .footer { position: relative; z-index: 1; }
 
 .tool__note { font-size: var(--step-small); color: var(--muted); max-width: 60ch; }
 
+.tool__list {
+  font-size: var(--step-small);
+  color: var(--muted);
+  max-width: 60ch;
+  padding-left: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tool__h + .tool__list { margin-top: 0; }
+
 @page { size: letter; margin: 0; }
 @media print {
   body.printing > :not(#printSheet) { display: none !important; }
