@@ -1,0 +1,40 @@
+---
+layout: default
+lang: en
+title: Badge
+description: "Generate a letter-size sheet with your two-sided badge: upload one or two images and download the sheet ready to print, cut and fold."
+---
+
+<h1>Badge</h1>
+<p class="page__sub">Upload your credential design and get a letter-size sheet ready to print: both sides join at the top edge, so you can cut them together and fold in half.</p>
+
+<div class="tool">
+  <div class="tool__grid">
+    <label class="drop" id="dropA">
+      <input type="file" id="fileA" accept="image/*">
+      <span class="drop__t">Front side</span>
+      <span class="drop__h">Tap to choose the image (JPG or PNG)</span>
+    </label>
+    <label class="drop" id="dropB">
+      <input type="file" id="fileB" accept="image/*">
+      <span class="drop__t">Back side</span>
+      <span class="drop__h">Optional: without it the front is repeated</span>
+    </label>
+  </div>
+
+  <div class="tool__opts">
+    <label><input type="radio" name="fit" value="cover" checked> Fill the badge, even if edges get cropped</label>
+    <label><input type="radio" name="fit" value="contain"> Show the whole image, even if margins remain</label>
+  </div>
+
+  <canvas id="hoja" width="2550" height="3300" aria-label="Preview of the letter-size sheet with the two-sided badge"></canvas>
+
+  <div class="tool__actions">
+    <button class="btn" id="dlPng" disabled>Download PNG</button>
+    <button class="btn btn--ghost" id="printBtn" disabled>Print or save as PDF</button>
+  </div>
+
+  <p class="tool__note">Each side comes out at 4 × 5 inches (about 10 × 13 cm), a standard event-badge size that fits most badge holders. Print at 100 %, with no "fit to page": cut the outline with the whole sheet, fold along the dashed line and clip it by the folded edge. Both sides share the same clip point.</p>
+</div>
+
+<script src="{{ '/assets/js/gafete.js' | relative_url }}" defer></script>

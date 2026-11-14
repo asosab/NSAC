@@ -3,4 +3,7 @@
 Mi sitio para el hackathon más grande del mundo: cuenta regresiva con un
 planeta de bloques estilo Minecraft, los 14 retos oficiales y el diario del evento.
 
-**https://asosab.github.io/NSAC/**
+My site for the world's biggest hackathon: a countdown with a
+Minecraft-style voxel planet, the 14 official challenges and the event journal.
+
+**https://asosab.github.io/NSAC/** — ES · **https://asosab.github.io/NSAC/en/** — EN

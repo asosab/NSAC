@@ -123,7 +123,7 @@
     canvas.toBlob(function (blob) {
       var a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "gafete-carta.png";
+      a.download = document.documentElement.lang === "en" ? "badge-letter.png" : "gafete-carta.png";
       a.click();
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
     }, "image/png");

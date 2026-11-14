@@ -33,6 +33,37 @@ En `assets/js/planet.js`:
 - Primera persona, castellano. Toda prosa nueva pasa por el skill
   `humanamente` (`.devin/skills/`).
 
+## Internacionalización (ES + EN)
+
+Sitio bilingüe sin plugins (GitHub Pages): el español vive en la raíz y el
+inglés en el árbol `/en/`. El suiche ES/EN va en el nav de todas las
+páginas (`_includes/langswitch.html`).
+
+- Idiomas: `langs: [es, en]` en `_config.yml` con defaults por scope:
+  páginas bajo `en/` y posts bajo `_posts/en/` llevan `lang: en`; el
+  resto, `es`.
+- Cadenas de la interfaz en `_data/i18n.yml` (nav, og:locale, meses para
+  fechas ES — `%B` de strftime sale en inglés, por eso existe
+  `_includes/fdate.html`).
+- `en/index.html` es estático como su par ES; usa rutas `../assets/...`
+  y enlaces internos propios (`en/diario/`, `en/galeria/`, `en/gafete/`).
+- Posts EN: `_posts/en/` con el **mismo nombre de archivo** que el ES →
+  mismo slug → el suiche los empareja solo. Front matter: `lang: en` +
+  `permalink: /en/diario/<slug>/` (explícito, no depender del placeholder).
+- Cada página declara `hreflang` es/en/x-default; `og:locale` +
+  `og:locale:alternate` salen de `i18n.yml`.
+- Captions de galería: `_data/galeria.yml` lleva `alt`/`alt_en` y
+  `pie`/`pie_en`; el layout serializa `NSAC_GALERIA` ya traducido.
+- JS (`planet.js`, `cine.js`, `gafete.js`): diccionario interno por
+  `document.documentElement.lang`, con ES por defecto — sin pasar
+  strings por markup.
+
+## Pruebas
+
+- Sin Docker ni Jekyll local: se sube a producción y se verifica en
+  caliente con Playwright (smoke). Para capturas locales, `index.html`
+  y `en/index.html` son estáticos: `python -m http.server` alcanza.
+
 ## Puente WhatsApp → diario y galería
 
 - El monitor `D:\proyectos\whatsapp` vigila el grupo «Diario NSAC»,
@@ -61,7 +92,8 @@ La raíz solo admite archivos del sitio y su configuración: `index.html`,
 `_config.yml`, `sitemap.xml`, `robots.txt`, `AGENTS.md`, `README.md`. Cualquier
 otra cosa tiene un lugar:
 
-- Contenido del sitio: `_posts/`, `_data/`, `diario/`, `galeria/`, `assets/`.
+- Contenido del sitio: `_posts/` (`_posts/en/` para inglés), `_data/`,
+  `diario/`, `galeria/`, `gafete/`, `en/` (árbol EN), `assets/`.
 - Notas y conocimiento del proyecto: `docs/` (vault Obsidian, no se publica).
 - Entrada del puente WhatsApp: `inbox/` (`PROMPT.md` + `lote-*`, los lotes no se
   versionan).

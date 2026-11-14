@@ -23,12 +23,19 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
    `_posts/YYYY-MM-DD-<slug>-HHMM.md` (fecha y hora del lote en Bolivia,
    UTC-4; slug corto del contenido; el `-HHMM` evita choques entre lotes
    del mismo día; `layout: post`, `title`, `description`). No edites
-   posts ya existentes.
+   posts ya existentes. **El sitio es bilingüe**: crea además la
+   traducción al inglés en `_posts/en/YYYY-MM-DD-<slug>-HHMM.md`
+   (mismo nombre de archivo para que el suiche ES/EN los empareje;
+   front matter con `layout: post`, `lang: en`, `title`,
+   `description` y `permalink: /en/diario/<slug>-HHMM/`). Las imágenes
+   apuntan a las mismas rutas; los enlaces internos van a las rutas EN
+   (`/en/galeria/` etc.). La traducción suena natural, no literal.
 4. **Fotos**: nómbralas por hash de contenido
    `assets/img/galeria/YYYY-MM-DD-<sha1[:8]>.<ext>` — así un reenvío o una
    corrida repetida produce el mismo nombre y nada se duplica. Antes de
-   agregar a `_data/galeria.yml` (`fotos:` con `src`, `alt`, `pie`
-   opcional) verifica que ese `src` no exista ya en el YAML. Videos
+   agregar a `_data/galeria.yml` (`fotos:` con `src`, `alt`, `alt_en`,
+   `pie` y `pie_en` opcionales — las entradas nuevas llevan las cuatro
+   claves) verifica que ese `src` no exista ya en el YAML. Videos
    locales solo < 25 MB. Las imágenes que ilustran el post se copian
    también a `assets/img/diario/` con el mismo criterio.
 5. **Videos YouTube**: `videos:` en `_data/galeria.yml` = videos del canal
@@ -42,11 +49,12 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
 8. `git add -A`, commit breve en minúsculas (estilo del repo), push a
    `master`.
 9. Solo si el push salió: escribe en cada lote publicado
-   `inbox/lote-<ts>/.publicado` con la URL absoluta de su post — una por
-   línea, `https://asosab.github.io/NSAC/diario/<slug>-HHMM/` (agrega
-   `https://asosab.github.io/NSAC/galeria/` si el lote solo llevaba
-   material visual). El monitor la usa para avisar por Telegram cuando
-   Pages ya la sirve. Un lote todo rechazado no lleva `.publicado`.
+   `inbox/lote-<ts>/.publicado` con las URLs absolutas de su post — una
+   por línea: primero `https://asosab.github.io/NSAC/diario/<slug>-HHMM/`
+   y luego su traducción `https://asosab.github.io/NSAC/en/diario/<slug>-HHMM/`
+   (agrega `https://asosab.github.io/NSAC/galeria/` si el lote solo llevaba
+   material visual). El monitor las usa para avisar por Telegram cuando
+   Pages ya las sirve. Un lote todo rechazado no lleva `.publicado`.
 
 ## Cierre verificado
 

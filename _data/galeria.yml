@@ -1,17 +1,27 @@
 fotos:
   - src: /assets/img/galeria/2026-11-08-cbb89c6e.jpg
     alt: "El grupo «Diario NSAC» recién creado en WhatsApp, con el aviso de la escucha al pie"
+    alt_en: "The newly created «Diario NSAC» WhatsApp group, with the listener notice at the bottom"
     pie: "Así nació el grupo «Diario NSAC»: lo que se mande ahí se publica aquí"
+    pie_en: "That's how the «Diario NSAC» group was born: whatever gets sent there gets published here"
   - src: /assets/img/galeria/2026-11-08-db59fb6f.jpg
     alt: "Televisor Sony Bravia apagado sobre un mueble de madera"
+    alt_en: "A switched-off Sony Bravia TV on a wooden cabinet"
     pie: "Mi estado en cuanto a ideas: aparatoso e inútil hasta que lo prenden"
+    pie_en: "My current state of ideas: bulky and useless until someone turns it on"
   - src: /assets/img/galeria/2026-11-11-6abf6897.jpg
     alt: "Credencial del NASA Space Apps Challenge 2026 a nombre de Alejandro Sosa, equipo elay puej, con un astronauta tocando guitarra"
+    alt_en: "NASA Space Apps Challenge 2026 badge for Alejandro Sosa, team elay puej, with a guitar-playing astronaut"
     pie: "Mi credencial del evento: astronauta, participante y explorador de ideas"
+    pie_en: "My event badge: astronaut, participant and idea explorer"
   - src: /assets/img/galeria/2026-11-11-7fa1dc25.jpg
     alt: "Ilustración estilo cómic del hackathon: un hombre canoso programa con una copa de vino al lado, un gnomo de jardín brinda con su copa y un mesero trae la botella"
+    alt_en: "Comic-style illustration of the hackathon: a gray-haired man codes with a glass of wine beside him, a garden gnome toasts with his own glass and a waiter brings the bottle"
     pie: "El equipo que me imaginé cuando leí «gnomo y enólogo» en vez de agrónomo y ecólogo"
+    pie_en: "The team I pictured when I misread «gnomo y enólogo» (gnome and winemaker) for agrónomo y ecólogo (agronomist and ecologist)"
   - src: /assets/img/galeria/2026-11-13-9b75e68f.jpg
     alt: "Gafete impreso y enfundado del NASA Space Apps Challenge 2026 a nombre de Alejandro Sosa Briceño, equipo elay puej, cargo astronauta"
+    alt_en: "Printed and sleeved NASA Space Apps Challenge 2026 badge for Alejandro Sosa Briceño, team elay puej, role astronaut"
     pie: "El gafete del evento, ya impreso y enfundado: astronauta, participante y explorador de ideas"
+    pie_en: "The event badge, printed and sleeved: astronaut, participant and idea explorer"
 videos: []

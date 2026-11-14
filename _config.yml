@@ -3,9 +3,20 @@ description: "Mi participación en el NASA Space Apps Challenge 2026, desde Sant
 baseurl: "/NSAC"
 url: "https://asosab.github.io"
 lang: es
+langs: [es, en]
+default_lang: es
 timezone: America/La_Paz
 markdown: kramdown
 permalink: /diario/:title/
+defaults:
+  - scope: { path: "", type: pages }
+    values: { lang: es }
+  - scope: { path: "en", type: pages }
+    values: { lang: en }
+  - scope: { path: "", type: posts }
+    values: { lang: es }
+  - scope: { path: "en", type: posts }
+    values: { lang: en }
 exclude:
   - AGENTS.md
   - README.md

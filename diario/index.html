@@ -4,14 +4,15 @@ title: Diario del hackathon
 description: "Los avances de mi participación en el NASA Space Apps Challenge 2026, contados día a día."
 ---
 
+{% assign posts = site.posts | where: "lang", "es" %}
 <h1>Diario del hackathon</h1>
 <p class="page__sub">Lo que va pasando, contado desde Santa Cruz de la Sierra. Los videos salen en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
 
 <div id="diario-feed">
-  {% for post in site.posts limit:3 %}
+  {% for post in posts limit:3 %}
   <article class="diario-post">
     <h2 class="diario-post__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-    <p class="post__date">{{ post.date | date: "%d de %B de %Y" }}</p>
+    <p class="post__date">{% include fdate.html date=post.date lang="es" %}</p>
     <div class="post__body">{{ post.content }}</div>
   </article>
   {% endfor %}
@@ -21,17 +22,17 @@ description: "Los avances de mi participación en el NASA Space Apps Challenge 2
 
 <noscript>
 <ul class="diary-list">
-  {% for post in site.posts %}
+  {% for post in posts %}
   <li>
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    <span class="d-date">{{ post.date | date: "%d de %B de %Y" }}</span>
+    <span class="d-date">{% include fdate.html date=post.date lang="es" %}</span>
     {% if post.description %}<span class="d-exc">{{ post.description }}</span>{% endif %}
   </li>
   {% endfor %}
 </ul>
 </noscript>
 
-{% assign resto = site.posts | slice: 3, site.posts.size %}
+{% assign resto = posts | slice: 3, posts.size %}
 <script>
   window.DIARIO_BASE = {{ '/' | relative_url | jsonify }};
   window.DIARIO_PENDING = {{ resto | map: 'url' | jsonify }};

@@ -1,0 +1,30 @@
+es:
+  other: en
+  other_name: "EN"
+  og_locale: es_ES
+  og_locale_alt: en_US
+  default_desc: "Diario de mi participación en el NASA Space Apps Challenge 2026."
+  nav_retos: "Retos"
+  nav_equipo: "El equipo"
+  nav_diario: "Diario"
+  nav_galeria: "Galería"
+  nav_gafete: "Gafete"
+  home: "/"
+  og_cover_alt: "Planeta Tierra de bloques estilo Minecraft a la izquierda y cuenta regresiva legible a la derecha."
+  lang_aria: "Idioma"
+  meses: [enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+en:
+  other: es
+  other_name: "ES"
+  og_locale: en_US
+  og_locale_alt: es_ES
+  default_desc: "Journal of my run at the NASA Space Apps Challenge 2026."
+  nav_retos: "Challenges"
+  nav_equipo: "The team"
+  nav_diario: "Journal"
+  nav_galeria: "Gallery"
+  nav_gafete: "Badge"
+  home: "/en/"
+  og_cover_alt: "Minecraft-style voxel planet Earth on the left and a legible countdown on the right."
+  lang_aria: "Language"
+  meses: [january, february, march, april, may, june, july, august, september, october, november, december]

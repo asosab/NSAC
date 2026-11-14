@@ -9,6 +9,11 @@
 
   var INTERVALO = 4500;
 
+  /* textos por idioma de la página (<html lang>) */
+  var T = document.documentElement.lang === "en"
+    ? { dialog: "Gallery slideshow", cerrar: "Close", prev: "Previous", next: "Next", play: "Play", pause: "Pause" }
+    : { dialog: "Pase de diapositivas de la galería", cerrar: "Cerrar", prev: "Anterior", next: "Siguiente", play: "Reproducir", pause: "Pausar" };
+
   var cine = null, img, pie, contador, btnPlay, origen;
   var slides = [], pos = 0, timer = null, tocX = null;
 
@@ -32,17 +37,17 @@
     cine.hidden = true;
     cine.setAttribute("role", "dialog");
     cine.setAttribute("aria-modal", "true");
-    cine.setAttribute("aria-label", "Pase de diapositivas de la galería");
+    cine.setAttribute("aria-label", T.dialog);
     cine.innerHTML =
-      '<button class="cine__x" type="button" data-a="cerrar" aria-label="Cerrar">&times;</button>' +
+      '<button class="cine__x" type="button" data-a="cerrar" aria-label="' + T.cerrar + '">&times;</button>' +
       '<figure class="cine__stage">' +
       '<img class="cine__img" alt="">' +
       '<figcaption class="cine__pie"></figcaption>' +
       '</figure>' +
       '<div class="cine__ui">' +
-      '<button class="cine__btn" type="button" data-a="prev" aria-label="Anterior">&#8249;</button>' +
-      '<button class="cine__btn" type="button" data-a="play" aria-label="Pausar">&#10074;&#10074;</button>' +
-      '<button class="cine__btn" type="button" data-a="next" aria-label="Siguiente">&#8250;</button>' +
+      '<button class="cine__btn" type="button" data-a="prev" aria-label="' + T.prev + '">&#8249;</button>' +
+      '<button class="cine__btn" type="button" data-a="play" aria-label="' + T.pause + '">&#10074;&#10074;</button>' +
+      '<button class="cine__btn" type="button" data-a="next" aria-label="' + T.next + '">&#8250;</button>' +
       '<span class="cine__n"></span>' +
       '</div>';
     document.body.appendChild(cine);
@@ -88,7 +93,7 @@
   function pausar() {
     if (timer) { clearInterval(timer); timer = null; }
     btnPlay.innerHTML = "&#9654;";
-    btnPlay.setAttribute("aria-label", "Reproducir");
+    btnPlay.setAttribute("aria-label", T.play);
   }
 
   function reproducir() {
@@ -98,7 +103,7 @@
       mostrar();
     }, INTERVALO);
     btnPlay.innerHTML = "&#10074;&#10074;";
-    btnPlay.setAttribute("aria-label", "Pausar");
+    btnPlay.setAttribute("aria-label", T.pause);
   }
 
   function alternar() {

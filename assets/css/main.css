@@ -80,7 +80,7 @@ main, .top, .footer { position: relative; z-index: 1; }
   text-decoration: none;
 }
 
-.nav { display: flex; gap: 28px; }
+.nav { display: flex; gap: 28px; align-items: baseline; }
 .nav a {
   font-weight: 700;
   font-size: 0.9375rem;
@@ -88,6 +88,20 @@ main, .top, .footer { position: relative; z-index: 1; }
   transition: color .2s ease;
 }
 .nav a:hover { color: var(--accent); }
+
+/* suiche de idioma: ES/EN, el activo en salvia */
+.langs {
+  display: flex;
+  gap: 6px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  margin-left: 12px;
+  padding-left: 16px;
+  border-left: 1px solid var(--muted);
+}
+.langs a { text-decoration: none; }
+.langs a:hover { color: var(--accent); }
+.langs__cur { color: var(--accent); }
 
 /* ---- hero ---- */
 

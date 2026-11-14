@@ -1,0 +1,24 @@
+{%- assign lsw_lang = page.lang | default: "es" -%}
+{%- assign lsw_t = site.data.i18n[lsw_lang] -%}
+{%- assign lsw_other = lsw_t.other -%}
+{%- if page.collection == "posts" -%}
+  {%- assign lsw_alt = site.posts | where: "slug", page.slug | where: "lang", lsw_other | first -%}
+  {%- if lsw_alt -%}
+    {%- assign lsw_url = lsw_alt.url -%}
+  {%- elsif lsw_lang == "en" -%}
+    {%- assign lsw_url = "/diario/" -%}
+  {%- else -%}
+    {%- assign lsw_url = "/en/diario/" -%}
+  {%- endif -%}
+{%- elsif lsw_lang == "en" -%}
+  {%- assign lsw_url = page.url | remove_first: "/en" -%}
+{%- else -%}
+  {%- assign lsw_url = "/en" | append: page.url -%}
+{%- endif -%}
+<span class="langs" aria-label="{{ lsw_t.lang_aria }}">
+  {%- if lsw_lang == "en" -%}
+    <a href="{{ lsw_url | relative_url }}" hreflang="es" lang="es">ES</a><span class="langs__cur" aria-current="true">EN</span>
+  {%- else -%}
+    <span class="langs__cur" aria-current="true">ES</span><a href="{{ lsw_url | relative_url }}" hreflang="en" lang="en">EN</a>
+  {%- endif -%}
+</span>

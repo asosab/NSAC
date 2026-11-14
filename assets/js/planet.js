@@ -11,6 +11,20 @@
   var LAUNCH = new Date("2026-11-01T00:00:00-04:00"); // el cohete ya venía en camino
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* textos por idioma de la página (<html lang>) */
+  var TXT = {
+    es: {
+      liveClaim: "elay puej corre hasta el domingo 15 a las 23:59.",
+      doneMsg: "Misión cumplida.",
+      doneClaim: "elay puej ya entregó. El resultado está en el diario."
+    },
+    en: {
+      liveClaim: "elay puej is racing until Sunday the 15th, 23:59.",
+      doneMsg: "Mission accomplished.",
+      doneClaim: "elay puej already delivered. The outcome is in the journal."
+    }
+  }[document.documentElement.lang === "en" ? "en" : "es"];
+
   /* ---------- demo secreta: AAA aterriza, DDD despega ---------- */
 
   var demo = null, demoT = 0, keys = [];
@@ -94,11 +108,11 @@
 
     if (estado === "live") {
       liveMsg.hidden = false;
-      claim.textContent = "elay puej corre hasta el domingo 15 a las 23:59.";
+      claim.textContent = TXT.liveClaim;
     } else if (estado === "done") {
       liveMsg.hidden = false;
-      liveMsg.textContent = "Misión cumplida.";
-      claim.textContent = "elay puej ya entregó. El resultado está en el diario.";
+      liveMsg.textContent = TXT.doneMsg;
+      claim.textContent = TXT.doneClaim;
     }
   }
   tick();
