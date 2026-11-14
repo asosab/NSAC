@@ -41,6 +41,8 @@ Investigación orquestada 2026-11-11, carpeta `docs/field-shift/`:
 - [[arquitectura-datos]] — síntesis: cruce en caliente vs precargado vs backend (con verificaciones en vivo y precarga hecha en `.tmp/field-shift-data/`)
 - [[fundacion-patino]] — aliado potencial: proyectos agro, fit con el reto, fichas de contacto y guion de entrevista (con cifras de sus informes anuales)
 - [[top10-enfoques-patino]] — 10 enfoques del reto rankeados que extienden el trabajo de la Fundación
+- [[respuestas-sueleen-pena]] — cuestionario respondido por la directora de la Hacienda: dolores forrajeros, registro en papel/Excel, WhatsApp como canal
+- [[jurado-y-ganadores]] — cómo se elige al ganador del Space Apps (local→global), ganadores anteriores y checklist de elegibilidad
 
 ## Notas rápidas
 
