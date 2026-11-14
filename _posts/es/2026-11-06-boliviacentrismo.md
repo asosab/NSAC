@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: es
+date: 2026-11-06 20:00:00 -0400
 permalink: /es/diario/boliviacentrismo/
 title: "Boliviacentrismo"
 description: "El globo de la portada gira con Sudamérica arriba, y Bolivia en posición protagónica"

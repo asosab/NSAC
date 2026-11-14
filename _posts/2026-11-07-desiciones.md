@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: en
+date: 2026-11-07 11:15:00 -0400
 title: "Decisions"
 description: "Six days to go and it's already time to pick a challenge, and to meet the team"
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: en
+date: 2026-11-06 20:00:00 -0400
 title: "Boliviacentrism"
 description: "The front-page globe spins with South America on top, and Bolivia in the lead role"
 ---

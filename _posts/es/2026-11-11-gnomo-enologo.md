@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: es
+date: 2026-11-11 17:53:00 -0400
 permalink: /es/diario/gnomo-enologo/
 title: "Un gnomo y un enólogo"
 description: "Siria me dice por chat que el equipo necesita un agrónomo y un ecólogo; no sé dónde tengo la cabeza, pero leí un gnomo y un enólogo"

@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: en
+date: 2026-11-11 17:53:00 -0400
 title: "A gnome and a winemaker"
 description: "Siria tells me over chat that the team needs an agrónomo and an ecólogo; I don't know where my head was, but I read un gnomo y un enólogo"
 ---

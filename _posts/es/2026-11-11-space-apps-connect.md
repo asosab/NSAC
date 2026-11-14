@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: es
+date: 2026-11-11 16:07:00 -0400
 permalink: /es/diario/space-apps-connect/
 title: "Space Apps Connect"
 description: "La organización abrió la comunidad oficial del hackathon: un foro de GitHub para buscar equipo, resolver dudas de los retos y pedir ayuda con la entrega"

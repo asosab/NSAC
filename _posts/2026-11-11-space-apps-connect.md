@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: en
+date: 2026-11-11 16:07:00 -0400
 title: "Space Apps Connect"
 description: "The organizers opened the hackathon's official community: a GitHub forum to find a team, sort out doubts about the challenges and get help with the submission"
 ---

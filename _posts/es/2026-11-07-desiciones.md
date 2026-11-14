@@ -1,6 +1,7 @@
 ---
 layout: post
 lang: es
+date: 2026-11-07 11:15:00 -0400
 permalink: /es/diario/desiciones/
 title: "Desiciones"
 description: "Faltan seis días y ya hay que decidirse por un reto, y conocer al equipo"
