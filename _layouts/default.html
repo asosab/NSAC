@@ -1,14 +1,14 @@
-{% assign lang = page.lang | default: "es" -%}
+{% assign lang = page.lang | default: "en" -%}
 {% assign T = site.data.i18n[lang] -%}
 {% assign other = T.other -%}
 {% assign alt_url = "" -%}
 {% if page.collection == "posts" -%}
 {%- assign alt_post = site.posts | where: "slug", page.slug | where: "lang", other | first -%}
 {%- if alt_post %}{% assign alt_url = alt_post.url %}{% endif -%}
-{% elsif lang == "en" -%}
-{%- assign alt_url = page.url | remove_first: "/en" -%}
+{% elsif lang == "es" -%}
+{%- assign alt_url = page.url | remove_first: "/es" -%}
 {% else -%}
-{%- assign alt_url = "/en" | append: page.url -%}
+{%- assign alt_url = "/es" | append: page.url -%}
 {% endif -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
@@ -24,7 +24,7 @@
 {% if alt_url != "" -%}
 <link rel="alternate" hreflang="{{ other }}" href="{{ alt_url | absolute_url }}">
 {% endif -%}
-<link rel="alternate" hreflang="x-default" href="{% if lang == "en" and alt_url != "" %}{{ alt_url | absolute_url }}{% else %}{{ page.url | absolute_url }}{% endif %}">
+<link rel="alternate" hreflang="x-default" href="{% if lang == "es" and alt_url != "" %}{{ alt_url | absolute_url }}{% else %}{{ page.url | absolute_url }}{% endif %}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}NSAC">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
@@ -76,7 +76,7 @@
 </main>
 <script>
   window.NSAC_BASE = {{ '/' | relative_url | jsonify }};
-  window.NSAC_GALERIA = [{% for f in site.data.galeria.fotos %}{"src": {{ f.src | jsonify }}, "alt": {% if lang == "en" %}{{ f.alt_en | default: f.alt | jsonify }}{% else %}{{ f.alt | jsonify }}{% endif %}, "pie": {% if lang == "en" %}{{ f.pie_en | default: f.pie | jsonify }}{% else %}{{ f.pie | jsonify }}{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}];
+  window.NSAC_GALERIA = [{% for f in site.data.galeria.fotos %}{"src": {{ f.src | jsonify }}, "alt": {% if lang == "es" %}{{ f.alt_es | default: f.alt | jsonify }}{% else %}{{ f.alt | jsonify }}{% endif %}, "pie": {% if lang == "es" %}{{ f.pie_es | default: f.pie | jsonify }}{% else %}{{ f.pie | jsonify }}{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}];
 </script>
 <script src="{{ '/assets/js/cine.js' | relative_url }}" defer></script>
 </body>

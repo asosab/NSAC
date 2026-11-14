@@ -23,7 +23,7 @@
       doneMsg: "Mission accomplished.",
       doneClaim: "elay puej already delivered. The outcome is in the journal."
     }
-  }[document.documentElement.lang === "en" ? "en" : "es"];
+  }[document.documentElement.lang === "es" ? "es" : "en"];
 
   /* ---------- demo secreta: AAA aterriza, DDD despega ---------- */
 

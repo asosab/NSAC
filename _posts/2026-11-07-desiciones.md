@@ -1,19 +1,20 @@
 ---
 layout: post
-title: "Desiciones"
-description: "Faltan seis días y ya hay que decidirse por un reto, y conocer al equipo"
+lang: en
+title: "Decisions"
+description: "Six days to go and it's already time to pick a challenge, and to meet the team"
 ---
 
-La Space App Challenge aterriza el sábado 14 a las 9:00 y hay que tomar desiciones antes de que me tomen a mi
+The Space Apps Challenge lands on Saturday the 14th at 9:00, and decisions have to be made before they make me.
 
-Me apunté al NASA Space Apps Challenge porque me gustan los problemas que no se resuelven en una tarde ¿Contradictorio?. Este año tenemos catorce retos: unos miran la Tierra desde los satélites, otros miran la Luna y Marte. Hay datos de incendios, de combustión en microgravedad, de la superficie marciana, de la salud de los astronautas.
+I signed up for the NASA Space Apps Challenge because I like problems that can't be solved in an afternoon. Contradictory? This year we have fourteen challenges: some look at Earth from satellites, others look at the Moon and Mars. There's data on wildfires, on microgravity combustion, on the Martian surface, on astronaut health.
 
-Todavía no sé cuál voy a agarrar. Prefiero armar equipo primero y decidirlo juntos, así que si lees esto antes del 14 y te animas, escríbeme.
+I still don't know which one I'll grab. I'd rather build the team first and decide together, so if you're reading this before the 14th and you're in, write me.
 
-## Lo que viene
+## What's next
 
-- El sábado 14 arranca el trabajo. El domingo 15 a las 23:59 se cierra la entrega.
-- Voy a ir contando el proceso aquí, con lo que salga bien y lo que se rompa.
-- Los videos del proceso salen en [youtube.com/@asosab](https://www.youtube.com/@asosab).
+- Work starts on Saturday the 14th. Submissions close on Sunday the 15th at 23:59.
+- I'll be telling the process here, what goes right and what breaks.
+- The videos of the process go up on [youtube.com/@asosab](https://www.youtube.com/@asosab) (in Spanish).
 
-Cuando el evento aterrice, la cosa se pondrá seria.
+When the event lands, things will get serious.

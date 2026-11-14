@@ -148,7 +148,7 @@
   dlPng.addEventListener("click", function () {
     canvas.toBlob(function (blob) {
       var a = document.createElement("a");
-      var en = document.documentElement.lang === "en";
+      var en = document.documentElement.lang !== "es";
       a.href = URL.createObjectURL(blob);
       a.download = (en ? "badge" : "gafete") + "-" +
         (paper() === PAPER.a4 ? "a4" : en ? "letter" : "carta") + ".png";

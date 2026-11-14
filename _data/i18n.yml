@@ -9,7 +9,7 @@ es:
   nav_diario: "Diario"
   nav_galeria: "Galería"
   nav_gafete: "Gafete"
-  home: "/"
+  home: "/es/"
   og_cover_alt: "Planeta Tierra de bloques estilo Minecraft a la izquierda y cuenta regresiva legible a la derecha."
   lang_aria: "Idioma"
   meses: [enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
@@ -24,7 +24,7 @@ en:
   nav_diario: "Journal"
   nav_galeria: "Gallery"
   nav_gafete: "Badge"
-  home: "/en/"
+  home: "/"
   og_cover_alt: "Minecraft-style voxel planet Earth on the left and a legible countdown on the right."
   lang_aria: "Language"
   meses: [january, february, march, april, may, june, july, august, september, october, november, december]

@@ -2,21 +2,21 @@ title: "NSAC — NASA Space Apps Challenge 2026"
 description: "Mi participación en el NASA Space Apps Challenge 2026, desde Santa Cruz de la Sierra."
 baseurl: "/NSAC"
 url: "https://asosab.github.io"
-lang: es
-langs: [es, en]
-default_lang: es
+lang: en
+langs: [en, es]
+default_lang: en
 timezone: America/La_Paz
 markdown: kramdown
 permalink: /diario/:title/
 defaults:
   - scope: { path: "", type: pages }
-    values: { lang: es }
-  - scope: { path: "en", type: pages }
     values: { lang: en }
+  - scope: { path: "es", type: pages }
+    values: { lang: es }
   - scope: { path: "", type: posts }
-    values: { lang: es }
-  - scope: { path: "en", type: posts }
     values: { lang: en }
+  - scope: { path: "es", type: posts }
+    values: { lang: es }
 exclude:
   - AGENTS.md
   - README.md

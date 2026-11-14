@@ -1,0 +1,41 @@
+---
+layout: default
+lang: es
+title: Diario del hackathon
+description: "Los avances de mi participación en el NASA Space Apps Challenge 2026, contados día a día."
+---
+
+{% assign posts = site.posts | where: "lang", "es" %}
+<h1>Diario del hackathon</h1>
+<p class="page__sub">Lo que va pasando, contado desde Santa Cruz de la Sierra. Los videos salen en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
+
+<div id="diario-feed">
+  {% for post in posts limit:3 %}
+  <article class="diario-post">
+    <h2 class="diario-post__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p class="post__date">{% include fdate.html date=post.date lang="es" %}</p>
+    <div class="post__body">{{ post.content }}</div>
+  </article>
+  {% endfor %}
+</div>
+<p id="diario-more" class="diario-more" hidden>cargando…</p>
+<p id="diario-end" class="diario-more" hidden>fin del diario</p>
+
+<noscript>
+<ul class="diary-list">
+  {% for post in posts %}
+  <li>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <span class="d-date">{% include fdate.html date=post.date lang="es" %}</span>
+    {% if post.description %}<span class="d-exc">{{ post.description }}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+</noscript>
+
+{% assign resto = posts | slice: 3, posts.size %}
+<script>
+  window.DIARIO_BASE = {{ '/' | relative_url | jsonify }};
+  window.DIARIO_PENDING = {{ resto | map: 'url' | jsonify }};
+</script>
+<script src="{{ '/assets/js/diario.js' | relative_url }}" defer></script>

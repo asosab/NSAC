@@ -1,11 +1,12 @@
 ---
 layout: default
-title: Galería
-description: "Fotos y videos de mi participación en el NASA Space Apps Challenge 2026, del 14 al 15 de noviembre."
+lang: en
+title: Gallery
+description: "Photos and videos from my run at the NASA Space Apps Challenge 2026, November 14–15."
 ---
 
-<h1>Galería</h1>
-<p class="page__sub">Lo que va quedando del hackathon. Los videos completos están en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
+<h1>Gallery</h1>
+<p class="page__sub">What's been left behind by the hackathon. Full videos are on <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a> (in Spanish).</p>
 
 {% if site.data.galeria.videos.size > 0 %}
 <div class="gal__vids">
@@ -23,12 +24,13 @@ description: "Fotos y videos de mi participación en el NASA Space Apps Challeng
   {% for f in site.data.galeria.fotos %}
   <figure class="gal__item">
     <img src="{{ f.src | relative_url }}" alt="{{ f.alt }}" loading="lazy">
-    {% if f.pie %}<figcaption class="gal__cap">{{ f.pie }}</figcaption>{% endif %}
+    {% assign pie = f.pie %}
+    {% if pie %}<figcaption class="gal__cap">{{ pie }}</figcaption>{% endif %}
   </figure>
   {% endfor %}
 </div>
 {% endif %}
 
 {% unless site.data.galeria.fotos.size > 0 or site.data.galeria.videos.size > 0 %}
-<p>Todavía no hay material: se va publicando durante el evento.</p>
+<p>No material yet: it gets published during the event.</p>
 {% endunless %}

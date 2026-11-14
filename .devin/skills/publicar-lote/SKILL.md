@@ -19,22 +19,25 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
    marca `.hecho` y pasa al siguiente sin commit.
 3. **Diario**: un post por lote — todo lo que trae el lote va en el
    mismo post. Reescribe los textos en primera persona y castellano con
-   la voz de los posts existentes (lee uno antes). Crea
-   `_posts/YYYY-MM-DD-<slug>-HHMM.md` (fecha y hora del lote en Bolivia,
-   UTC-4; slug corto del contenido; el `-HHMM` evita choques entre lotes
-   del mismo día; `layout: post`, `title`, `description`). No edites
-   posts ya existentes. **El sitio es bilingüe**: crea además la
-   traducción al inglés en `_posts/en/YYYY-MM-DD-<slug>-HHMM.md`
+   la voz de los posts existentes (lee uno antes). Crea la versión en
+   inglés en `_posts/YYYY-MM-DD-<slug>-HHMM.md` (fecha y hora del lote
+   en Bolivia, UTC-4; slug corto del contenido; el `-HHMM` evita choques
+   entre lotes del mismo día; `layout: post`, `lang: en`, `title`,
+   `description`). No edites posts ya existentes. **El sitio es
+   bilingüe y el inglés es el idioma por defecto**: crea además la
+   versión en castellano en `_posts/es/YYYY-MM-DD-<slug>-HHMM.md`
    (mismo nombre de archivo para que el suiche ES/EN los empareje;
-   front matter con `layout: post`, `lang: en`, `title`,
-   `description` y `permalink: /en/diario/<slug>-HHMM/`). Las imágenes
-   apuntan a las mismas rutas; los enlaces internos van a las rutas EN
-   (`/en/galeria/` etc.). La traducción suena natural, no literal.
+   front matter con `layout: post`, `lang: es`, `title`,
+   `description` y `permalink: /es/diario/<slug>-HHMM/`). Las imágenes
+   apuntan a las mismas rutas; los enlaces internos del post ES van a
+   las rutas `/es/` (`/es/galeria/` etc.). La traducción suena natural,
+   no literal.
 4. **Fotos**: nómbralas por hash de contenido
    `assets/img/galeria/YYYY-MM-DD-<sha1[:8]>.<ext>` — así un reenvío o una
    corrida repetida produce el mismo nombre y nada se duplica. Antes de
-   agregar a `_data/galeria.yml` (`fotos:` con `src`, `alt`, `alt_en`,
-   `pie` y `pie_en` opcionales — las entradas nuevas llevan las cuatro
+   agregar a `_data/galeria.yml` (`fotos:` con `src`, `alt`, `alt_es`,
+   `pie` y `pie_es` opcionales — `alt`/`pie` van en inglés, que es el
+   idioma por defecto del sitio; las entradas nuevas llevan las cuatro
    claves) verifica que ese `src` no exista ya en el YAML. Videos
    locales solo < 25 MB. Las imágenes que ilustran el post se copian
    también a `assets/img/diario/` con el mismo criterio.
@@ -51,7 +54,8 @@ Trabajas en este repo Jekyll (GitHub Pages). Lee `AGENTS.md` primero.
 9. Solo si el push salió: escribe en cada lote publicado
    `inbox/lote-<ts>/.publicado` con las URLs absolutas de su post — una
    por línea: primero `https://asosab.github.io/NSAC/diario/<slug>-HHMM/`
-   y luego su traducción `https://asosab.github.io/NSAC/en/diario/<slug>-HHMM/`
+   (inglés, idioma por defecto) y luego su versión en castellano
+   `https://asosab.github.io/NSAC/es/diario/<slug>-HHMM/`
    (agrega `https://asosab.github.io/NSAC/galeria/` si el lote solo llevaba
    material visual). El monitor las usa para avisar por Telegram cuando
    Pages ya las sirve. Un lote todo rechazado no lleva `.publicado`.

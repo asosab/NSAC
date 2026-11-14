@@ -10,7 +10,7 @@
   var INTERVALO = 4500;
 
   /* textos por idioma de la página (<html lang>) */
-  var T = document.documentElement.lang === "en"
+  var T = document.documentElement.lang !== "es"
     ? { dialog: "Gallery slideshow", cerrar: "Close", prev: "Previous", next: "Next", play: "Play", pause: "Pause" }
     : { dialog: "Pase de diapositivas de la galería", cerrar: "Cerrar", prev: "Anterior", next: "Siguiente", play: "Reproducir", pause: "Pausar" };
 

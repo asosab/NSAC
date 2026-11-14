@@ -1,31 +1,32 @@
 ---
 layout: default
-title: Diario del hackathon
-description: "Los avances de mi participación en el NASA Space Apps Challenge 2026, contados día a día."
+lang: en
+title: Hackathon journal
+description: "The progress of my run at the NASA Space Apps Challenge 2026, told day by day."
 ---
 
-{% assign posts = site.posts | where: "lang", "es" %}
-<h1>Diario del hackathon</h1>
-<p class="page__sub">Lo que va pasando, contado desde Santa Cruz de la Sierra. Los videos salen en <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a>.</p>
+{% assign posts = site.posts | where: "lang", "en" %}
+<h1>Hackathon journal</h1>
+<p class="page__sub">What's going on, told from Santa Cruz de la Sierra. The videos go up on <a href="https://www.youtube.com/@asosab" target="_blank" rel="noopener">youtube.com/@asosab</a> (in Spanish).</p>
 
 <div id="diario-feed">
   {% for post in posts limit:3 %}
   <article class="diario-post">
     <h2 class="diario-post__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-    <p class="post__date">{% include fdate.html date=post.date lang="es" %}</p>
+    <p class="post__date">{% include fdate.html date=post.date lang="en" %}</p>
     <div class="post__body">{{ post.content }}</div>
   </article>
   {% endfor %}
 </div>
-<p id="diario-more" class="diario-more" hidden>cargando…</p>
-<p id="diario-end" class="diario-more" hidden>fin del diario</p>
+<p id="diario-more" class="diario-more" hidden>loading…</p>
+<p id="diario-end" class="diario-more" hidden>end of the journal</p>
 
 <noscript>
 <ul class="diary-list">
   {% for post in posts %}
   <li>
     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-    <span class="d-date">{% include fdate.html date=post.date lang="es" %}</span>
+    <span class="d-date">{% include fdate.html date=post.date lang="en" %}</span>
     {% if post.description %}<span class="d-exc">{{ post.description }}</span>{% endif %}
   </li>
   {% endfor %}

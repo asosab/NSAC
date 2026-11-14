@@ -6,10 +6,10 @@
   <url><loc>{{ '/diario/' | absolute_url }}</loc></url>
   <url><loc>{{ '/galeria/' | absolute_url }}</loc></url>
   <url><loc>{{ '/gafete/' | absolute_url }}</loc></url>
-  <url><loc>{{ '/en/' | absolute_url }}</loc></url>
-  <url><loc>{{ '/en/diario/' | absolute_url }}</loc></url>
-  <url><loc>{{ '/en/galeria/' | absolute_url }}</loc></url>
-  <url><loc>{{ '/en/gafete/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/es/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/es/diario/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/es/galeria/' | absolute_url }}</loc></url>
+  <url><loc>{{ '/es/gafete/' | absolute_url }}</loc></url>
   {% for post in site.posts %}
   <url><loc>{{ post.url | absolute_url }}</loc></url>
   {% endfor %}

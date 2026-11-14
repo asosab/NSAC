@@ -1,15 +1,16 @@
 ---
 layout: post
+lang: en
 title: "Space Apps Connect"
-description: "La organización abrió la comunidad oficial del hackathon: un foro de GitHub para buscar equipo, resolver dudas de los retos y pedir ayuda con la entrega"
+description: "The organizers opened the hackathon's official community: a GitHub forum to find a team, sort out doubts about the challenges and get help with the submission"
 ---
 
-La página del evento amaneció con un aviso: «Space Apps Connect is now open!». El enlace lleva a un repositorio de GitHub, [nasa/spaceapps](https://github.com/nasa/spaceapps): un README, mil estrellas y nada de código. La comunidad oficial del hackathon vive en la pestaña Discussions.
+The event page woke up with a notice: «Space Apps Connect is now open!». The link leads to a GitHub repository, [nasa/spaceapps](https://github.com/nasa/spaceapps): a README, a thousand stars and no code. The hackathon's official community lives in the Discussions tab.
 
-Adentro hay categorías para casi todo lo que hace falta esta semana: buscar equipo, dudas sobre los retos, ayuda con la entrega del proyecto, anuncios de la organización y ofertas de herramientas para participantes. También un canal para el «Universal Event», la modalidad para quienes participan sin sede local. Para escribir hay que estar inscrito en el hackathon.
+Inside there are categories for almost everything needed this week: finding a team, questions about the challenges, help with project submission, announcements from the organizers and tool offers for participants. Also a channel for the «Universal Event», the mode for those taking part without a local site. To post you have to be registered for the hackathon.
 
-![El foro de Space Apps Connect en GitHub Discussions; el hilo de elay puej buscando gente aparece primero en la lista]({{ '/assets/img/diario/2026-11-11-84825431.jpg' | relative_url }})
+![The Space Apps Connect forum on GitHub Discussions; the elay puej thread looking for people appears first on the list]({{ '/assets/img/diario/2026-11-11-84825431.jpg' | relative_url }})
 
-Ya publiqué ahí: un hilo en «!Find A Team» buscando diseñadores, artistas y gente que sepa de agricultura para elay puej en Santa Cruz. Cuando tomé la captura era el primero de la lista. Veremos si el foro de la NASA recluta mejor que el mural guitarrista.
+I already posted there: a thread in «!Find A Team» looking for designers, artists and people who know agriculture for elay puej in Santa Cruz. When I took the screenshot it was first on the list. We'll see if NASA's forum recruits better than the guitar-playing mural.
 
-El detalle que me gusta: el primer hilo con respuesta del equipo organizador es alguien reportando un enlace roto en la propia página del evento. Cuando tu comunidad vive en GitHub, hasta la web rota se reporta como un issue.
+The detail I like: the first thread answered by the organizing team is someone reporting a broken link on the event page itself. When your community lives on GitHub, even the broken web gets reported as an issue.
