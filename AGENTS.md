@@ -65,6 +65,11 @@ va su traducción; nada visible queda en un solo idioma.
 - JS (`planet.js`, `cine.js`, `gafete.js`): diccionario interno por
   `document.documentElement.lang`, con EN por defecto — sin pasar
   strings por markup.
+- `assets/js/lang.js` (sincrónico en el `<head>` de todas las páginas):
+  guarda la elección del suiche en `localStorage` (`nsac-lang`) y, al
+  entrar, redirige a la versión alternativa (vía link `hreflang`) si el
+  idioma guardado difiere del de la página. No hay autodetección por
+  `navigator.language`: solo manda lo que el usuario eligió.
 
 ## Pruebas
 

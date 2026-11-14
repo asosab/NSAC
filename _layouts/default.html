@@ -25,6 +25,7 @@
 <link rel="alternate" hreflang="{{ other }}" href="{{ alt_url | absolute_url }}">
 {% endif -%}
 <link rel="alternate" hreflang="x-default" href="{% if lang == "es" and alt_url != "" %}{{ alt_url | absolute_url }}{% else %}{{ page.url | absolute_url }}{% endif %}">
+<script src="{{ '/assets/js/lang.js' | relative_url }}"></script>
 <meta property="og:type" content="article">
 <meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}NSAC">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
