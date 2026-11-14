@@ -1,8 +1,11 @@
 /* Gafete doble cara en hoja carta o A4, siempre a 300 dpi.
-   Cada cara mide 4x5" (1200x1500 px), centrada en la hoja, y ambas
-   comparten el borde superior en la linea media: la trasera va
-   rotada 180 grados en la mitad de arriba. Nada sale del navegador:
-   las imagenes se procesan en canvas local. */
+   Cada cara mide 4x5" (1200x1500 px). El bloque va pegado arriba a la
+   izquierda — lejos del margen inferior que recortan las impresoras —
+   y las dos caras comparten el borde en la linea de doblez, que ya no
+   cae a la mitad de la hoja: la trasera va rotada 180 grados arriba.
+   En los margenes van reglas de pulgadas y centimetros para comprobar
+   la escala con una regla real. Nada sale del navegador: las imagenes
+   se procesan en canvas local. */
 (function () {
   "use strict";
 
@@ -10,8 +13,10 @@
     carta: { w: 2550, h: 3300, page: "letter", inW: "8.5in", inH: "11in" },
     a4:    { w: 2480, h: 3508, page: "A4",     inW: "210mm", inH: "297mm" }
   };
-  var BW = 1200, BH = 1500;
-  var W, H, MID, X0;
+  var BW = 1200, BH = 1500;                 // 4 x 5" a 300 dpi
+  var DPI = 300, CMPX = DPI / 2.54;
+  var TOP = 90, LEFT = 150;                 // ~0.3" arriba, 0.5" a la izquierda
+  var W, H, FOLD, X0;
 
   var canvas = document.getElementById("hoja");
   var ctx = canvas.getContext("2d");
@@ -28,7 +33,7 @@
   /* ajusta lienzo, guias y la hoja de estilo @page/#printSheet al papel */
   function setPaper() {
     var p = paper();
-    W = p.w; H = p.h; MID = H / 2; X0 = (W - BW) / 2;
+    W = p.w; H = p.h; FOLD = TOP + BH; X0 = LEFT;
     canvas.width = W; canvas.height = H;
     pageStyle.textContent =
       "@page{size:" + p.page + ";margin:0}" +
@@ -62,14 +67,47 @@
     ctx.setLineDash([24, 24]);
     ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.moveTo(60, MID); ctx.lineTo(X0 - 20, MID);
-    ctx.moveTo(X0 + BW + 20, MID); ctx.lineTo(W - 60, MID);
+    ctx.moveTo(60, FOLD); ctx.lineTo(X0 - 20, FOLD);
+    ctx.moveTo(X0 + BW + 20, FOLD); ctx.lineTo(W - 60, FOLD);
     ctx.stroke();
     ctx.setLineDash([]);
     ctx.strokeStyle = "#cfcfcf";
     ctx.lineWidth = 3;
-    ctx.strokeRect(X0, MID - BH, BW, BH);
-    ctx.strokeRect(X0, MID, BW, BH);
+    ctx.strokeRect(X0, FOLD - BH, BW, BH);
+    ctx.strokeRect(X0, FOLD, BW, BH);
+  }
+
+  /* reglas impresas: pulgadas (marcas largas + numero) y centimetros
+     (marcas cortas), vertical en el margen derecho y horizontal bajo
+     el bloque, para comprobar la escala con una regla real */
+  function rulers() {
+    var xr = X0 + BW + 60, yr = FOLD + BH + 40;
+    ctx.strokeStyle = "#a8a8a8";
+    ctx.fillStyle = "#a8a8a8";
+    ctx.lineWidth = 3;
+    ctx.font = "600 30px Chivo, Arial, sans-serif";
+    ctx.beginPath(); ctx.moveTo(xr, TOP); ctx.lineTo(xr, FOLD + BH); ctx.stroke();
+    var i, c, y;
+    for (i = 0; i <= Math.round((FOLD + BH - TOP) / DPI); i++) {
+      y = TOP + i * DPI;
+      ctx.beginPath(); ctx.moveTo(xr, y); ctx.lineTo(xr + 54, y); ctx.stroke();
+      if (i > 0) ctx.fillText(i + '"', xr + 66, y + 11);
+    }
+    for (c = 1; c * CMPX <= FOLD + BH - TOP; c++) {
+      y = TOP + c * CMPX;
+      ctx.beginPath(); ctx.moveTo(xr, y); ctx.lineTo(xr + 26, y); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.moveTo(LEFT, yr); ctx.lineTo(W - LEFT, yr); ctx.stroke();
+    var x;
+    for (i = 0; i <= Math.floor((W - 2 * LEFT) / DPI); i++) {
+      x = LEFT + i * DPI;
+      ctx.beginPath(); ctx.moveTo(x, yr); ctx.lineTo(x, yr + 54); ctx.stroke();
+      if (i > 0) ctx.fillText(i + '"', x + 10, yr + 88);
+    }
+    for (c = 1; c * CMPX <= W - 2 * LEFT; c++) {
+      x = LEFT + c * CMPX;
+      ctx.beginPath(); ctx.moveTo(x, yr); ctx.lineTo(x, yr + 26); ctx.stroke();
+    }
   }
 
   function render() {
@@ -78,13 +116,14 @@
     var front = imgs.A, back = imgs.B || imgs.A;
     if (back) {
       ctx.save();
-      ctx.translate(X0 + BW / 2, MID - BH / 2);
+      ctx.translate(X0 + BW / 2, FOLD - BH / 2);
       ctx.rotate(Math.PI);
       drawFit(back, -BW / 2, -BH / 2, BW, BH);
       ctx.restore();
     }
-    if (front) drawFit(front, X0, MID, BW, BH);
+    if (front) drawFit(front, X0, FOLD, BW, BH);
     guides();
+    rulers();
     var ready = !!front;
     dlPng.disabled = !ready;
     printBtn.disabled = !ready;
