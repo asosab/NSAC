@@ -760,6 +760,15 @@ main, .top, .footer { position: relative; z-index: 1; }
 .drop__h { font-size: var(--step-small); color: var(--muted); overflow-wrap: anywhere; }
 .drop__img { width: 100%; height: 140px; object-fit: contain; }
 
+.tool__h {
+  font-size: var(--step-small);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 8px;
+}
+.tool__note + .tool__note { margin-top: 14px; }
+
 .tool__opts {
   display: flex;
   flex-direction: column;

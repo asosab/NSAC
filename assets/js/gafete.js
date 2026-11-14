@@ -1,17 +1,40 @@
-/* Gafete doble cara en hoja carta.
-   Lienzo de 2550x3300 px (8.5x11" a 300 dpi). Cada cara mide 4x5"
-   (1200x1500 px) y ambas comparten el borde superior en la linea
-   media: la trasera va rotada 180 grados en la mitad de arriba. */
+/* Gafete doble cara en hoja carta o A4, siempre a 300 dpi.
+   Cada cara mide 4x5" (1200x1500 px), centrada en la hoja, y ambas
+   comparten el borde superior en la linea media: la trasera va
+   rotada 180 grados en la mitad de arriba. Nada sale del navegador:
+   las imagenes se procesan en canvas local. */
 (function () {
   "use strict";
 
-  var W = 2550, H = 3300, MID = H / 2;
-  var BW = 1200, BH = 1500, X0 = (W - BW) / 2;
+  var PAPER = {
+    carta: { w: 2550, h: 3300, page: "letter", inW: "8.5in", inH: "11in" },
+    a4:    { w: 2480, h: 3508, page: "A4",     inW: "210mm", inH: "297mm" }
+  };
+  var BW = 1200, BH = 1500;
+  var W, H, MID, X0;
 
   var canvas = document.getElementById("hoja");
   var ctx = canvas.getContext("2d");
   var dlPng = document.getElementById("dlPng");
   var printBtn = document.getElementById("printBtn");
+  var pageStyle = document.createElement("style");
+  document.head.appendChild(pageStyle);
+
+  function paper() {
+    var r = document.querySelector('input[name="paper"]:checked');
+    return PAPER[(r && r.value) === "a4" ? "a4" : "carta"];
+  }
+
+  /* ajusta lienzo, guias y la hoja de estilo @page/#printSheet al papel */
+  function setPaper() {
+    var p = paper();
+    W = p.w; H = p.h; MID = H / 2; X0 = (W - BW) / 2;
+    canvas.width = W; canvas.height = H;
+    pageStyle.textContent =
+      "@page{size:" + p.page + ";margin:0}" +
+      "@media print{#printSheet{width:" + p.inW + ";height:" + p.inH + "}}";
+    render();
+  }
 
   var imgs = { A: null, B: null };
 
@@ -118,12 +141,17 @@
   document.querySelectorAll('input[name="fit"]').forEach(function (r) {
     r.addEventListener("change", render);
   });
+  document.querySelectorAll('input[name="paper"]').forEach(function (r) {
+    r.addEventListener("change", setPaper);
+  });
 
   dlPng.addEventListener("click", function () {
     canvas.toBlob(function (blob) {
       var a = document.createElement("a");
+      var en = document.documentElement.lang === "en";
       a.href = URL.createObjectURL(blob);
-      a.download = document.documentElement.lang === "en" ? "badge-letter.png" : "gafete-carta.png";
+      a.download = (en ? "badge" : "gafete") + "-" +
+        (paper() === PAPER.a4 ? "a4" : en ? "letter" : "carta") + ".png";
       a.click();
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
     }, "image/png");
@@ -147,5 +175,5 @@
     document.body.classList.remove("printing");
   });
 
-  render();
+  setPaper();
 })();
