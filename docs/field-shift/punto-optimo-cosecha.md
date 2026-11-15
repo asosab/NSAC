@@ -155,7 +155,7 @@ Aquí los aforos dejan de ser solo archivo:
 |---|---|---|
 | **v1 — reloj** | `cortes` (modelo + endpoint + botón UI), `forraje.js` con días efectivos + estados, chip en ficha y sección en análisis/PDF | Catálogo `rebrote` (números validables con Patiño) |
 | **v2 — calibración** | Regresión aforo↔NDVI por parcela → kgMS/ha estimado; detección de caídas NDVI como pastoreo no registrado; forraje total del predio | v1 + aforos existentes |
-| **v3 — operación** | Ranking «a dónde rotar el lote» (estado × forraje disponible × tamaño de hato si lo cargan), variante ensilaje por grados-día, alertas WhatsApp | Datos de uso real |
+| **v3 — operación** | Ranking «a dónde rotar el lote» (estado × forraje disponible × tamaño de hato si lo cargan), variante ensilaje por grados-día, alertas por bot de Telegram | Datos de uso real |
 
 La v1 es autónoma y ya responde la pregunta de Sueleen; v2 es donde
 los aforos dejan de ser un trámite.
