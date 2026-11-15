@@ -29,4 +29,7 @@ fotos:
     alt: "Laptop with the fieldShift app open on a wooden bench, with external keyboard, mouse, backpack and water bottle, in front of a UCB Santa Cruz chair"
     pie_es: "Puesto de la última noche: la banca donde el internet por fin se porta bien"
     pie: "Last-night workstation: the bench where the internet finally behaves"
-videos: []
+videos:
+  - id: JT_0MpPjNsI
+    titulo: "1:40am, time to put the boots on: ten hours to delivery, twelve to the presentation"
+    titulo_es: "1:40am, hora de ponerse las botas: a diez horas de la entrega y doce de la presentación"
