@@ -7,7 +7,7 @@ title: "GrazePoint explained without jargon"
 description: "What the app does, for someone who knows nothing about farming: when and where to put the herd on each paddock, with numbers from NASA satellites."
 ---
 
-Several people have asked me what GrazePoint actually does and I always end up tangled in acronyms. Here is the written version for next time.
+The simple explanation of what GrazePoint does, to share whenever it needs telling without jargon.
 
 In one sentence: **it tells a rancher when and where to put the cattle on each paddock**.
 

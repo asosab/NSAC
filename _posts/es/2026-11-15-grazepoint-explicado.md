@@ -7,7 +7,7 @@ title: "GrazePoint explicado sin jerga"
 description: "Para qué sirve la app, contado para alguien que no sabe nada de agro: cuándo y dónde meter el lote al potrero, con números de satélites de la NASA."
 ---
 
-Me han preguntado varias veces qué hace exactamente GrazePoint y siempre termino enredándome con siglas. Dejo la explicación escrita para la próxima.
+La explicación simple de qué hace GrazePoint, para compartir cuando toque contarlo sin jerga.
 
 En una frase: **le dice a un ganadero cuándo y dónde meter las vacas al potrero**.
 
