@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, datos, bolivia, estadisticas-agro]
+tags: [reto, graze-point, datos, bolivia, estadisticas-agro]
 ---
 
 # Datos de producción agrícola: Bolivia, Venezuela y benchmark mundial
 
-Investigación del agente B para [[00-plan|Field Shift]]. Qué se sembró,
+Investigación del agente B para [[00-plan|GrazePoint]]. Qué se sembró,
 dónde, cuándo, cuánta superficie y con qué rendimiento.
 
 > **Alcance:** el usuario descartó esfuerzos especiales sobre Venezuela

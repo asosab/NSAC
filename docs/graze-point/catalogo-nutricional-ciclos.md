@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, bolivia, cultivos, nutricion, ciclos]
+tags: [reto, graze-point, bolivia, cultivos, nutricion, ciclos]
 ---
 
 # Catálogo de la producción boliviana: nutrición × velocidad de ciclo
 
-Investigación del agente G para [[00-plan|Field Shift]].
+Investigación del agente G para [[00-plan|GrazePoint]].
 
 **Advertencias:** las superficies mezclan tres calendarios (año agrícola
 INE/OAP, comercial USDA-FAS, calendario FAOSTAT); cada celda indica

@@ -2,7 +2,7 @@
 type: persona
 status: activo
 created: 2026-11-13
-tags: [equipo, elay-puej, field-shift]
+tags: [equipo, elay-puej, graze-point]
 ---
 
 # Leonardo Fernández Hurtado
@@ -10,7 +10,7 @@ tags: [equipo, elay-puej, field-shift]
 ![[leonardo-fernandez.jpg]]
 
 Segundo integrante de «elay puej» en el NASA Space Apps Challenge 2026.
-Agrónomo: en el reto Field Shift pone el suelo — sabe qué significa un
+Agrónomo: en el reto GrazePoint pone el suelo — sabe qué significa un
 índice de vegetación en una parcela real y qué le preocupa a un productor.
 
 ## Contacto
@@ -59,7 +59,7 @@ también «encontraron» el username-basura.
 - **IIA Vallecito** — voluntariado en producción agrícola: cultivos
   extensivos, hortalizas, ensayos y monitoreo de plagas (2021–2024).
 
-## Encaje con Field Shift
+## Encaje con GrazePoint
 
 El reto pide cruzar datos de la NASA con el suelo de cada granja para
 proponer rotaciones. Leo ya trabajó el pipeline completo de punta a punta:

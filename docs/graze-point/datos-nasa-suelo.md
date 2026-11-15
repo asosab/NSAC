@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, nasa, datos, api]
+tags: [reto, graze-point, nasa, datos, api]
 ---
 
-# Qué aporta la NASA al reto Field Shift
+# Qué aporta la NASA al reto GrazePoint
 
-Investigación del agente C para [[00-plan|Field Shift]]. Recursos
+Investigación del agente C para [[00-plan|GrazePoint]]. Recursos
 NASA/DAAC para una herramienta de rotación de cultivos con foco en
 Bolivia.
 

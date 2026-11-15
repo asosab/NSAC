@@ -2,7 +2,7 @@
 type: investigacion
 status: propuesta
 created: 2026-11-14
-tags: [reto, field-shift, patino, forraje, cosecha, ndvi, diseño]
+tags: [reto, graze-point, patino, forraje, cosecha, ndvi, diseño]
 ---
 
 # Punto óptimo de cosecha de pasto / ensilaje — estudio de viabilidad

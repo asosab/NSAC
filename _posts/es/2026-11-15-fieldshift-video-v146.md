@@ -3,13 +3,13 @@ layout: post
 lang: es
 date: 2026-11-15 01:50:00 -0400
 permalink: /es/diario/fieldshift-video-v146/
-title: "fieldShift V1.46, la demo completa"
+title: "GrazePoint V1.46, la demo completa"
 description: "Casi cuatro minutos de app real: predio nuevo, parcela importada y otra dibujada a toques, suelo, aforos, capas NASA, estado de potreros, análisis, PDF y el bot de Telegram."
 ---
 
 Quería una demo que se explicara sola. La del sábado duraba un minuto y quedó vieja el mismo día: desde entonces la app aprendió a estimar el punto del potrero, a abrir capas de satélite, a cruzar el forraje con el hato y a mandar el informe por Telegram. Esta versión lo muestra todo.
 
-{% include youtube.html id="7nVDRoW2wyQ" title="fieldShift V1.46 en español" %}
+{% include youtube.html id="7nVDRoW2wyQ" title="GrazePoint V1.46 en español" %}
 
 Esta versión lleva mi voz narrando el recorrido y, de fondo, la «Tonada del Cabrestero» de Simón Díaz en [un arreglo de piano](https://www.youtube.com/watch?v=SqHeCiF-qG0). Es la castellana; la inglesa, sin voz, está en el mismo canal.
 

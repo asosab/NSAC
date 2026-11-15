@@ -2,7 +2,7 @@
 type: entrevista
 status: completo
 created: 2026-11-14
-tags: [reto, field-shift, patino, entrevistas, respuestas]
+tags: [reto, graze-point, patino, entrevistas, respuestas]
 ---
 
 # Respuestas del cuestionario — Sueleen Peña (Hacienda Patiño)

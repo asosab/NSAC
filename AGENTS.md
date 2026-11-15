@@ -34,6 +34,10 @@ En `assets/js/planet.js`:
   `humanamente` (`.devin/skills/`) — incluidos textos para pegar fuera
   del sitio (respuestas de foro, mensajes, etc.), que se redactan en
   castellano con la skill y luego se traducen naturales al inglés.
+- Los textos en inglés pasan por `humanamente-en` (`.devin/skills/`,
+  mismo motor y rúbrica): banco de tics inglés y regla dura — **cero
+  em dashes** por defecto, se reemplazan por coma, punto, dos puntos o
+  paréntesis.
 
 ## Internacionalización (EN + ES)
 

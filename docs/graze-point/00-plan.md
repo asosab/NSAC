@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, space-apps, datos, plan]
+tags: [reto, graze-point, space-apps, datos, plan]
 ---
 
-# Field Shift — plan de investigación
+# GrazePoint — plan de investigación
 
-Reto elegido: **Field Shift: Adapting Farms with NASA Data** (intermedio/
+Reto elegido: **GrazePoint: Adapting Farms with NASA Data** (intermedio/
 avanzado; Earth Science, Software). El statement pide una herramienta de
 apoyo a la decisión que combine observaciones de la Tierra de la NASA con
 datos locales de suelo, características de cultivo y prioridades del
@@ -18,7 +18,7 @@ NASA; hay que traerlos de socios o censos públicos.
 Página oficial (no admite fetch directo):
 https://www.spaceappschallenge.org/2026/challenges/adapting-farms-with-nasa-data/
 Espejo con datasets sugeridos:
-https://spacedata.swapniltamse.com/challenges/field-shift-adapting-farms/
+https://spacedata.swapniltamse.com/challenges/graze-point-adapting-farms/
 
 ## Pregunta que guía todo
 

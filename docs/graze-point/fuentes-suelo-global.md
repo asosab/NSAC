@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, suelos, datos, api]
+tags: [reto, graze-point, suelos, datos, api]
 ---
 
 # Fuentes globales de datos de suelo y subsuelo
 
-Investigación del agente A para [[00-plan|Field Shift]]. **Veto:** los
+Investigación del agente A para [[00-plan|GrazePoint]]. **Veto:** los
 servicios y dominios chinos quedan fuera por restricción de la
 competencia.
 

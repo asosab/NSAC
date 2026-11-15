@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, bolivia, cultivos, suelos, clima]
+tags: [reto, graze-point, bolivia, cultivos, suelos, clima]
 ---
 
 # El caso boliviano: qué se cultiva y dónde
 
-Investigación del agente D para [[00-plan|Field Shift]].
+Investigación del agente D para [[00-plan|GrazePoint]].
 
 ## 1. Panorama
 

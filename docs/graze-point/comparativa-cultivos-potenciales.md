@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, bolivia, cultivos, nutrientes, rotacion]
+tags: [reto, graze-point, bolivia, cultivos, nutrientes, rotacion]
 ---
 
 # Cultivos potenciales para Bolivia: nutrientes y velocidad
 
-Investigación del agente F para [[00-plan|Field Shift]]. Especies que
+Investigación del agente F para [[00-plan|GrazePoint]]. Especies que
 no se cultivan (o apenas) en Bolivia pero prosperan en análogos
 edafoclimáticos. Zonas: (a) llanos SCZ Oxisoles-Aw · (b) altiplano
 salino BSk · (c) valles 1.800–2.800 m Cwb · (d) Chaco BSh · (e) Tarija

@@ -2,12 +2,12 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, bolivia, analogos, suelos, clima]
+tags: [reto, graze-point, bolivia, analogos, suelos, clima]
 ---
 
 # Análogos edafoclimáticos de las zonas agrícolas de Bolivia
 
-Investigación del agente E para [[00-plan|Field Shift]]. Criterio:
+Investigación del agente E para [[00-plan|GrazePoint]]. Criterio:
 coincidencia de Köppen, altitud, orden de suelos y restricción dominante
 (acidez, salinidad, anegamiento, déficit, heladas).
 

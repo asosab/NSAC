@@ -3,12 +3,12 @@ type: investigacion
 status: completo
 created: 2026-11-11
 updated: 2026-11-12
-tags: [reto, field-shift, patino, aliados, entrevistas]
+tags: [reto, graze-point, patino, aliados, entrevistas]
 ---
 
-# Fundación Patiño y el reto Field Shift
+# Fundación Patiño y el reto GrazePoint
 
-Investigación del agente H para [[00-plan|Field Shift]]. Aliado
+Investigación del agente H para [[00-plan|GrazePoint]]. Aliado
 potencial en Santa Cruz: usuarios reales, banco de pruebas y
 entrevistas para afinar la herramienta.
 
@@ -28,21 +28,21 @@ Fuentes: Informe de Actividades 2024
 
 ## 1. Índice de proyectos vinculados a agricultura
 
-| Proyecto | Sede | Qué hace | Estado |
-|---|---|---|---|
-| **Hacienda Patiño / CEASIP** | Santa Cruz, Lomas de Arena | Centro experimental ~400 ha (80% conservación): horticultura, fruticultura, apicultura, ganadería regenerativa, lácteos (~880.000 l/año). Pruebas para suelos arenosos pobres y clima tropical; reserva de bovino criollo. | **Activo** |
-| **Granja Modelo Pairumani** | Cochabamba (500 ha) | Lácteos orgánicos, **rotación de cultivos**, recuperación de suelos, gestión del agua, capacitación anual a pequeños productores. | Activo |
-| **Centro Fitotécnico y de Semillas** | Pairumani | Desde 1970: banco de germoplasma (731 accesiones de ají, maíz, haba, arveja, vainita), mejoramiento, fitopatología, cultivo de tejidos, semilla mejorada a productores. | Activo |
-| **Programa nacional de agroecología** | Nacional | >1.000 productores acompañados; >3.000 formados/año en agroforestería, **rotación de cultivos**, compostaje; circuitos cortos. | Activo |
-| **Días de Campo y talleres** | Hacienda Patiño | Jornadas abiertas + talleres pagados para técnicos (ej. Nutrición Animal jun-2026). | Activo |
-| **Pasantías preprofesionales** | Hacienda Patiño | Convocatoria anual: ganadería regenerativa, agricultura sostenible, lácteos, educación ambiental. | Activo |
-| **Seminario Int. de Ganadería Sostenible** | Santa Cruz | III edición **13–14 nov 2026** (¡el finde del Space Apps!), con UEB. Día 2 de campo en la Hacienda: PRV, polifíticas, silvopastoreo. | En curso |
-| **Ediciones Patiño / Bolivia Ecológica** | Santa Cruz | Editorial ambiental y agropecuaria. | Activo |
-| **Becas Patiño** | Bolivia→Europa | Maestrías completas desde 1931; becario vuelve a aportar. | Activo |
-| **Espacios Patiño + Lab. Pedagógicos** | SCZ (Independencia #89), Cbba, LP | Centros educativos; laboratorios con impresión 3D/láser (2024); el cruceño con enfoque ecología para jóvenes. | Activo |
-| **Convenio INIAF–UAGRM–FUSIP (maíz)** | Nacional | Convenio 2014 de investigación aplicada. | Histórico (verificar) |
-| **Startups agroecología** | La Paz | Piloto con Solydes/Pista8 + Unifranz. | Parcial / verificar |
-| **Finca La Vizcaína** | Cochabamba | Vivero-semillero histórico de la familia; función probablemente absorbida por la Granja Modelo. | Histórico / no verificado |
+| Proyecto                                   | Sede                              | Qué hace                                                                                                                                                                                                                   | Estado                    |
+| ------------------------------------------ | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| **Hacienda Patiño / CEASIP**               | Santa Cruz, Lomas de Arena        | Centro experimental ~400 ha (80% conservación): horticultura, fruticultura, apicultura, ganadería regenerativa, lácteos (~880.000 l/año). Pruebas para suelos arenosos pobres y clima tropical; reserva de bovino criollo. | **Activo**                |
+| **Granja Modelo Pairumani**                | Cochabamba (500 ha)               | Lácteos orgánicos, **rotación de cultivos**, recuperación de suelos, gestión del agua, capacitación anual a pequeños productores.                                                                                          | Activo                    |
+| **Centro Fitotécnico y de Semillas**       | Pairumani                         | Desde 1970: banco de germoplasma (731 accesiones de ají, maíz, haba, arveja, vainita), mejoramiento, fitopatología, cultivo de tejidos, semilla mejorada a productores.                                                    | Activo                    |
+| **Programa nacional de agroecología**      | Nacional                          | >1.000 productores acompañados; >3.000 formados/año en agroforestería, **rotación de cultivos**, compostaje; circuitos cortos.                                                                                             | Activo                    |
+| **Días de Campo y talleres**               | Hacienda Patiño                   | Jornadas abiertas + talleres pagados para técnicos (ej. Nutrición Animal jun-2026).                                                                                                                                        | Activo                    |
+| **Pasantías preprofesionales**             | Hacienda Patiño                   | Convocatoria anual: ganadería regenerativa, agricultura sostenible, lácteos, educación ambiental.                                                                                                                          | Activo                    |
+| **Seminario Int. de Ganadería Sostenible** | Santa Cruz                        | III edición **13–14 nov 2026** (¡el finde del Space Apps!), con UEB. Día 2 de campo en la Hacienda: PRV, polifíticas, silvopastoreo.                                                                                       | En curso                  |
+| **Ediciones Patiño / Bolivia Ecológica**   | Santa Cruz                        | Editorial ambiental y agropecuaria.                                                                                                                                                                                        | Activo                    |
+| **Becas Patiño**                           | Bolivia→Europa                    | Maestrías completas desde 1931; becario vuelve a aportar.                                                                                                                                                                  | Activo                    |
+| **Espacios Patiño + Lab. Pedagógicos**     | SCZ (Independencia #89), Cbba, LP | Centros educativos; laboratorios con impresión 3D/láser (2024); el cruceño con enfoque ecología para jóvenes.                                                                                                              | Activo                    |
+| **Convenio INIAF–UAGRM–FUSIP (maíz)**      | Nacional                          | Convenio 2014 de investigación aplicada.                                                                                                                                                                                   | Histórico (verificar)     |
+| **Startups agroecología**                  | La Paz                            | Piloto con Solydes/Pista8 + Unifranz.                                                                                                                                                                                      | Parcial / verificar       |
+| **Finca La Vizcaína**                      | Cochabamba                        | Vivero-semillero histórico de la familia; función probablemente absorbida por la Granja Modelo.                                                                                                                            | Histórico / no verificado |
 
 Color útil: recibieron el **Premio Sombra del Tajibo** en agricultura
 regenerativa, y la directora presenta indicadores y métricas de gestión
@@ -74,7 +74,7 @@ edafoclimática que resuelve NASA POWER + NDVI + suelo.
 
 ## 2b. Datos duros extraídos de los informes anuales
 
-PDF en `.tmp/field-shift-data/patino/` (2022, 2023 y 2025 en fr/es;
+PDF en `.tmp/graze-point-data/patino/` (2022, 2023 y 2025 en fr/es;
 texto extraído en `.txt` al lado). La «Hacienda Patiño» se llamaba
 **CEASIP hasta 2023**, año en que se renombró e integró
 agroecoturismo.
@@ -111,7 +111,7 @@ ya existe un protocolo de medición edáfica donde enchufar la app.
 
 - Misión: agricultura regenerativa adaptada al contexto local,
   «rehabilitar los suelos y mantenerlos productivos» para no expandir
-  a nuevas zonas — el mismo problema que resuelve Field Shift.
+  a nuevas zonas — el mismo problema que resuelve GrazePoint.
 - En Santa Cruz: «producción de frutas y hortalizas de alta calidad en
   el marco de la **agricultura 4.0**, certificación ecológica» — la
   adopción de tecnología/datos es objetivo escrito, no una venta fría.
@@ -215,7 +215,7 @@ Mensaje:
 > internacional que este año se juega el 14 y 15 de noviembre,
 > también aquí en Santa Cruz.
 >
-> El reto que elegimos se llama «Field Shift»: construir una
+> El reto que elegimos se llama «GrazePoint»: construir una
 > herramienta que ayude a los agricultores a decidir qué sembrar y
 > cuándo rotar sus cultivos, combinando datos públicos de la NASA —
 > lluvias, temperatura, salud de la vegetación vistos desde el

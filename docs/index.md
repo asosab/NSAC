@@ -15,7 +15,7 @@ el vault; `docs/` no se publica (está en `exclude`).
 - [[2026-11-06]] — creación del repo, diseño y primera versión de la landing
 - [[2026-11-07]] — aterrizaje calibrado sobre Bolivia (arriba al centro) y cuenta a la derecha en móvil
 - [[2026-11-08]] — reloj del sitio anclado a UTC-4: misma cuenta, rotación y aterrizaje en cualquier zona horaria
-- [[2026-11-11]] — reto elegido (Field Shift) y equipo «elay puej» creado; post y OG frescos
+- [[2026-11-11]] — reto elegido (GrazePoint) y equipo «elay puej» creado; post y OG frescos
 
 ## Notas
 
@@ -26,9 +26,9 @@ el vault; `docs/` no se publica (está en `exclude`).
 
 - [[leonardo-fernandez]] — agrónomo (UAGRM), segundo integrante de «elay puej»; agricultura de precisión con drones y forraje
 
-## Field Shift (reto elegido)
+## GrazePoint (reto elegido)
 
-Investigación orquestada 2026-11-11, carpeta `docs/field-shift/`:
+Investigación orquestada 2026-11-11, carpeta `docs/graze-point/`:
 
 - [[00-plan]] — encargo, orquestación por agentes y datasets sugeridos del reto
 - [[fuentes-suelo-global]] — fuentes de suelo/subsuelo mundial (sin servicios chinos)
@@ -38,11 +38,12 @@ Investigación orquestada 2026-11-11, carpeta `docs/field-shift/`:
 - [[analogos-mundiales]] — espejos edafoclimáticos de cada zona boliviana
 - [[comparativa-cultivos-potenciales]] — cultivos ausentes en BO con extracción NPK y ciclos
 - [[catalogo-nutricional-ciclos]] — producción BO por nutrición y velocidad de cosecha
-- [[arquitectura-datos]] — síntesis: cruce en caliente vs precargado vs backend (con verificaciones en vivo y precarga hecha en `.tmp/field-shift-data/`)
+- [[arquitectura-datos]] — síntesis: cruce en caliente vs precargado vs backend (con verificaciones en vivo y precarga hecha en `.tmp/graze-point-data/`)
 - [[fundacion-patino]] — aliado potencial: proyectos agro, fit con el reto, fichas de contacto y guion de entrevista (con cifras de sus informes anuales)
 - [[top10-enfoques-patino]] — 10 enfoques del reto rankeados que extienden el trabajo de la Fundación
 - [[respuestas-sueleen-pena]] — cuestionario respondido por la directora de la Hacienda: dolores forrajeros, registro en papel/Excel, WhatsApp como canal
 - [[jurado-y-ganadores]] — cómo se elige al ganador del Space Apps (local→global), ganadores anteriores y checklist de elegibilidad
+- [[docs/graze-point/recursos/index|recursos/]] — catálogo de los 28 recursos NASA/socios del reto en `docs/graze-point/recursos/`, clasificados por dominio, acceso y cobertura; [[router-fuentes]] define el suicheo entre APIs por capacidad (en vivo vs precarga vs validación)
 
 ## Notas rápidas
 

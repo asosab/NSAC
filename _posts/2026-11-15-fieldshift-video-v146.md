@@ -2,13 +2,13 @@
 layout: post
 lang: en
 date: 2026-11-15 01:50:00 -0400
-title: "fieldShift V1.46, the full tour"
+title: "GrazePoint V1.46, the full tour"
 description: "Almost four minutes of the real app: new farm, an imported parcel and one drawn by tapping, soil records, forage measurements, NASA layers, paddock status, analysis, PDF and the Telegram bot."
 ---
 
 I wanted a demo that could explain itself. Saturday's ran one minute and went stale the same day: since then the app learned to estimate the paddock window, to open satellite layers, to weigh forage against the herd and to send the report over Telegram. This version shows all of it.
 
-{% include youtube.html id="2-BdT6WG6Gg" title="fieldShift V1.46" %}
+{% include youtube.html id="2-BdT6WG6Gg" title="GrazePoint V1.46" %}
 
 No voiceover. The text is burned in at the top, at a calm reading pace: the point is someone watching on their phone with no headphones should follow anyway. This is the English cut; the Spanish one is on the same channel.
 

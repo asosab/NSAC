@@ -2,10 +2,10 @@
 type: investigacion
 status: completo
 created: 2026-11-11
-tags: [reto, field-shift, arquitectura, datos, app]
+tags: [reto, graze-point, arquitectura, datos, app]
 ---
 
-# Arquitectura de datos para la app Field Shift
+# Arquitectura de datos para la app GrazePoint
 
 Síntesis del orquestador a partir de las siete investigaciones
 ([[fuentes-suelo-global]], [[datos-agro-bolivia-venezuela]],
@@ -37,15 +37,15 @@ servidor propio; el grupo 3 queda para el colofón si sobra tiempo.
 
 ## El cruce propuesto, por pregunta del usuario
 
-| Pregunta del agricultor | Datos que la responden |
-|---|---|
-| ¿Cómo está mi suelo hoy? | POWER `GWETTOP/ROOT/PROF` + Open-Meteo `soil_moisture_*` + GIBS SMAP/NDVI |
-| ¿Qué suelo tengo? | OpenLandMap point → clase USDA + pH + SOC + textura por tramos; ancla con perfiles WoSIS/SISLAC cercanos; litología GLiM; geología fina GeoBolivia |
-| ¿Qué puede crecer aquí? | ZAE 2002/SDSN 2024 (aptitud por unidad de tierra) + GAEZ (LGP, restricciones, rendimiento potencial) + clima POWER histórico |
-| ¿Qué se sembró aquí antes? | WorldCereal 2021 + MapSPAM 2020 como baseline + NDVI HLS/MOD13Q1 de 10 años (fenología = rotación inferida) + mapas OAP por municipio |
-| ¿Qué rotación conviene? | Reglas por piso ecológico ([[bolivia-cultivos-regiones]]) + extracción N–P–K por cultivo ([[comparativa-cultivos-potenciales]]) + leguminosa tras cereal + calendario doble campaña |
-| ¿Qué más podría sembrar que aún no siembro? | Motor de analogía: zonas BO ↔ análogos mundiales ([[analogos-mundiales]]) filtrado por pH/Al/salinidad/agua |
-| ¿Vale la pena nutricional/económicamente? | FDC/BCA por cultivo ([[catalogo-nutricional-ciclos]]) + superficie/precio FAOSTAT |
+| Pregunta del agricultor                     | Datos que la responden                                                                                                                                                              |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ¿Cómo está mi suelo hoy?                    | POWER `GWETTOP/ROOT/PROF` + Open-Meteo `soil_moisture_*` + GIBS SMAP/NDVI                                                                                                           |
+| ¿Qué suelo tengo?                           | OpenLandMap point → clase USDA + pH + SOC + textura por tramos; ancla con perfiles WoSIS/SISLAC cercanos; litología GLiM; geología fina GeoBolivia                                  |
+| ¿Qué puede crecer aquí?                     | ZAE 2002/SDSN 2024 (aptitud por unidad de tierra) + GAEZ (LGP, restricciones, rendimiento potencial) + clima POWER histórico                                                        |
+| ¿Qué se sembró aquí antes?                  | WorldCereal 2021 + MapSPAM 2020 como baseline + NDVI HLS/MOD13Q1 de 10 años (fenología = rotación inferida) + mapas OAP por municipio                                               |
+| ¿Qué rotación conviene?                     | Reglas por piso ecológico ([[bolivia-cultivos-regiones]]) + extracción N–P–K por cultivo ([[comparativa-cultivos-potenciales]]) + leguminosa tras cereal + calendario doble campaña |
+| ¿Qué más podría sembrar que aún no siembro? | Motor de analogía: zonas BO ↔ análogos mundiales ([[analogos-mundiales]]) filtrado por pH/Al/salinidad/agua                                                                         |
+| ¿Vale la pena nutricional/económicamente?   | FDC/BCA por cultivo ([[catalogo-nutricional-ciclos]]) + superficie/precio FAOSTAT                                                                                                   |
 
 ## Ventanas que cierran el diseño
 
@@ -113,7 +113,7 @@ servidor propio; el grupo 3 queda para el colofón si sobra tiempo.
   El `WorldCereal_AEZ.geojson` (762 KB) sí está bajado y trae las
   ventanas de temporada por zona agroecológica.
 
-**Precarga hecha** (`.tmp/field-shift-data/`, ~170 MB, gitignored):
+**Precarga hecha** (`.tmp/graze-point-data/`, ~170 MB, gitignored):
 
 - `rasters/sg_{clay,sand,silt,phh2o,soc,cec,nitrogen}_0-5_bolivia.tif`
   — SoilGrids 0–5 cm media, 250 m, EPSG:4326 (vía WCS, receta

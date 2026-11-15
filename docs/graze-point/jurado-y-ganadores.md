@@ -2,7 +2,7 @@
 type: investigacion
 status: completo
 created: 2026-11-14
-tags: [reto, field-shift, space-apps, jurado, ganadores, estrategia]
+tags: [reto, graze-point, space-apps, jurado, ganadores, estrategia]
 ---
 
 # Cómo se elige al ganador del Space Apps — y qué tienen en común los que ganan
@@ -95,7 +95,7 @@ CloudCatchers/WIRA Cbba 2025, varios LP 2025).
 - Empezar a desarrollar antes del hackathon.
 - Pasar el deadline (domingo 15, 23:59 hora local de la sede).
 
-## Conclusiones para fieldShift
+## Conclusiones para GrazePoint
 
 Lo que nuestro proyecto debe cubrir para ser elegible y competitivo:
 
