@@ -19,8 +19,12 @@ En `assets/js/planet.js`:
 
 - `LAUNCH` → `T0` (14 nov, 09:00 local): el cohete desciende hacia Sudamérica
   en proporción al tiempo restante; aterriza cuando la cuenta llega a cero.
-- `T0` → `T1` (15 nov, 23:59:59 local): muestra «¡Estamos desarrollando
-  software!» y nueva cuenta al cierre; la nave despega gradualmente y desaparece.
+- `T0` → `TSUB` (15 nov, 12:00): «¡Estamos desarrollando software!» y la
+  cuenta apunta al cierre de la entrega del mediodía.
+- `TSUB` → `TDEF` (15 nov, 14:00): «Proyecto entregado.» y la cuenta apunta
+  al inicio de las defensas.
+- `TDEF` → `T1` (15 nov, 20:00): «¡Estamos defendiendo!» y la cuenta apunta
+  al cierre total; la nave despega durante las defensas y desaparece a las 20:00.
 - Después de `T1`: la nave no vuelve; el planeta sigue girando solo.
 - El planeta es fondo fijo; el scroll orbita la cámara para mostrar más.
 - `prefers-reduced-motion`: escena estática, cuenta regresiva sigue viva.
@@ -141,6 +145,7 @@ esos dominios pertenece. Ninguno → `.tmp/`.
   `description`, `og:description` y `twitter:description`, para que el
   comentario concuerde con el momento del evento: antes de `T0`, «Faltan N
   días / N horas…» hacia el sábado 14, 9:00 (hora de Bolivia); entre `T0`
-  y `T1`, «en curso, quedan N horas para el cierre» (domingo 15, 23:59:59);
+  y `T1`, «en curso, quedan N horas para el próximo hito» (entrega domingo
+  15 al mediodía, defensas desde las 14:00, cierre total a las 20:00);
   después de `T1`, en pasado: «el hackathon fue el 14 y 15 de noviembre
   de 2026…».

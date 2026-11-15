@@ -93,7 +93,7 @@ CloudCatchers/WIRA Cbba 2025, varios LP 2025).
 - IA generativa no declarada (casilla obligatoria; marca de agua en
   imágenes/video generados).
 - Empezar a desarrollar antes del hackathon.
-- Pasar el deadline (domingo 15, 23:59 hora local de la sede).
+- Pasar el deadline (domingo 15, 12:00 hora local de la sede).
 
 ## Conclusiones para GrazePoint
 
@@ -116,7 +116,7 @@ Lo que nuestro proyecto debe cubrir para ser elegible y competitivo:
 6. **Video ≤30 s** con guion: agricultor → problema → herramienta en
    acción → dato NASA → impacto. Subtítulos en inglés.
 7. Declarar el uso de IA en la casilla; verificar todos los links en
-   incógnito; submit antes de las 23:59.
+   incógnito; submit antes del mediodía.
 
 ## Fuentes
 

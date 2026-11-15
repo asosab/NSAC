@@ -1,25 +1,36 @@
 /* NSAC — planeta de bloques (voxel) + cohete sincronizado a la cuenta regresiva.
    Ventana oficial del hackathon en hora de Bolivia (UTC-4, sin horario de
-   verano): abre sábado 14 nov 2026 09:00 · cierra domingo 15 nov 2026 23:59:59.
+   verano): abre sábado 14 nov 2026 09:00 · la entrega de proyectos cierra el
+   domingo 15 a las 12:00 · defensas desde las 14:00 · todo termina a las 20:00.
    Las fechas llevan offset explícito para que la cuenta, la rotación del
    planeta y el aterrizaje sean el mismo instante en cualquier zona horaria. */
 (function () {
   "use strict";
 
-  var T0 = new Date("2026-11-14T09:00:00-04:00");   // empieza (La Paz)
-  var T1 = new Date("2026-11-15T23:59:59-04:00");   // cierra (La Paz)
+  var T0   = new Date("2026-11-14T09:00:00-04:00");   // empieza (La Paz)
+  var TSUB = new Date("2026-11-15T12:00:00-04:00");   // cierre de la entrega
+  var TDEF = new Date("2026-11-15T14:00:00-04:00");   // empiezan las defensas
+  var T1   = new Date("2026-11-15T20:00:00-04:00");   // se cierra todo (La Paz)
   var LAUNCH = new Date("2026-11-01T00:00:00-04:00"); // el cohete ya venía en camino
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* textos por idioma de la página (<html lang>) */
   var TXT = {
     es: {
-      liveClaim: "elay puej corre hasta el domingo 15 a las 23:59.",
+      devClaim: "elay puej corre hasta el domingo 15 al mediodía, cuando cierra la entrega.",
+      subMsg: "Proyecto entregado.",
+      subClaim: "Las defensas empiezan a las 14:00.",
+      defMsg: "¡Estamos defendiendo!",
+      defClaim: "elay puej presenta su proyecto. Todo cierra a las 20:00.",
       doneMsg: "Misión cumplida.",
       doneClaim: "elay puej ya entregó. El resultado está en el diario."
     },
     en: {
-      liveClaim: "elay puej is racing until Sunday the 15th, 23:59.",
+      devClaim: "elay puej is racing until Sunday the 15th at noon, when submissions close.",
+      subMsg: "Project submitted.",
+      subClaim: "Defenses start at 2 PM.",
+      defMsg: "We're defending our project!",
+      defClaim: "elay puej is presenting their project. Everything wraps up at 8 PM.",
       doneMsg: "Mission accomplished.",
       doneClaim: "elay puej already delivered. The outcome is in the journal."
     }
@@ -61,7 +72,7 @@
       liveMsg = document.getElementById("live-msg"),
       claim = document.getElementById("claim");
 
-  var estado = "pre"; // pre | live | done
+  var estado = "pre"; // pre | dev | sub | def | done
   function pad(n) { return String(n); }
 
   /* ---------- firma: el monumento responde al scroll ---------- */
@@ -95,7 +106,9 @@
   function tick() {
     var now = new Date(), target;
     if (now < T0) { estado = "pre"; target = T0; }
-    else if (now < T1) { estado = "live"; target = T1; }
+    else if (now < TSUB) { estado = "dev"; target = TSUB; }
+    else if (now < TDEF) { estado = "sub"; target = TDEF; }
+    else if (now < T1) { estado = "def"; target = T1; }
     else { estado = "done"; target = T1; }
 
     var left = Math.max(0, target - now);
@@ -106,9 +119,17 @@
     elD.textContent = pad(d); elH.textContent = pad(h);
     elM.textContent = pad(m); elS.textContent = pad(s);
 
-    if (estado === "live") {
+    if (estado === "dev") {
       liveMsg.hidden = false;
-      claim.textContent = TXT.liveClaim;
+      claim.textContent = TXT.devClaim;
+    } else if (estado === "sub") {
+      liveMsg.hidden = false;
+      liveMsg.textContent = TXT.subMsg;
+      claim.textContent = TXT.subClaim;
+    } else if (estado === "def") {
+      liveMsg.hidden = false;
+      liveMsg.textContent = TXT.defMsg;
+      claim.textContent = TXT.defClaim;
     } else if (estado === "done") {
       liveMsg.hidden = false;
       liveMsg.textContent = TXT.doneMsg;
@@ -534,22 +555,19 @@
       ship.position.y += Math.sin(t * 1.7) * 0.02;
       flame.visible = p < 0.98;
       flame.scale.setScalar(0.8 + Math.sin(t * 14) * 0.25);
-    } else if (estado === "live") {
-      var q = (now - T0) / (T1 - T0);
-      if (q < 0.72) {
-        /* aterrizada, con una respiración mínima */
-        ship.position.copy(landSpot(_p));
-        ship.position.y += Math.sin(t * 1.2) * 0.004;
-        ship.lookAt(world.localToWorld(_a.copy(SPOT2)));
-        ship.rotateX(Math.PI / 2);
-        flame.visible = false;
-      } else {
-        /* despegue: se va para no volver */
-        var k = easeIn((q - 0.72) / 0.28);
-        aim(ship, depart, k, dt);
-        flame.visible = true;
-        flame.scale.setScalar(1 + Math.sin(t * 16) * 0.3);
-      }
+    } else if (estado === "dev" || estado === "sub") {
+      /* aterrizada, con una respiración mínima */
+      ship.position.copy(landSpot(_p));
+      ship.position.y += Math.sin(t * 1.2) * 0.004;
+      ship.lookAt(world.localToWorld(_a.copy(SPOT2)));
+      ship.rotateX(Math.PI / 2);
+      flame.visible = false;
+    } else if (estado === "def") {
+      /* despegue durante las defensas: se va para no volver */
+      var k = easeIn(Math.min((now - TDEF) / (T1 - TDEF), 1));
+      aim(ship, depart, k, dt);
+      flame.visible = true;
+      flame.scale.setScalar(1 + Math.sin(t * 16) * 0.3);
     } else {
       ship.visible = false;
     }
