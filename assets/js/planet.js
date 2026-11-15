@@ -19,8 +19,8 @@
   /* textos por idioma de la página (<html lang>) */
   var TXT = {
     es: {
-      devMsg: "¡Estamos desarrollando software!",
-      devClaim: "elay puej corre hasta el domingo 15 al mediodía, cuando cierra la entrega.",
+      devMsg: "¡Software entregado al jurado de la NASA Space Apps Challenge!",
+      devClaim: "El cohete despega con las defensas de las 14:00.",
       subMsg: "Proyecto entregado.",
       subClaim: "Las defensas empiezan a las 14:00.",
       defMsg: "¡Estamos presentando GrazePoint!",
@@ -30,8 +30,8 @@
       doneClaim: "GrazePoint se desarrolló en 12 horas durante la NASA Space Apps Challenge 2026."
     },
     en: {
-      devMsg: "We're building software!",
-      devClaim: "elay puej is racing until Sunday the 15th at noon, when submissions close.",
+      devMsg: "Software delivered to the NASA Space Apps Challenge jury!",
+      devClaim: "The rocket lifts off with the 2 PM defenses.",
       subMsg: "Project submitted.",
       subClaim: "Defenses start at 2 PM.",
       defMsg: "We're presenting GrazePoint!",
@@ -112,7 +112,7 @@
   function tick() {
     var now = new Date(), target;
     if (now < T0) { estado = "pre"; target = T0; }
-    else if (now < TSUB) { estado = "dev"; target = TSUB; }
+    else if (now < TSUB) { estado = "dev"; target = TDEF; }
     else if (now < TDEF) { estado = "sub"; target = TDEF; }
     else if (now < T1) { estado = "def"; target = T1; }
     else if (now < TEND) { estado = "bye"; target = T1; }

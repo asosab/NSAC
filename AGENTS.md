@@ -19,8 +19,9 @@ En `assets/js/planet.js`:
 
 - `LAUNCH` → `T0` (14 nov, 09:00 local): el cohete desciende hacia Sudamérica
   en proporción al tiempo restante; aterriza cuando la cuenta llega a cero.
-- `T0` → `TSUB` (15 nov, 12:00): «¡Estamos desarrollando software!» y la
-  cuenta apunta al cierre de la entrega del mediodía.
+- `T0` → `TSUB` (15 nov, 12:00): «¡Software entregado al jurado de la
+  NASA Space Apps Challenge!» y la cuenta apunta al despegue del cohete
+  (TDEF, 14:00: la nave se va con las defensas).
 - `TSUB` → `TDEF` (15 nov, 14:00): «Proyecto entregado.» y la cuenta apunta
   al inicio de las defensas.
 - `TDEF` → `T1` (15 nov, 20:00): «¡Estamos presentando GrazePoint!» y la
