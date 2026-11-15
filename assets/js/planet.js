@@ -1,7 +1,8 @@
 /* NSAC — planeta de bloques (voxel) + cohete sincronizado a la cuenta regresiva.
    Ventana oficial del hackathon en hora de Bolivia (UTC-4, sin horario de
    verano): abre sábado 14 nov 2026 09:00 · la entrega de proyectos cierra el
-   domingo 15 a las 12:00 · defensas desde las 14:00 · todo termina a las 20:00.
+   domingo 15 a las 12:00 · defensas desde las 14:00 · todo termina a las 20:00
+   · despedida hasta las 20:30, cuando la cuenta desaparece para siempre.
    Las fechas llevan offset explícito para que la cuenta, la rotación del
    planeta y el aterrizaje sean el mismo instante en cualquier zona horaria. */
 (function () {
@@ -11,28 +12,33 @@
   var TSUB = new Date("2026-11-15T12:00:00-04:00");   // cierre de la entrega
   var TDEF = new Date("2026-11-15T14:00:00-04:00");   // empiezan las defensas
   var T1   = new Date("2026-11-15T20:00:00-04:00");   // se cierra todo (La Paz)
+  var TEND = new Date("2026-11-15T20:30:00-04:00");   // fin de la despedida
   var LAUNCH = new Date("2026-11-01T00:00:00-04:00"); // el cohete ya venía en camino
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* textos por idioma de la página (<html lang>) */
   var TXT = {
     es: {
+      devMsg: "¡Estamos desarrollando software!",
       devClaim: "elay puej corre hasta el domingo 15 al mediodía, cuando cierra la entrega.",
       subMsg: "Proyecto entregado.",
       subClaim: "Las defensas empiezan a las 14:00.",
-      defMsg: "¡Estamos defendiendo!",
-      defClaim: "elay puej presenta su proyecto. Todo cierra a las 20:00.",
-      doneMsg: "Misión cumplida.",
-      doneClaim: "elay puej ya entregó. El resultado está en el diario."
+      defMsg: "¡Estamos presentando GrazePoint!",
+      defClaim: "elay puej presenta GrazePoint. Todo cierra a las 20:00.",
+      byeMsg: "¡Ha sido un gusto!",
+      byeClaim: "elay puej ya entregó. El resultado está en el diario.",
+      doneClaim: "GrazePoint se desarrolló en 12 horas durante la NASA Space Apps Challenge 2026."
     },
     en: {
+      devMsg: "We're building software!",
       devClaim: "elay puej is racing until Sunday the 15th at noon, when submissions close.",
       subMsg: "Project submitted.",
       subClaim: "Defenses start at 2 PM.",
-      defMsg: "We're defending our project!",
-      defClaim: "elay puej is presenting their project. Everything wraps up at 8 PM.",
-      doneMsg: "Mission accomplished.",
-      doneClaim: "elay puej already delivered. The outcome is in the journal."
+      defMsg: "We're presenting GrazePoint!",
+      defClaim: "elay puej is presenting GrazePoint. Everything wraps up at 8 PM.",
+      byeMsg: "It's been a pleasure!",
+      byeClaim: "elay puej already delivered. The outcome is in the journal.",
+      doneClaim: "GrazePoint was built in 12 hours during the NASA Space Apps Challenge 2026."
     }
   }[document.documentElement.lang === "es" ? "es" : "en"];
 
@@ -72,7 +78,7 @@
       liveMsg = document.getElementById("live-msg"),
       claim = document.getElementById("claim");
 
-  var estado = "pre"; // pre | dev | sub | def | done
+  var estado = "pre"; // pre | dev | sub | def | bye | done
   function pad(n) { return String(n); }
 
   /* ---------- firma: el monumento responde al scroll ---------- */
@@ -109,6 +115,7 @@
     else if (now < TSUB) { estado = "dev"; target = TSUB; }
     else if (now < TDEF) { estado = "sub"; target = TDEF; }
     else if (now < T1) { estado = "def"; target = T1; }
+    else if (now < TEND) { estado = "bye"; target = T1; }
     else { estado = "done"; target = T1; }
 
     var left = Math.max(0, target - now);
@@ -119,21 +126,14 @@
     elD.textContent = pad(d); elH.textContent = pad(h);
     elM.textContent = pad(m); elS.textContent = pad(s);
 
-    if (estado === "dev") {
-      liveMsg.hidden = false;
-      claim.textContent = TXT.devClaim;
-    } else if (estado === "sub") {
-      liveMsg.hidden = false;
-      liveMsg.textContent = TXT.subMsg;
-      claim.textContent = TXT.subClaim;
-    } else if (estado === "def") {
-      liveMsg.hidden = false;
-      liveMsg.textContent = TXT.defMsg;
-      claim.textContent = TXT.defClaim;
-    } else if (estado === "done") {
-      liveMsg.hidden = false;
-      liveMsg.textContent = TXT.doneMsg;
+    if (estado === "done") {
+      /* la cuenta se retira: queda solo el claim, para siempre */
+      cdEl.style.display = "none";
       claim.textContent = TXT.doneClaim;
+    } else if (estado !== "pre") {
+      liveMsg.hidden = false;
+      liveMsg.textContent = TXT[estado + "Msg"];
+      claim.textContent = TXT[estado + "Claim"];
     }
   }
   tick();
@@ -509,8 +509,11 @@
       spin = spinStop.a + (spinStop.b - spinStop.a) * easeOut(st);
       if (spinStop.t >= 1) { spin = spinStop.b; spinStop = null; }
     }
+    /* terminada la despedida el planeta gira una vuelta por minuto:
+       el movimiento por fin se percibe a simple vista */
+    var fastYaw = now > TEND ? (now - TEND) / 6e4 * Math.PI * 2 : 0;
     var prog = demo === "approach" ? easeOut(Math.min(demoT, 1)) : demo === null ? 0 : 1;
-    world.rotation.y = timeYaw + sp * 0.8 + spin + prog * wrapAngle(phiLand + YAW_LEAD - timeYaw - sp * 0.8 - spin);
+    world.rotation.y = timeYaw + sp * 0.8 + spin + fastYaw + prog * wrapAngle(phiLand + YAW_LEAD - timeYaw - sp * 0.8 - spin - fastYaw);
     tilt.updateMatrixWorld();
 
     /* los extremos de las trayectorias siguen a Bolivia cada frame; el

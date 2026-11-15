@@ -23,9 +23,14 @@ En `assets/js/planet.js`:
   cuenta apunta al cierre de la entrega del mediodía.
 - `TSUB` → `TDEF` (15 nov, 14:00): «Proyecto entregado.» y la cuenta apunta
   al inicio de las defensas.
-- `TDEF` → `T1` (15 nov, 20:00): «¡Estamos defendiendo!» y la cuenta apunta
-  al cierre total; la nave despega durante las defensas y desaparece a las 20:00.
-- Después de `T1`: la nave no vuelve; el planeta sigue girando solo.
+- `TDEF` → `T1` (15 nov, 20:00): «¡Estamos presentando GrazePoint!» y la
+  cuenta apunta al cierre total; la nave despega durante las defensas y
+  desaparece a las 20:00.
+- `T1` → `TEND` (15 nov, 20:30): despedida «¡Ha sido un gusto!» con la
+  cuenta en cero.
+- Después de `TEND`: la cuenta desaparece para siempre; el claim queda fijo
+  («GrazePoint se desarrolló en 12 horas durante la NASA Space Apps
+  Challenge 2026») y el planeta gira una vuelta por minuto, ya perceptible.
 - El planeta es fondo fijo; el scroll orbita la cámara para mostrar más.
 - `prefers-reduced-motion`: escena estática, cuenta regresiva sigue viva.
 
