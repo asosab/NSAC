@@ -10,7 +10,7 @@ I wanted a demo that could explain itself. Saturday's ran one minute and went st
 
 {% include youtube.html id="2-BdT6WG6Gg" title="fieldShift V1.46" %}
 
-No voiceover. The text is burned in at the top, at a calm reading pace: the point is someone watching on their phone with no headphones should follow anyway. There is one version per language, both recorded tonight.
+No voiceover. The text is burned in at the top, at a calm reading pace: the point is someone watching on their phone with no headphones should follow anyway. This is the English cut; the Spanish one is on the same channel.
 
 The run is what a real user would do: sign in, create the farm, import a parcel from a KMZ and draw another one by tapping. Then the full record sheet: lab soil, planting, last season with its yield, a forage measurement and a grazing record. On the map the NASA GIBS and SoilGrids layers come on, the focus mask darkens everything but the selected parcel, and the time stepper walks back six months or projects ahead with the same month of last year. It closes with the paddock sheet and the herd balance, the analysis, the PDF and the Telegram link.
 
