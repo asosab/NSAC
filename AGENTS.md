@@ -154,4 +154,6 @@ esos dominios pertenece. Ninguno → `.tmp/`.
   y `T1`, «en curso, quedan N horas para el próximo hito» (entrega domingo
   15 al mediodía, defensas desde las 14:00, cierre total a las 20:00);
   después de `T1`, en pasado: «el hackathon fue el 14 y 15 de noviembre
-  de 2026…».
+  de 2026…» y el resultado: **GrazePoint ganó el galardón a la app de
+  mayor impacto local** (EN: the award for the app with the greatest
+  local impact).

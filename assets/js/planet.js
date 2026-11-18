@@ -27,7 +27,7 @@
       defClaim: "elay puej presenta GrazePoint. Todo cierra a las 20:00.",
       byeMsg: "¡Ha sido un gusto!",
       byeClaim: "elay puej ya entregó. El resultado está en el diario.",
-      doneClaim: "GrazePoint se desarrolló en 12 horas durante la NASA Space Apps Challenge 2026."
+      doneClaim: "GrazePoint ganó el galardón a la app de mayor impacto local en la NASA Space Apps Challenge 2026."
     },
     en: {
       devMsg: "Software delivered to the NASA Space Apps Challenge jury!",
@@ -38,7 +38,7 @@
       defClaim: "elay puej is presenting GrazePoint. Everything wraps up at 8 PM.",
       byeMsg: "It's been a pleasure!",
       byeClaim: "elay puej already delivered. The outcome is in the journal.",
-      doneClaim: "GrazePoint was built in 12 hours during the NASA Space Apps Challenge 2026."
+      doneClaim: "GrazePoint won the award for the app with the greatest local impact at the NASA Space Apps Challenge 2026."
     }
   }[document.documentElement.lang === "es" ? "es" : "en"];
 
